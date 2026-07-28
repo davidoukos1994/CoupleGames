@@ -82,7 +82,7 @@
 <section id="sports" class="screen">
 <div class="tabs">
 <button class="tab active" data-pane="playersPane">Ποδοσφαιριστές</button>
-<button class="tab" data-pane="teamsPane">Ομάδες</button>
+<button class="tab" data-pane="teamsPane">Σήματα ομάδων</button>
 <button class="tab" data-pane="addPane">Προσθήκη</button>
 </div>
 
@@ -94,20 +94,22 @@
 
 <div id="teamsPane" class="pane">
 <div class="card quiz-card"><div class="image-box logo"><img id="teamImg"><div id="teamFallback">🛡️</div></div>
-<h2>Ποια ομάδα είναι;</h2><div id="teamOptions" class="options"></div><p id="teamMsg" class="msg"></p>
+<h2>Ποιο σήμα ομάδας είναι;</h2><div id="teamOptions" class="options"></div><p id="teamMsg" class="msg"></p>
 <div class="row"><b>Σκορ: <span id="teamScore">0</span></b><button id="nextTeam" class="primary">Επόμενη</button></div></div>
 </div>
 
 <div id="addPane" class="pane">
-<div class="card form-card"><h2>Προσθήκη ποδοσφαιριστή</h2>
-<label>Όνομα<input id="newPlayerName" type="text"></label>
-<label>Φωτογραφία<input id="newPlayerPhoto" type="file" accept="image/*" capture="environment"></label>
-<button id="addPlayer" class="primary full">Προσθήκη</button></div>
-<div class="card form-card"><h2>Προσθήκη ομάδας</h2>
-<label>Όνομα ομάδας<input id="newTeamName" type="text"></label>
-<label>Λογότυπο<input id="newTeamPhoto" type="file" accept="image/*"></label>
-<button id="addTeam" class="primary full">Προσθήκη</button></div>
-<div class="card list-card"><h3>Δικές σου προσθήκες</h3><div id="customList"></div></div>
+<div class="card form-card"><h2>Μαζική προσθήκη ποδοσφαιριστών</h2>
+<p class="helper">Επίλεξε πολλές φωτογραφίες μαζί. Μετά γράψε το όνομα κάτω από κάθε φωτογραφία και πάτησε αποθήκευση.</p>
+<label>Φωτογραφίες παικτών<input id="bulkPlayerPhotos" type="file" accept="image/*" multiple></label>
+<div id="playerImportEditor" class="import-editor"></div>
+<button id="saveBulkPlayers" class="primary full hidden">Αποθήκευση παικτών</button></div>
+<div class="card form-card"><h2>Μαζική προσθήκη σημάτων ομάδων</h2>
+<p class="helper">Επίλεξε πολλά σήματα μαζί και συμπλήρωσε το όνομα κάθε ομάδας.</p>
+<label>Σήματα ομάδων<input id="bulkTeamPhotos" type="file" accept="image/*" multiple></label>
+<div id="teamImportEditor" class="import-editor"></div>
+<button id="saveBulkTeams" class="primary full hidden">Αποθήκευση σημάτων</button></div>
+<div class="card list-card"><h3>Επεξεργασία προσθηκών</h3><div id="customList"></div></div>
 </div>
 </section>
 
