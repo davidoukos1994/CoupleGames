@@ -12,7 +12,7 @@
 <div class="app">
 <header>
 <button id="back" class="icon hidden">←</button>
-<div><h1 id="title">RetroGames By D.Lemonis</h1><p id="subtitle">Παιχνίδια για δύο στο ίδιο κινητό</p></div>
+<div><h1 id="title">RetroGames By D.Lemonis</h1><p id="subtitle" class="hidden"></p></div>
 <button id="settingsBtn" class="icon">⚙️</button>
 </header>
 
@@ -80,36 +80,59 @@
 </section>
 
 <section id="sports" class="screen">
-<div class="tabs">
-<button class="tab active" data-pane="playersPane">Ποδοσφαιριστές</button>
-<button class="tab" data-pane="teamsPane">Σήματα ομάδων</button>
-<button class="tab" data-pane="addPane">Προσθήκη</button>
+<div id="sportsStart" class="card form-card sports-start">
+<h2>Έναρξη παιχνιδιού</h2>
+<label>Παιχνίδι
+<select id="sportsGameType">
+<option value="players">Μάντεψε τον ποδοσφαιριστή</option>
+<option value="teams">Μάντεψε το σήμα ομάδας</option>
+</select>
+</label>
+<label>Αριθμός παικτών
+<select id="sportsPlayerCount">
+<option value="1">1 παίκτης</option>
+<option value="2">2 παίκτες</option>
+<option value="3">3 παίκτες</option>
+</select>
+</label>
+<div id="sportsNames" class="sports-names"></div>
+<button id="startSportsGame" class="primary full">Έναρξη παιχνιδιού</button>
+<button id="openSportsAdd" class="secondary full">Μαζική προσθήκη φωτογραφιών</button>
 </div>
 
-<div id="playersPane" class="pane active">
-<div class="card quiz-card"><div class="image-box"><img id="playerImg"><div id="playerFallback">⚽</div></div>
+<div id="sportsGame" class="hidden">
+<div class="sports-game-head card">
+<div><small>Παίζει τώρα</small><b id="sportsTurnName">Παίκτης 1</b></div>
+<div id="sportsScoreboard" class="sports-scoreboard"></div>
+<button id="endSportsGame" class="secondary">Τέλος παιχνιδιού</button>
+</div>
+
+<div id="playersPane" class="pane">
+<div class="card quiz-card"><div class="image-box"><img id="playerImg" alt="Φωτογραφία ποδοσφαιριστή"><div id="playerFallback">⚽</div></div>
 <h2>Ποιος ποδοσφαιριστής είναι;</h2><div id="playerOptions" class="options"></div><p id="playerMsg" class="msg"></p>
-<div class="row"><b>Σκορ: <span id="playerScore">0</span></b><button id="nextPlayer" class="primary">Επόμενος</button></div></div>
+<div class="row"><span></span><button id="nextPlayer" class="primary">Επόμενος</button></div></div>
 </div>
 
 <div id="teamsPane" class="pane">
-<div class="card quiz-card"><div class="image-box logo"><img id="teamImg"><div id="teamFallback">🛡️</div></div>
+<div class="card quiz-card"><div class="image-box logo"><img id="teamImg" alt="Σήμα ομάδας"><div id="teamFallback">🛡️</div></div>
 <h2>Ποιο σήμα ομάδας είναι;</h2><div id="teamOptions" class="options"></div><p id="teamMsg" class="msg"></p>
-<div class="row"><b>Σκορ: <span id="teamScore">0</span></b><button id="nextTeam" class="primary">Επόμενη</button></div></div>
+<div class="row"><span></span><button id="nextTeam" class="primary">Επόμενο</button></div></div>
+</div>
 </div>
 
-<div id="addPane" class="pane">
-<div class="card form-card"><h2>Μαζική προσθήκη ποδοσφαιριστών</h2>
-<p class="helper">Επίλεξε πολλές φωτογραφίες μαζί. Μετά γράψε το όνομα κάτω από κάθε φωτογραφία και πάτησε αποθήκευση.</p>
-<label>Φωτογραφίες παικτών<input id="bulkPlayerPhotos" type="file" accept="image/*" multiple></label>
+<div id="addPane" class="hidden">
+<div class="add-head"><button id="backFromAdd" class="secondary">← Πίσω</button><h2>Μαζική προσθήκη</h2></div>
+<div class="card form-card"><h2>Ποδοσφαιριστές</h2>
+<p class="helper">Διάλεξε πολλές φωτογραφίες μαζί. Κάτω από κάθε φωτογραφία γράψε το όνομα του ποδοσφαιριστή.</p>
+<label class="upload-box">Επιλογή πολλών φωτογραφιών<input id="bulkPlayerPhotos" type="file" accept="image/*" multiple></label>
 <div id="playerImportEditor" class="import-editor"></div>
-<button id="saveBulkPlayers" class="primary full hidden">Αποθήκευση παικτών</button></div>
-<div class="card form-card"><h2>Μαζική προσθήκη σημάτων ομάδων</h2>
-<p class="helper">Επίλεξε πολλά σήματα μαζί και συμπλήρωσε το όνομα κάθε ομάδας.</p>
-<label>Σήματα ομάδων<input id="bulkTeamPhotos" type="file" accept="image/*" multiple></label>
+<button id="saveBulkPlayers" class="primary full hidden">Αποθήκευση ποδοσφαιριστών</button></div>
+<div class="card form-card"><h2>Σήματα ομάδων</h2>
+<p class="helper">Διάλεξε πολλά σήματα μαζί. Κάτω από κάθε εικόνα γράψε ποια ομάδα είναι.</p>
+<label class="upload-box">Επιλογή πολλών σημάτων<input id="bulkTeamPhotos" type="file" accept="image/*" multiple></label>
 <div id="teamImportEditor" class="import-editor"></div>
 <button id="saveBulkTeams" class="primary full hidden">Αποθήκευση σημάτων</button></div>
-<div class="card list-card"><h3>Επεξεργασία προσθηκών</h3><div id="customList"></div></div>
+<div class="card list-card"><h3>Επεξεργασία αποθηκευμένων φωτογραφιών</h3><div id="customList"></div></div>
 </div>
 </section>
 
