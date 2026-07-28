@@ -67,11 +67,13 @@
 
           <button class="game-card stats" data-game="stats">
             <span class="game-emoji">🏆</span>
-            <span>
-              <strong>Στατιστικά</strong>
-              <small>Νίκες και παιχνίδια</small>
-            </span>
+            <span><strong>Στατιστικά</strong><small>Νίκες και παιχνίδια</small></span>
           </button>
+          <button class="game-card wheel-card" data-game="wheel"><span class="game-emoji">🎡</span><span><strong>Τροχός Τύχης</strong><small>Δικά σας challenges</small></span></button>
+          <button class="game-card flags-card" data-game="flags"><span class="game-emoji">🌍</span><span><strong>Σημαίες & Χώρες</strong><small>Μάντεψε τη χώρα</small></span></button>
+          <button class="game-card sports-card" data-game="sports"><span class="game-emoji">⚽</span><span><strong>Αθλητισμός</strong><small>Παίκτες και ομάδες</small></span></button>
+          <button class="game-card coin-card-home" data-game="coin"><span class="game-emoji">🪙</span><span><strong>Κορώνα–Γράμματα</strong><small>Ρίξε το νόμισμα</small></span></button>
+
         </div>
 
         <div class="card quick-score">
@@ -156,6 +158,29 @@
           <div class="stat-row"><span>Νίκες στην Κρεμάλα</span><strong id="statHang">0</strong></div>
           <div class="stat-row"><span>Ήττες στην Κρεμάλα</span><strong id="statHangLoss">0</strong></div>
         </div>
+      </section>
+
+
+      <section id="coinScreen" class="screen">
+        <div class="card extra-card center"><div id="coinDisc" class="coin-disc">👑</div><h2 id="coinResult">Πάτησε για ρίψη</h2><button id="flipCoinBtn" class="primary full">Ρίξε το νόμισμα</button></div>
+        <div class="card extra-card"><h3>Τελευταίες ρίψεις</h3><div id="coinHistory"></div></div>
+      </section>
+
+      <section id="wheelScreen" class="screen">
+        <div class="wheel-wrap"><canvas id="wheelCanvas" width="700" height="700"></canvas><div class="wheel-pointer">▼</div></div>
+        <button id="spinWheelBtn" class="primary full">Γύρισε τον τροχό</button><p id="wheelResult" class="status"></p>
+        <div class="card extra-card"><h3>Επιλογές τροχού</h3><div class="inline-add"><input id="wheelInput" type="text" placeholder="Νέο challenge"><button id="addWheelBtn" class="primary">＋</button></div><div id="wheelItems" class="editable-list"></div></div>
+      </section>
+
+      <section id="flagsScreen" class="screen">
+        <div class="card extra-card center"><div id="flagEmoji" class="flag-emoji">🇬🇷</div><h2>Ποια χώρα είναι;</h2><div id="flagOptions" class="quiz-options"></div><p id="flagMessage" class="status"></p><div class="split"><b>Σκορ: <span id="flagScore">0</span></b><button id="nextFlagBtn" class="primary">Επόμενη</button></div></div>
+      </section>
+
+      <section id="sportsScreen" class="screen">
+        <div class="sport-tabs"><button class="sport-tab active" data-pane="playerPane">Ποδοσφαιριστές</button><button class="sport-tab" data-pane="teamPane">Ομάδες</button><button class="sport-tab" data-pane="addSportPane">Προσθήκη</button></div>
+        <div id="playerPane" class="sport-pane active"><div class="card extra-card center"><div class="photo-box"><img id="playerPhoto" alt="Ποδοσφαιριστής"><div id="playerFallback">⚽</div></div><h2>Ποιος ποδοσφαιριστής είναι;</h2><div id="playerOptions" class="quiz-options"></div><p id="playerMessage" class="status"></p><div class="split"><b>Σκορ: <span id="playerScore">0</span></b><button id="nextPlayerBtn" class="primary">Επόμενος</button></div></div></div>
+        <div id="teamPane" class="sport-pane"><div class="card extra-card center"><div class="photo-box logo-box"><img id="teamPhoto" alt="Λογότυπο ομάδας"><div id="teamFallback">🛡️</div></div><h2>Ποια ομάδα είναι;</h2><div id="teamOptions" class="quiz-options"></div><p id="teamMessage" class="status"></p><div class="split"><b>Σκορ: <span id="teamScore">0</span></b><button id="nextTeamBtn" class="primary">Επόμενη</button></div></div></div>
+        <div id="addSportPane" class="sport-pane"><div class="card extra-card"><h2>Προσθήκη ποδοσφαιριστή</h2><label>Όνομα<input id="customPlayerName" type="text"></label><label>Φωτογραφία<input id="customPlayerPhoto" type="file" accept="image/*" capture="environment"></label><button id="addCustomPlayerBtn" class="primary full">Προσθήκη</button></div><div class="card extra-card"><h2>Προσθήκη ομάδας</h2><label>Όνομα<input id="customTeamName" type="text"></label><label>Λογότυπο<input id="customTeamPhoto" type="file" accept="image/*"></label><button id="addCustomTeamBtn" class="primary full">Προσθήκη</button></div><div class="card extra-card"><h3>Δικές σου προσθήκες</h3><div id="customSportsList"></div></div></div>
       </section>
 
       <section id="settingsScreen" class="screen">
