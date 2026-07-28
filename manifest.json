@@ -1,11 +1,11 @@
 {
-  "name": "Couple Games",
-  "short_name": "Couple Games",
+  "name": "RetroGames By D.Lemonis",
+  "short_name": "RetroGames",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f6f4ff",
-  "theme_color": "#7c3aed",
-  "description": "Τρίλιζα, Σκορ 4 και Κρεμάλα για δύο παίκτες στο ίδιο κινητό.",
+  "background_color": "#f5f2ff",
+  "theme_color": "#5b21b6",
+  "description": "RetroGames By D.Lemonis",
   "icons": [
     {
       "src": "icon.svg",
