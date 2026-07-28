@@ -1,0 +1,17 @@
+{
+  "name": "Couple Games",
+  "short_name": "Couple Games",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f4ff",
+  "theme_color": "#7c3aed",
+  "description": "Τρίλιζα, Σκορ 4 και Κρεμάλα για δύο παίκτες στο ίδιο κινητό.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

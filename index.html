@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#7c3aed" />
+  <title>Couple Games ❤️</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button id="backBtn" class="icon-btn hidden" aria-label="Πίσω">←</button>
+      <div>
+        <h1 id="pageTitle">Couple Games ❤️</h1>
+        <p id="pageSubtitle">Παιχνίδια για δύο στο ίδιο κινητό</p>
+      </div>
+      <button id="settingsBtn" class="icon-btn" aria-label="Ρυθμίσεις">⚙️</button>
+    </header>
+
+    <main>
+      <section id="homeScreen" class="screen active">
+        <div class="players-card card">
+          <div class="player">
+            <span class="avatar p1">1</span>
+            <div>
+              <small>Παίκτης 1</small>
+              <strong id="homeP1">Αλέξανδρος</strong>
+            </div>
+          </div>
+          <div class="versus">VS</div>
+          <div class="player">
+            <span class="avatar p2">2</span>
+            <div>
+              <small>Παίκτης 2</small>
+              <strong id="homeP2">Παίκτης 2</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-grid">
+          <button class="game-card tic" data-game="tic">
+            <span class="game-emoji">❌⭕</span>
+            <span>
+              <strong>Τρίλιζα</strong>
+              <small>Κλασικό 3×3</small>
+            </span>
+          </button>
+
+          <button class="game-card connect" data-game="connect">
+            <span class="game-emoji">🔴🟡</span>
+            <span>
+              <strong>Σκορ 4</strong>
+              <small>4 πιόνια στη σειρά</small>
+            </span>
+          </button>
+
+          <button class="game-card hangman" data-game="hangman">
+            <span class="game-emoji">🔤</span>
+            <span>
+              <strong>Κρεμάλα</strong>
+              <small>Βάλε δική σου λέξη</small>
+            </span>
+          </button>
+
+          <button class="game-card stats" data-game="stats">
+            <span class="game-emoji">🏆</span>
+            <span>
+              <strong>Στατιστικά</strong>
+              <small>Νίκες και παιχνίδια</small>
+            </span>
+          </button>
+        </div>
+
+        <div class="card quick-score">
+          <div>
+            <small>Συνολικό σκορ</small>
+            <strong><span id="totalP1">0</span> - <span id="totalP2">0</span></strong>
+          </div>
+          <button id="resetAllBtn" class="secondary danger">Μηδενισμός</button>
+        </div>
+      </section>
+
+      <section id="ticScreen" class="screen">
+        <div class="scoreboard card">
+          <div><small id="ticP1Name">Παίκτης 1</small><strong id="ticP1Score">0</strong></div>
+          <div class="turn-box"><small>Σειρά</small><strong id="ticTurn">❌</strong></div>
+          <div><small id="ticP2Name">Παίκτης 2</small><strong id="ticP2Score">0</strong></div>
+        </div>
+        <div id="ticBoard" class="tic-board" aria-label="Πίνακας τρίλιζας"></div>
+        <p id="ticMessage" class="status">Παίζει ο Παίκτης 1</p>
+        <div class="actions">
+          <button id="ticNewBtn" class="primary">Νέος γύρος</button>
+          <button id="ticResetBtn" class="secondary">Μηδενισμός σκορ</button>
+        </div>
+      </section>
+
+      <section id="connectScreen" class="screen">
+        <div class="scoreboard card">
+          <div><small id="conP1Name">Παίκτης 1</small><strong id="conP1Score">0</strong></div>
+          <div class="turn-box"><small>Σειρά</small><strong id="conTurn">🔴</strong></div>
+          <div><small id="conP2Name">Παίκτης 2</small><strong id="conP2Score">0</strong></div>
+        </div>
+        <div id="connectBoard" class="connect-board" aria-label="Πίνακας Σκορ 4"></div>
+        <p id="connectMessage" class="status">Παίζει ο Παίκτης 1</p>
+        <div class="actions">
+          <button id="connectNewBtn" class="primary">Νέος γύρος</button>
+          <button id="connectResetBtn" class="secondary">Μηδενισμός σκορ</button>
+        </div>
+      </section>
+
+      <section id="hangmanScreen" class="screen">
+        <div id="hangSetup" class="card setup-card">
+          <h2>Νέα λέξη</h2>
+          <p>Ο ένας παίκτης γράφει τη λέξη κρυφά και μετά δίνει το κινητό στον άλλον.</p>
+          <label>
+            Λέξη
+            <input id="secretWord" type="password" autocomplete="off" placeholder="Γράψε τη λέξη" />
+          </label>
+          <label>
+            Βοήθεια / κατηγορία
+            <input id="secretHint" type="text" autocomplete="off" placeholder="π.χ. Ζώο, χώρα, ταινία" />
+          </label>
+          <button id="startHangBtn" class="primary full">Έναρξη παιχνιδιού</button>
+        </div>
+
+        <div id="hangGame" class="hidden">
+          <div class="card hang-card">
+            <div class="hang-figure" id="hangFigure">🙂</div>
+            <small>Λάθη: <span id="hangMistakes">0</span>/6</small>
+            <p id="hangHint" class="hint"></p>
+            <div id="hangWord" class="hang-word"></div>
+            <div id="wrongLetters" class="wrong-letters"></div>
+          </div>
+          <div id="keyboard" class="keyboard"></div>
+          <p id="hangMessage" class="status">Διάλεξε ένα γράμμα</p>
+          <div class="actions">
+            <button id="hangNewBtn" class="primary">Νέα λέξη</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="statsScreen" class="screen">
+        <div class="stats-grid">
+          <div class="card stat-card"><small>Συνολικές νίκες</small><strong id="statTotal">0</strong></div>
+          <div class="card stat-card"><small>Παιχνίδια</small><strong id="statGames">0</strong></div>
+          <div class="card stat-card"><small id="statP1Name">Παίκτης 1</small><strong id="statP1">0</strong></div>
+          <div class="card stat-card"><small id="statP2Name">Παίκτης 2</small><strong id="statP2">0</strong></div>
+        </div>
+        <div class="card stats-list">
+          <h2>Ανά παιχνίδι</h2>
+          <div class="stat-row"><span>Τρίλιζα</span><strong id="statTic">0 - 0</strong></div>
+          <div class="stat-row"><span>Σκορ 4</span><strong id="statConnect">0 - 0</strong></div>
+          <div class="stat-row"><span>Νίκες στην Κρεμάλα</span><strong id="statHang">0</strong></div>
+          <div class="stat-row"><span>Ήττες στην Κρεμάλα</span><strong id="statHangLoss">0</strong></div>
+        </div>
+      </section>
+
+      <section id="settingsScreen" class="screen">
+        <div class="card settings-card">
+          <h2>Ρυθμίσεις</h2>
+          <label>
+            Όνομα Παίκτη 1
+            <input id="player1Input" type="text" maxlength="20" />
+          </label>
+          <label>
+            Όνομα Παίκτη 2
+            <input id="player2Input" type="text" maxlength="20" />
+          </label>
+          <label class="switch-row">
+            <span>Ήχοι παιχνιδιού</span>
+            <input id="soundToggle" type="checkbox" />
+          </label>
+          <button id="saveSettingsBtn" class="primary full">Αποθήκευση</button>
+        </div>
+        <div class="card install-card">
+          <h2>Εγκατάσταση στο κινητό</h2>
+          <p>Από Safari πάτησε <strong>Κοινή χρήση</strong> → <strong>Προσθήκη στην οθόνη Αφετηρίας</strong>.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
