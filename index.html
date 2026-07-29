@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=stable5">
+<link rel="stylesheet" href="style.css?v=stable6">
 </head>
 <body class="home-view">
 <div class="app">
@@ -31,6 +31,8 @@
 <button class="game green" data-screen="hang"><i>🔤</i><b>Κρεμάλα</b><small>Δική σας λέξη</small></button>
 <button class="game gold" data-screen="coin"><i>🪙</i><b>Κορώνα–Γράμματα</b><small>Ρίξε το νόμισμα</small></button>
 <button class="game sos-card" data-screen="sos"><i>SOS</i><b>SOS</b><small>Σχημάτισε όσες περισσότερες λέξεις SOS μπορείς</small></button>
+<button class="game snake-card" data-screen="snake"><i>🐍</i><b>Φιδάκι</b><small>Φάε τα μήλα και κάνε ρεκόρ</small></button>
+<button class="game mines-card" data-screen="mines"><i>💣</i><b>Ναρκαλιευτής</b><small>Βρες όλα τα ασφαλή τετράγωνα</small></button>
 </div>
 
 <h2>Challenges & Γνώσεις</h2>
@@ -79,6 +81,21 @@
 <p id="sosMsg" class="msg"></p>
 <div class="actions"><button id="sosNew" class="primary">Νέο παιχνίδι</button><button id="sosReset">Μηδενισμός σκορ</button></div>
 <div class="card sos-rules"><b>Κανόνες</b><p>Κάθε οριζόντιο, κάθετο ή διαγώνιο SOS δίνει 1 πόντο. Οι παίκτες παίζουν πάντα εναλλάξ: ο πρώτος με S και ο δεύτερος με O. Κάθε SOS σημειώνεται με τη γραμμή και το χρώμα του παίκτη που το ολοκλήρωσε.</p></div>
+</section>
+
+<section id="snake" class="screen">
+<div class="card arcade-head"><div><small>Σκορ</small><b id="snakeScore">0</b></div><div><small>Ρεκόρ</small><b id="snakeBest">0</b></div><label>Δυσκολία<select id="snakeLevel"><option value="180">Εύκολο</option><option value="125" selected>Κανονικό</option><option value="80">Δύσκολο</option></select></label></div>
+<div class="snake-wrap"><canvas id="snakeCanvas" width="400" height="400" aria-label="Παιχνίδι Φιδάκι"></canvas></div>
+<p id="snakeMsg" class="msg">Πάτησε Έναρξη</p>
+<div class="snake-pad"><button data-dir="up">▲</button><div><button data-dir="left">◀</button><button data-dir="down">▼</button><button data-dir="right">▶</button></div></div>
+<div class="actions"><button id="snakeStart" class="primary">Έναρξη</button><button id="snakePause">Παύση</button><button id="snakeReset">Νέο παιχνίδι</button></div>
+</section>
+
+<section id="mines" class="screen">
+<div class="card mines-head"><button id="minesNew" class="mine-face" aria-label="Νέο παιχνίδι">🙂</button><div><small>Νάρκες</small><b id="minesLeft">10</b></div><div><small>Χρόνος</small><b id="minesTime">0</b></div><label>Επίπεδο<select id="minesLevel"><option value="beginner">Αρχάριος 9×9</option><option value="medium">Μεσαίος 12×12</option><option value="advanced">Προχωρημένος 16×16</option></select></label></div>
+<p class="mines-help">Απλό πάτημα: άνοιγμα · Δεξί κλικ ή παρατεταμένο πάτημα: σημαία 🚩</p>
+<div id="minesBoard" class="mines-board" aria-label="Πίνακας Ναρκαλιευτή"></div>
+<p id="minesMsg" class="msg"></p>
 </section>
 
 <section id="hang" class="screen">
@@ -227,6 +244,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=stable5"></script>
+<script src="app.js?v=stable6"></script>
 </body>
 </html>

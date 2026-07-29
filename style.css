@@ -326,3 +326,20 @@ body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{dis
 .sos-lines line.player-1{stroke:#2563eb}
 .sos-lines line.player-2{stroke:#ef4444}
 @media(max-width:520px){.sos-score span{min-width:0}.sos-score b{font-size:1.7rem!important}#sports .image-box.logo .logo-cover{left:20%!important;right:20%!important}}
+
+/* Stable V6: Retro Arcade - Φιδάκι & Ναρκαλιευτής */
+.snake-card{background:linear-gradient(135deg,#16a34a,#14532d)}
+.mines-card{background:linear-gradient(135deg,#475569,#111827)}
+.arcade-head,.mines-head{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;text-align:center}
+.arcade-head>div,.mines-head>div{min-width:82px;padding:8px 13px;border-radius:12px;background:#f4f1f8}.arcade-head small,.arcade-head b,.mines-head small,.mines-head b{display:block}.arcade-head b,.mines-head b{font-size:1.6rem}
+.arcade-head label,.mines-head label{margin:0;min-width:180px;text-align:left}.arcade-head select,.mines-head select{margin-top:5px}
+.snake-wrap{width:min(92vw,520px);margin:16px auto;padding:10px;border-radius:18px;background:#111827;box-shadow:0 14px 35px rgba(0,0,0,.25)}
+#snakeCanvas{display:block;width:100%;height:auto;aspect-ratio:1;background:#e9f7e9;border-radius:12px;touch-action:none}
+.snake-pad{display:none;text-align:center;margin:10px auto}.snake-pad button{width:62px;height:50px;margin:3px;border-radius:12px;font-size:1.2rem;font-weight:900}.snake-pad>div{display:flex;justify-content:center}
+.mines-help{text-align:center;color:var(--mut);font-weight:700}
+.mine-face{font-size:1.7rem;width:56px;height:48px;border-radius:12px;background:#fff;border:2px solid var(--border)}
+.mines-board{--mine-cols:9;display:grid;grid-template-columns:repeat(var(--mine-cols),minmax(24px,1fr));gap:2px;width:min(96vw,650px);margin:15px auto;padding:7px;background:#64748b;border:4px ridge #cbd5e1;border-radius:8px;user-select:none;touch-action:manipulation}
+.mines-board button{aspect-ratio:1;padding:0;border:2px outset #fff;background:#cbd5e1;border-radius:2px;font-size:clamp(.72rem,2.4vw,1.15rem);font-weight:900;min-width:0}
+.mines-board button.open{border:1px solid #94a3b8;background:#e2e8f0}.mines-board button.mine{background:#fecaca}.mines-board button.flagged{background:#fde68a}
+.mines-board button.n1{color:#2563eb}.mines-board button.n2{color:#15803d}.mines-board button.n3{color:#dc2626}.mines-board button.n4{color:#6d28d9}.mines-board button.n5,.mines-board button.n6,.mines-board button.n7,.mines-board button.n8{color:#111827}
+@media(max-width:700px){.snake-pad{display:block}.arcade-head,.mines-head{gap:8px}.arcade-head>div,.mines-head>div{min-width:70px}.mines-board{gap:1px;padding:4px}.mines-board button{border-width:1px}}
