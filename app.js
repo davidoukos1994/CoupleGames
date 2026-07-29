@@ -71,36 +71,47 @@ $("#hangStart").onclick=()=>{word=norm($("#secret").value.trim());if(word.length
 function renderH(){let f=["🙂","😐","😟","😨","😵","💀","☠️"];$("#hangFace").textContent=f[mis];$("#mistakes").textContent=mis;$("#hintOut").textContent=$("#hint").value?"Βοήθεια: "+$("#hint").value:"";$("#wordOut").textContent=[...word].map(c=>/[^Α-ΩA-Z]/.test(c)||gu.has(c)?c:"_").join(" ");$("#wrongOut").textContent=[...gu].filter(c=>!word.includes(c)).join(" ");let k=$("#keyboard");k.innerHTML="";[...alpha].forEach(l=>{let b=document.createElement("button");b.textContent=l;b.disabled=gu.has(l)||hov;b.onclick=()=>{gu.add(l);if(!word.includes(l))mis++;let won=[...word].filter(c=>/[Α-ΩA-Z]/.test(c)).every(c=>gu.has(c));if(won){hov=true;$("#hangMsg").textContent="Βρήκες τη λέξη"}else if(mis>=6){hov=true;$("#hangMsg").textContent="Η λέξη ήταν "+word}renderH()};k.append(b)})}$("#hangNew").onclick=()=>{$("#secret").value="";$("#hint").value="";$("#hangSetup").classList.remove("hidden");$("#hangPlay").classList.add("hidden")};
 
 // SOS game
-let sosSize=8,sosBoard=Array(sosSize*sosSize).fill(''),sosPlayer=0,sosLetter='S',sosScores=[0,0],sosOver=false;
+let sosSize=8,sosBoard=Array(sosSize*sosSize).fill(''),sosPlayer=0,sosScores=[0,0],sosOver=false,sosLines=[];
 function sosNames(){return [d.players[0]||'Παίκτης 1',d.players[1]||'Παίκτης 2']}
+function sosLetterForPlayer(player){return player===0?'S':'O'}
 function renderSOS(){
-  const names=sosNames();
-  $('#sosName1').textContent=names[0];$('#sosName2').textContent=names[1];
+  const names=sosNames(),letter=sosLetterForPlayer(sosPlayer);
+  $('#sosName1').textContent=names[0]+' · S';$('#sosName2').textContent=names[1]+' · O';
   $('#sosScore1').textContent=sosScores[0];$('#sosScore2').textContent=sosScores[1];
-  $('#sosTurnName').textContent=sosOver?'Τέλος':names[sosPlayer];
-  $('#sosPickS').classList.toggle('active',sosLetter==='S');$('#sosPickO').classList.toggle('active',sosLetter==='O');
+  $('#sosTurnName').textContent=sosOver?'Τέλος':names[sosPlayer]+' · '+letter;
+  $('#sosScoreBox1')?.classList.toggle('active',!sosOver&&sosPlayer===0);
+  $('#sosScoreBox2')?.classList.toggle('active',!sosOver&&sosPlayer===1);
+  $('#sosFixedS')?.classList.toggle('active',!sosOver&&sosPlayer===0);
+  $('#sosFixedO')?.classList.toggle('active',!sosOver&&sosPlayer===1);
   const board=$('#sosBoard');if(!board)return;board.innerHTML='';board.style.setProperty('--sos-size',sosSize);
-  sosBoard.forEach((v,i)=>{const b=document.createElement('button');b.textContent=v;b.disabled=!!v||sosOver;b.setAttribute('aria-label',v?`Κελί ${v}`:'Άδειο κελί');b.onclick=()=>sosMove(i);board.append(b)});
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('class','sos-lines');svg.setAttribute('viewBox',`0 0 ${sosSize} ${sosSize}`);svg.setAttribute('preserveAspectRatio','none');
+  sosLines.forEach(line=>{const el=document.createElementNS('http://www.w3.org/2000/svg','line');const a=line.cells[0],z=line.cells[2];el.setAttribute('x1',(a%sosSize)+.5);el.setAttribute('y1',Math.floor(a/sosSize)+.5);el.setAttribute('x2',(z%sosSize)+.5);el.setAttribute('y2',Math.floor(z/sosSize)+.5);el.setAttribute('class','player-'+(line.player+1));svg.append(el)});
+  board.append(svg);
+  sosBoard.forEach((v,i)=>{const b=document.createElement('button');b.textContent=v;b.disabled=!!v||sosOver;b.className=v?(v==='S'?'letter-s':'letter-o'):'';b.setAttribute('aria-label',v?`Κελί ${v}`:'Άδειο κελί');b.onclick=()=>sosMove(i);board.append(b)});
 }
 function sosMove(index){
-  if(sosOver||sosBoard[index])return;sosBoard[index]=sosLetter;
+  if(sosOver||sosBoard[index])return;
+  const player=sosPlayer,letter=sosLetterForPlayer(player);sosBoard[index]=letter;
   const r=Math.floor(index/sosSize),c=index%sosSize,dirs=[[0,1],[1,0],[1,1],[1,-1]];let made=0;
   for(const [dr,dc] of dirs){
     for(let off=-2;off<=0;off++){
       const cells=[];let ok=true;
-      for(let k=0;k<3;k++){const rr=r+(off+k)*dr,cc=c+(off+k)*dc;if(rr<0||rr>=sosSize||cc<0||cc>=sosSize){ok=false;break}cells.push(sosBoard[rr*sosSize+cc])}
-      if(ok&&cells.join('')==='SOS')made++;
+      for(let k=0;k<3;k++){const rr=r+(off+k)*dr,cc=c+(off+k)*dc;if(rr<0||rr>=sosSize||cc<0||cc>=sosSize){ok=false;break}cells.push(rr*sosSize+cc)}
+      if(ok&&cells.map(i=>sosBoard[i]).join('')==='SOS'){
+        const key=cells.join('-');
+        if(!sosLines.some(x=>x.key===key)){sosLines.push({key,cells,player});made++;}
+      }
     }
   }
-  if(made){sosScores[sosPlayer]+=made;$('#sosMsg').textContent=made===1?'SOS! +1 πόντος · Παίζεις ξανά':`Έκανες ${made} SOS! +${made} πόντοι · Παίζεις ξανά`;}
-  else {sosPlayer=1-sosPlayer;$('#sosMsg').textContent='';}
+  if(made){sosScores[player]+=made;$('#sosMsg').textContent=made===1?`${sosNames()[player]} έκανε SOS! +1 πόντος`:`${sosNames()[player]} έκανε ${made} SOS! +${made} πόντοι`;}
+  else $('#sosMsg').textContent='';
+  sosPlayer=1-sosPlayer;
   if(sosBoard.every(Boolean)){sosOver=true;const n=sosNames();$('#sosMsg').textContent=sosScores[0]===sosScores[1]?`Ισοπαλία ${sosScores[0]}–${sosScores[1]}`:`Νικητής: ${sosScores[0]>sosScores[1]?n[0]:n[1]} (${Math.max(...sosScores)} πόντοι)`;}
   renderSOS();
 }
-$('#sosPickS').onclick=()=>{sosLetter='S';renderSOS()};
-$('#sosPickO').onclick=()=>{sosLetter='O';renderSOS()};
-$('#sosNew').onclick=()=>{sosBoard=Array(sosSize*sosSize).fill('');sosPlayer=0;sosOver=false;$('#sosMsg').textContent='';renderSOS()};
-$('#sosReset').onclick=()=>{sosScores=[0,0];sosBoard=Array(sosSize*sosSize).fill('');sosPlayer=0;sosOver=false;$('#sosMsg').textContent='';renderSOS()};
+$('#sosNew').onclick=()=>{sosBoard=Array(sosSize*sosSize).fill('');sosPlayer=0;sosOver=false;sosLines=[];$('#sosMsg').textContent='';renderSOS()};
+$('#sosReset').onclick=()=>{sosScores=[0,0];sosBoard=Array(sosSize*sosSize).fill('');sosPlayer=0;sosOver=false;sosLines=[];$('#sosMsg').textContent='';renderSOS()};
 
 $("#flipCoin").onclick=()=>{let c=$("#coinDisc");c.classList.remove("flip");void c.offsetWidth;c.classList.add("flip");setTimeout(()=>{let r=Math.random()<.5?"Κορώνα":"Γράμματα";c.textContent=r==="Κορώνα"?"👑":"🔤";$("#coinResult").textContent=r;d.coin.unshift(r);d.coin=d.coin.slice(0,20);save()},850)};
 function renderCoin(){$("#coinHistory").innerHTML=d.coin.length?d.coin.map((x,i)=>"<div class='custom-row'><span>"+(i+1)+". "+x+"</span></div>").join(""):"Δεν υπάρχουν ρίψεις."}
@@ -193,7 +204,7 @@ function renderSpriteToImg(img,fb,cfg,idx,kind){
   if(!sprite){
     sprite=new Image();
     spriteCache.set(key,sprite);
-    sprite.src=cfg.file+'?v=stable4';
+    sprite.src=cfg.file+'?v=stable5';
   }
   const draw=()=>{
     try{

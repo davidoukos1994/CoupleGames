@@ -298,3 +298,31 @@ body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{dis
 .sos-board{--sos-size:8;display:grid;grid-template-columns:repeat(var(--sos-size),1fr);gap:4px;width:min(94vw,620px);margin:14px auto}.sos-board button{aspect-ratio:1;border:1px solid #b9afca;border-radius:7px;background:#fff;font-size:clamp(1rem,4vw,1.6rem);font-weight:900;padding:0}.sos-board button:disabled{opacity:1;color:#2d2140}.sos-rules{margin-top:14px}.sos-rules p{margin-bottom:0;color:var(--mut);line-height:1.45}
 #sports .image-box.logo #qbLogo{display:block;width:100%;height:100%;object-fit:contain!important;background:#fff;padding:10px!important}
 @media(max-width:520px){.sos-head{align-items:flex-start;flex-direction:column}.sos-score{width:100%}.sos-score span{flex:1}.sos-board{gap:3px}.sos-board button{border-radius:5px}}
+
+/* Stable V5: καθαρό πλήρες σήμα και διακριτική απόκρυψη ονομασίας */
+#sports .image-box.logo{background:#fff!important;overflow:hidden;position:relative}
+#sports .image-box.logo #qbLogo{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:8px!important;background:#fff!important}
+#sports .image-box.logo .logo-cover{left:24%!important;right:24%!important;height:9%!important;border-radius:8px!important;background:rgba(255,255,255,.88)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 10px rgba(255,255,255,.9)!important}
+#sports .image-box.logo .logo-cover-top{top:8%!important}
+#sports .image-box.logo .logo-cover-mid{top:68%!important}
+
+/* Stable V5: SOS με σταθερό γράμμα ανά παίκτη και έγχρωμες γραμμές */
+.sos-score span{border:3px solid transparent;transition:.18s;position:relative;min-width:118px}
+.sos-score span.player-one{background:#eef5ff;border-color:#3b82f6;color:#1d4ed8}
+.sos-score span.player-two{background:#fff1f2;border-color:#ef4444;color:#b91c1c}
+.sos-score span.active{transform:scale(1.06);box-shadow:0 0 0 4px rgba(255,255,255,.8),0 8px 22px rgba(31,41,55,.18)}
+.sos-score em{display:block;font-size:.66rem;font-style:normal;font-weight:900;letter-spacing:.09em;opacity:.72}
+.sos-score b{font-size:2rem!important;line-height:1.05}
+.sos-letter-pick.fixed button{opacity:.45;cursor:default}
+.sos-letter-pick.fixed button.active{opacity:1}
+.sos-letter-pick.fixed #sosFixedS.active{background:#3b82f6;border-color:#3b82f6}
+.sos-letter-pick.fixed #sosFixedO.active{background:#ef4444;border-color:#ef4444}
+.sos-board{position:relative}
+.sos-board button{position:relative;z-index:2}
+.sos-board button.letter-s{color:#2563eb!important;background:#eff6ff}
+.sos-board button.letter-o{color:#dc2626!important;background:#fff1f2}
+.sos-lines{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:visible}
+.sos-lines line{stroke-width:.11;stroke-linecap:round;filter:drop-shadow(0 0 .045px #fff)}
+.sos-lines line.player-1{stroke:#2563eb}
+.sos-lines line.player-2{stroke:#ef4444}
+@media(max-width:520px){.sos-score span{min-width:0}.sos-score b{font-size:1.7rem!important}#sports .image-box.logo .logo-cover{left:20%!important;right:20%!important}}

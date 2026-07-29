@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=stable4">
+<link rel="stylesheet" href="style.css?v=stable5">
 </head>
 <body class="home-view">
 <div class="app">
@@ -69,16 +69,16 @@
 <section id="sos" class="screen">
 <div class="card sos-head">
   <div><small>Παίζει τώρα</small><b id="sosTurnName">Παίκτης 1</b></div>
-  <div class="sos-score"><span><small id="sosName1">Παίκτης 1</small><b id="sosScore1">0</b></span><span><small id="sosName2">Παίκτης 2</small><b id="sosScore2">0</b></span></div>
+  <div class="sos-score"><span id="sosScoreBox1" class="player-one active"><small id="sosName1">Παίκτης 1 · S</small><b id="sosScore1">0</b><em>ΠΟΝΤΟΙ</em></span><span id="sosScoreBox2" class="player-two"><small id="sosName2">Παίκτης 2 · O</small><b id="sosScore2">0</b><em>ΠΟΝΤΟΙ</em></span></div>
 </div>
 <div class="card sos-controls">
-  <p>Διάλεξε γράμμα και μετά πάτησε ένα άδειο τετράγωνο.</p>
-  <div class="sos-letter-pick"><button id="sosPickS" class="active">S</button><button id="sosPickO">O</button></div>
+  <p>Οι παίκτες παίζουν εναλλάξ. Ο Παίκτης 1 βάζει πάντα <b>S</b> και ο Παίκτης 2 πάντα <b>O</b>.</p>
+  <div class="sos-letter-pick fixed"><button id="sosFixedS" class="active" disabled>S</button><button id="sosFixedO" disabled>O</button></div>
 </div>
 <div id="sosBoard" class="sos-board" aria-label="Πίνακας SOS"></div>
 <p id="sosMsg" class="msg"></p>
 <div class="actions"><button id="sosNew" class="primary">Νέο παιχνίδι</button><button id="sosReset">Μηδενισμός σκορ</button></div>
-<div class="card sos-rules"><b>Κανόνες</b><p>Κάθε οριζόντιο, κάθετο ή διαγώνιο SOS δίνει 1 πόντο. Όταν σχηματίσεις SOS, παίζεις ξανά. Το παιχνίδι τελειώνει όταν γεμίσει ο πίνακας.</p></div>
+<div class="card sos-rules"><b>Κανόνες</b><p>Κάθε οριζόντιο, κάθετο ή διαγώνιο SOS δίνει 1 πόντο. Οι παίκτες παίζουν πάντα εναλλάξ: ο πρώτος με S και ο δεύτερος με O. Κάθε SOS σημειώνεται με τη γραμμή και το χρώμα του παίκτη που το ολοκλήρωσε.</p></div>
 </section>
 
 <section id="hang" class="screen">
@@ -227,6 +227,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=stable4"></script>
+<script src="app.js?v=stable5"></script>
 </body>
 </html>
