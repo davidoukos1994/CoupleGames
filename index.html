@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=stable3fix">
+<link rel="stylesheet" href="style.css?v=stable4">
 </head>
 <body class="home-view">
 <div class="app">
@@ -30,6 +30,7 @@
 <button class="game blue" data-screen="connect"><i>🔴🟡</i><b>Σκορ 4</b><small>4 στη σειρά</small></button>
 <button class="game green" data-screen="hang"><i>🔤</i><b>Κρεμάλα</b><small>Δική σας λέξη</small></button>
 <button class="game gold" data-screen="coin"><i>🪙</i><b>Κορώνα–Γράμματα</b><small>Ρίξε το νόμισμα</small></button>
+<button class="game sos-card" data-screen="sos"><i>SOS</i><b>SOS</b><small>Σχημάτισε όσες περισσότερες λέξεις SOS μπορείς</small></button>
 </div>
 
 <h2>Challenges & Γνώσεις</h2>
@@ -63,6 +64,21 @@
 <div class="card score"><span><small id="conN1"></small><b id="conS1">0</b></span><span><small>Σειρά</small><b id="conTurn">🔴</b></span><span><small id="conN2"></small><b id="conS2">0</b></span></div>
 <div id="conBoard" class="con-board"></div><p id="conMsg" class="msg"></p>
 <div class="actions"><button id="conNew" class="primary">Νέος γύρος</button><button id="conReset">Μηδενισμός</button></div>
+</section>
+
+<section id="sos" class="screen">
+<div class="card sos-head">
+  <div><small>Παίζει τώρα</small><b id="sosTurnName">Παίκτης 1</b></div>
+  <div class="sos-score"><span><small id="sosName1">Παίκτης 1</small><b id="sosScore1">0</b></span><span><small id="sosName2">Παίκτης 2</small><b id="sosScore2">0</b></span></div>
+</div>
+<div class="card sos-controls">
+  <p>Διάλεξε γράμμα και μετά πάτησε ένα άδειο τετράγωνο.</p>
+  <div class="sos-letter-pick"><button id="sosPickS" class="active">S</button><button id="sosPickO">O</button></div>
+</div>
+<div id="sosBoard" class="sos-board" aria-label="Πίνακας SOS"></div>
+<p id="sosMsg" class="msg"></p>
+<div class="actions"><button id="sosNew" class="primary">Νέο παιχνίδι</button><button id="sosReset">Μηδενισμός σκορ</button></div>
+<div class="card sos-rules"><b>Κανόνες</b><p>Κάθε οριζόντιο, κάθετο ή διαγώνιο SOS δίνει 1 πόντο. Όταν σχηματίσεις SOS, παίζεις ξανά. Το παιχνίδι τελειώνει όταν γεμίσει ο πίνακας.</p></div>
 </section>
 
 <section id="hang" class="screen">
@@ -211,6 +227,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=stable3fix"></script>
+<script src="app.js?v=stable4"></script>
 </body>
 </html>

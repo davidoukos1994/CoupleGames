@@ -41,7 +41,7 @@ function options(container,items,correct,onPick){
     container.appendChild(b);
   });
 }
-const meta={home:["RetroGames By D.Lemonis",""],tic:["Τρίλιζα","Τρία σύμβολα στη σειρά"],connect:["Σκορ 4","Τέσσερα πιόνια στη σειρά"],hang:["Κρεμάλα","Μάντεψε τη λέξη"],coin:["Κορώνα–Γράμματα","Ρίξε το νόμισμα"],wheel:["Τροχός Τύχης","Challenges που αλλάζεις εσύ"],flags:["Find the Flags","Μάντεψε τη χώρα"],sports:["QuizBall","Ποδοσφαιρικά παιχνίδια και ερωτήσεις"],quotes:["TV Quote Challenge","Μάντεψε την ελληνική σειρά από τη διάσημη ατάκα"],stats:["Στατιστικά","Τα σκορ σας"],settings:["Ρυθμίσεις","Ονόματα παικτών"]};
+const meta={home:["RetroGames By D.Lemonis",""],tic:["Τρίλιζα","Τρία σύμβολα στη σειρά"],connect:["Σκορ 4","Τέσσερα πιόνια στη σειρά"],hang:["Κρεμάλα","Μάντεψε τη λέξη"],coin:["Κορώνα–Γράμματα","Ρίξε το νόμισμα"],sos:["SOS","Σχημάτισε τις περισσότερες λέξεις SOS"],wheel:["Τροχός Τύχης","Challenges που αλλάζεις εσύ"],flags:["Find the Flags","Μάντεψε τη χώρα"],sports:["QuizBall","Ποδοσφαιρικά παιχνίδια και ερωτήσεις"],quotes:["TV Quote Challenge","Μάντεψε την ελληνική σειρά από τη διάσημη ατάκα"],stats:["Στατιστικά","Τα σκορ σας"],settings:["Ρυθμίσεις","Ονόματα παικτών"]};
 function go(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$('#title').textContent=meta[id][0];$('#subtitle').textContent=meta[id][1]||'';$('#subtitle').classList.toggle('hidden',!meta[id][1]);$('#back').classList.toggle('hidden',id==='home');document.body.classList.toggle('home-view',id==='home');const playerBar=$('#gamePlayersBar');if(playerBar)playerBar.classList.toggle('hidden',id==='home'||id==='settings');const sb=$('#settingsBtn');if(sb)sb.classList.toggle('hidden',id==='settings');scrollTo(0,0);if(id==='wheel')drawWheel();if(id==='flags')newFlag();if(id==='sports')showQuizBallHub();if(id==='quotes')showQuoteHub()}
 $$('[data-screen]').forEach(b=>b.onclick=()=>go(b.dataset.screen));$("#back").onclick=()=>go("home");const settingsHeader=$("#settingsBtn");if(settingsHeader)settingsHeader.onclick=()=>go("settings");
 function setText(sel,value){let el=$(sel);if(el)el.textContent=value}
@@ -69,6 +69,38 @@ const alpha="ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";let word="",gu=ne
 const norm=s=>s.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 $("#hangStart").onclick=()=>{word=norm($("#secret").value.trim());if(word.length<2)return toast("Γράψε λέξη");gu=new Set();mis=0;hov=false;$("#hangSetup").classList.add("hidden");$("#hangPlay").classList.remove("hidden");renderH()};
 function renderH(){let f=["🙂","😐","😟","😨","😵","💀","☠️"];$("#hangFace").textContent=f[mis];$("#mistakes").textContent=mis;$("#hintOut").textContent=$("#hint").value?"Βοήθεια: "+$("#hint").value:"";$("#wordOut").textContent=[...word].map(c=>/[^Α-ΩA-Z]/.test(c)||gu.has(c)?c:"_").join(" ");$("#wrongOut").textContent=[...gu].filter(c=>!word.includes(c)).join(" ");let k=$("#keyboard");k.innerHTML="";[...alpha].forEach(l=>{let b=document.createElement("button");b.textContent=l;b.disabled=gu.has(l)||hov;b.onclick=()=>{gu.add(l);if(!word.includes(l))mis++;let won=[...word].filter(c=>/[Α-ΩA-Z]/.test(c)).every(c=>gu.has(c));if(won){hov=true;$("#hangMsg").textContent="Βρήκες τη λέξη"}else if(mis>=6){hov=true;$("#hangMsg").textContent="Η λέξη ήταν "+word}renderH()};k.append(b)})}$("#hangNew").onclick=()=>{$("#secret").value="";$("#hint").value="";$("#hangSetup").classList.remove("hidden");$("#hangPlay").classList.add("hidden")};
+
+// SOS game
+let sosSize=8,sosBoard=Array(sosSize*sosSize).fill(''),sosPlayer=0,sosLetter='S',sosScores=[0,0],sosOver=false;
+function sosNames(){return [d.players[0]||'Παίκτης 1',d.players[1]||'Παίκτης 2']}
+function renderSOS(){
+  const names=sosNames();
+  $('#sosName1').textContent=names[0];$('#sosName2').textContent=names[1];
+  $('#sosScore1').textContent=sosScores[0];$('#sosScore2').textContent=sosScores[1];
+  $('#sosTurnName').textContent=sosOver?'Τέλος':names[sosPlayer];
+  $('#sosPickS').classList.toggle('active',sosLetter==='S');$('#sosPickO').classList.toggle('active',sosLetter==='O');
+  const board=$('#sosBoard');if(!board)return;board.innerHTML='';board.style.setProperty('--sos-size',sosSize);
+  sosBoard.forEach((v,i)=>{const b=document.createElement('button');b.textContent=v;b.disabled=!!v||sosOver;b.setAttribute('aria-label',v?`Κελί ${v}`:'Άδειο κελί');b.onclick=()=>sosMove(i);board.append(b)});
+}
+function sosMove(index){
+  if(sosOver||sosBoard[index])return;sosBoard[index]=sosLetter;
+  const r=Math.floor(index/sosSize),c=index%sosSize,dirs=[[0,1],[1,0],[1,1],[1,-1]];let made=0;
+  for(const [dr,dc] of dirs){
+    for(let off=-2;off<=0;off++){
+      const cells=[];let ok=true;
+      for(let k=0;k<3;k++){const rr=r+(off+k)*dr,cc=c+(off+k)*dc;if(rr<0||rr>=sosSize||cc<0||cc>=sosSize){ok=false;break}cells.push(sosBoard[rr*sosSize+cc])}
+      if(ok&&cells.join('')==='SOS')made++;
+    }
+  }
+  if(made){sosScores[sosPlayer]+=made;$('#sosMsg').textContent=made===1?'SOS! +1 πόντος · Παίζεις ξανά':`Έκανες ${made} SOS! +${made} πόντοι · Παίζεις ξανά`;}
+  else {sosPlayer=1-sosPlayer;$('#sosMsg').textContent='';}
+  if(sosBoard.every(Boolean)){sosOver=true;const n=sosNames();$('#sosMsg').textContent=sosScores[0]===sosScores[1]?`Ισοπαλία ${sosScores[0]}–${sosScores[1]}`:`Νικητής: ${sosScores[0]>sosScores[1]?n[0]:n[1]} (${Math.max(...sosScores)} πόντοι)`;}
+  renderSOS();
+}
+$('#sosPickS').onclick=()=>{sosLetter='S';renderSOS()};
+$('#sosPickO').onclick=()=>{sosLetter='O';renderSOS()};
+$('#sosNew').onclick=()=>{sosBoard=Array(sosSize*sosSize).fill('');sosPlayer=0;sosOver=false;$('#sosMsg').textContent='';renderSOS()};
+$('#sosReset').onclick=()=>{sosScores=[0,0];sosBoard=Array(sosSize*sosSize).fill('');sosPlayer=0;sosOver=false;$('#sosMsg').textContent='';renderSOS()};
 
 $("#flipCoin").onclick=()=>{let c=$("#coinDisc");c.classList.remove("flip");void c.offsetWidth;c.classList.add("flip");setTimeout(()=>{let r=Math.random()<.5?"Κορώνα":"Γράμματα";c.textContent=r==="Κορώνα"?"👑":"🔤";$("#coinResult").textContent=r;d.coin.unshift(r);d.coin=d.coin.slice(0,20);save()},850)};
 function renderCoin(){$("#coinHistory").innerHTML=d.coin.length?d.coin.map((x,i)=>"<div class='custom-row'><span>"+(i+1)+". "+x+"</span></div>").join(""):"Δεν υπάρχουν ρίψεις."}
@@ -154,6 +186,32 @@ function folderLibraryStatus(){
   box.innerHTML=`<b>Περιεχόμενο μέσα στο ZIP:</b> ${folderPlayers.length} ποδοσφαιριστές, ${folderTeams.length} σήματα και ${totalQuestions} ερωτήσεις.`;
 }
 
+const spriteCache=new Map();
+function renderSpriteToImg(img,fb,cfg,idx,kind){
+  const key=cfg.file;
+  let sprite=spriteCache.get(key);
+  if(!sprite){
+    sprite=new Image();
+    spriteCache.set(key,sprite);
+    sprite.src=cfg.file+'?v=stable4';
+  }
+  const draw=()=>{
+    try{
+      const col=idx%cfg.cols,row=Math.floor(idx/cfg.cols);
+      const cellW=Math.floor(sprite.naturalWidth/cfg.cols),cellH=Math.floor(sprite.naturalHeight/cfg.rows);
+      const canvas=document.createElement('canvas');
+      canvas.width=cellW;canvas.height=cellH;
+      const ctx=canvas.getContext('2d');
+      ctx.fillStyle=kind==='teams'?'#ffffff':'#e9e6ef';ctx.fillRect(0,0,cellW,cellH);
+      ctx.drawImage(sprite,col*cellW,row*cellH,cellW,cellH,0,0,cellW,cellH);
+      img.style.backgroundImage='';img.style.objectFit='contain';img.style.padding=kind==='teams'?'10px':'0';
+      img.src=canvas.toDataURL('image/webp',0.95);
+      img.style.display='block';fb.style.display='none';
+    }catch(e){img.style.display='none';fb.style.display='grid'}
+  };
+  if(sprite.complete&&sprite.naturalWidth)draw();
+  else {sprite.addEventListener('load',draw,{once:true});sprite.addEventListener('error',()=>{img.style.display='none';fb.style.display='grid'},{once:true});}
+}
 function setImg(img,fb,url){
   fb.style.display='none';img.style.display='block';
   img.style.backgroundImage='';img.style.backgroundSize='';img.style.backgroundPosition='';img.style.backgroundRepeat='';
@@ -161,16 +219,7 @@ function setImg(img,fb,url){
   if(typeof url==='string'&&url.startsWith('sprite:')){
     const parts=url.split(':'),kind=parts[1],idx=Number(parts[2]),cfg=folderSprites[kind];
     if(!cfg||!Number.isFinite(idx)){img.style.display='none';fb.style.display='grid';return}
-    const col=idx%cfg.cols,row=Math.floor(idx/cfg.cols);
-    // Ένα διάφανο pixel κρατά το <img> ενεργό σε όλους τους browsers,
-    // ώστε να εμφανίζεται σωστά το sprite ως background (Chrome/iPhone/GitHub Pages).
-    img.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
-    img.style.backgroundImage=`url('${cfg.file}?v=stable3fix')`;
-    img.style.backgroundSize=`${cfg.cols*100}% ${cfg.rows*100}%`;
-    img.style.backgroundPosition=`${cfg.cols===1?0:col*(100/(cfg.cols-1))}% ${cfg.rows===1?0:row*(100/(cfg.rows-1))}%`;
-    img.style.backgroundRepeat='no-repeat';
-    img.style.backgroundColor=kind==='teams'?'#fff':'#e9e6ef';
-    return;
+    renderSpriteToImg(img,fb,cfg,idx,kind);return;
   }
   img.onload=()=>{fb.style.display='none';img.style.display='block'};
   img.onerror=()=>{img.style.display='none';fb.style.display='grid'};
@@ -273,3 +322,5 @@ const settingsQuotes=$("#settingsQuotes");if(settingsQuotes)settingsQuotes.oncli
 const settingsQuizball=$("#settingsQuizball");if(settingsQuizball)settingsQuizball.onclick=()=>go("sports");
 const addFlagItem=$("#addFlagItem");if(addFlagItem)addFlagItem.onclick=()=>{const emoji=$("#newFlagEmoji").value.trim(),country=$("#newFlagCountry").value.trim();if(!emoji||!country)return toast("Βάλε διαδρομή εικόνας και όνομα χώρας");d.customFlagList.push([emoji,country]);$("#newFlagEmoji").value="";$("#newFlagCountry").value="";flagDeck=[];save();renderFlagEditor()};
 const resetFlags=$("#resetFlags");if(resetFlags)resetFlags.onclick=()=>{if(!confirm("Να επανέλθει η αρχική λίστα χωρών;"))return;d.customFlagList=defaultFlags.map(x=>[...x]);flagDeck=[];save();renderFlagEditor();toast("Η λίστα επανήλθε")};
+
+try{renderSOS()}catch(e){}
