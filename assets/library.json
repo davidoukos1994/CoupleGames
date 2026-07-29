@@ -1,0 +1,276 @@
+{
+  "players": [
+    {
+      "name": "Demis Nikolaidis",
+      "img": "assets/players/demis-nikolaidis.jpg"
+    },
+    {
+      "name": "Jude Bellingham",
+      "img": "assets/players/jude-bellingham.webp"
+    },
+    {
+      "name": "Wayne Rooney",
+      "img": "assets/players/wayne-rooney.jpg"
+    },
+    {
+      "name": "Angelos Charisteas",
+      "img": "assets/players/angelos-charisteas.jpg"
+    },
+    {
+      "name": "Hulk",
+      "img": "assets/players/hulk.jpg"
+    },
+    {
+      "name": "Luciano Galletti",
+      "img": "assets/players/luciano-galletti.jpg"
+    },
+    {
+      "name": "Djibril Cissé",
+      "img": "assets/players/djibril-cisse.jpg"
+    },
+    {
+      "name": "Zinedine Zidane",
+      "img": "assets/players/zinedine-zidane.webp"
+    },
+    {
+      "name": "Ronaldinho",
+      "img": "assets/players/ronaldinho.webp"
+    },
+    {
+      "name": "Thierry Henry",
+      "img": "assets/players/thierry-henry.jpg"
+    },
+    {
+      "name": "Giovanni Silva de Oliveira",
+      "img": "assets/players/giovanni.jpg"
+    },
+    {
+      "name": "David Beckham",
+      "img": "assets/players/david-beckham.webp"
+    },
+    {
+      "name": "Zlatan Ibrahimović",
+      "img": "assets/players/zlatan-ibrahimovic.jpg"
+    },
+    {
+      "name": "Luka Modrić",
+      "img": "assets/players/luka-modric.jpg"
+    },
+    {
+      "name": "Juninho Pernambucano",
+      "img": "assets/players/juninho-pernambucano.jpg"
+    },
+    {
+      "name": "David Luiz",
+      "img": "assets/players/david-luiz.jpg"
+    },
+    {
+      "name": "Rivaldo",
+      "img": "assets/players/rivaldo.jpg"
+    },
+    {
+      "name": "Kaká",
+      "img": "assets/players/kaka.webp"
+    }
+  ],
+  "teams": [
+    {
+      "name": "AEK",
+      "img": "assets/teams/Aek .png"
+    },
+    {
+      "name": "Ajax",
+      "img": "assets/teams/Ajax .png"
+    },
+    {
+      "name": "Alaves",
+      "img": "assets/teams/Alaves .png"
+    },
+    {
+      "name": "Alkmaar",
+      "img": "assets/teams/Alkmaar .png"
+    },
+    {
+      "name": "Arsenal",
+      "img": "assets/teams/Arsenal .png"
+    },
+    {
+      "name": "Atletico Madrid",
+      "img": "assets/teams/Atletico Madrid .png"
+    },
+    {
+      "name": "Atletico Mineiro",
+      "img": "assets/teams/Atletico Mineiro .png"
+    },
+    {
+      "name": "Atromitos",
+      "img": "assets/teams/Atromitos .png"
+    },
+    {
+      "name": "Bayer Leverkusen",
+      "img": "assets/teams/Bayern leverkusen .png"
+    },
+    {
+      "name": "Benfica",
+      "img": "assets/teams/Benfica .png"
+    },
+    {
+      "name": "Besiktas",
+      "img": "assets/teams/Beshiktas .png"
+    },
+    {
+      "name": "Borussia Dortmund",
+      "img": "assets/teams/Borusia dortmund.png"
+    },
+    {
+      "name": "Chelsea",
+      "img": "assets/teams/Chelsea-logos.cc.png"
+    },
+    {
+      "name": "Como",
+      "img": "assets/teams/Como .png"
+    },
+    {
+      "name": "Fenerbahce",
+      "img": "assets/teams/Fenerbahce .png"
+    },
+    {
+      "name": "Feyenoord",
+      "img": "assets/teams/Feyenoord .png"
+    },
+    {
+      "name": "Fiorentina",
+      "img": "assets/teams/Fiorentina .png"
+    },
+    {
+      "name": "Flamengo",
+      "img": "assets/teams/Flamengo .png"
+    },
+    {
+      "name": "Galatasaray",
+      "img": "assets/teams/Galatasaray .png"
+    },
+    {
+      "name": "Gremio",
+      "img": "assets/teams/Gremio .png"
+    },
+    {
+      "name": "Lazio",
+      "img": "assets/teams/Lazio .png"
+    },
+    {
+      "name": "Lille",
+      "img": "assets/teams/Lille.png"
+    },
+    {
+      "name": "Liverpool",
+      "img": "assets/teams/Liverpool.cc.png"
+    },
+    {
+      "name": "Lyon",
+      "img": "assets/teams/Lyon.png"
+    },
+    {
+      "name": "Manchester City",
+      "img": "assets/teams/Manchester City-logos.cc.png"
+    },
+    {
+      "name": "Marseille",
+      "img": "assets/teams/Marsellie .png"
+    },
+    {
+      "name": "Monaco",
+      "img": "assets/teams/Monaco .png"
+    },
+    {
+      "name": "Napoli",
+      "img": "assets/teams/Napoli .png"
+    },
+    {
+      "name": "Newcastle",
+      "img": "assets/teams/Newcastle .png"
+    },
+    {
+      "name": "Nottingham forest",
+      "img": "assets/teams/Nottingham forest .png"
+    },
+    {
+      "name": "Olympiacos",
+      "img": "assets/teams/Olympiakos .png"
+    },
+    {
+      "name": "PSV Eindhoven",
+      "img": "assets/teams/PSV Aithofen .png"
+    },
+    {
+      "name": "Panathinaikos",
+      "img": "assets/teams/Panathinaikos .png"
+    },
+    {
+      "name": "PAOK",
+      "img": "assets/teams/Paok .png"
+    },
+    {
+      "name": "Porto",
+      "img": "assets/teams/Porto .png"
+    },
+    {
+      "name": "Real Madrid",
+      "img": "assets/teams/Real Madrid Logos.cc.png"
+    },
+    {
+      "name": "Roma",
+      "img": "assets/teams/Roma.png"
+    },
+    {
+      "name": "Schalke",
+      "img": "assets/teams/Schalke .png"
+    },
+    {
+      "name": "Sevilla",
+      "img": "assets/teams/Sevilla .png"
+    },
+    {
+      "name": "Tottenham",
+      "img": "assets/teams/Tottenham .png"
+    },
+    {
+      "name": "Villarreal",
+      "img": "assets/teams/Villarreal .png"
+    },
+    {
+      "name": "West Ham",
+      "img": "assets/teams/West Ham .png"
+    },
+    {
+      "name": "Manchester United",
+      "img": "assets/teams/_manchester-united_logos.cc.png"
+    },
+    {
+      "name": "Arsenal",
+      "img": "assets/teams/arsenal_logos.cc.png"
+    },
+    {
+      "name": "Barcelona",
+      "img": "assets/teams/barcelona-logos.cc.png"
+    },
+    {
+      "name": "Bayern Munich",
+      "img": "assets/teams/bayern munich-logos.cc.png"
+    },
+    {
+      "name": "Paris Saint-Germain",
+      "img": "assets/teams/france_paris-saint-germain_.png"
+    },
+    {
+      "name": "Inter",
+      "img": "assets/teams/inter-logos.cc.png"
+    }
+  ],
+  "questions": {
+    "playerid": [],
+    "footballers": [],
+    "history": [],
+    "audience": []
+  }
+}

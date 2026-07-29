@@ -11,3 +11,146 @@ header{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;align-items:cent
 .photo-change{display:inline-flex!important;align-items:center;border:0;border-radius:10px;padding:8px 10px!important;margin:0!important;background:#ece8f4;font-size:inherit!important;font-weight:700!important;cursor:pointer}.custom-entry-main small{display:block;color:var(--mut);margin-bottom:5px}
 
 select{width:100%;margin-top:7px;border:1px solid var(--border);border-radius:14px;padding:13px;background:#faf9fd}.secondary{border:1px solid var(--border);border-radius:14px;padding:12px 16px;background:#fff;font-weight:800}.sports-start{max-width:560px;margin:0 auto}.sports-start .secondary{margin-top:10px}.sports-names{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.sports-game-head{padding:14px;display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;margin-bottom:14px}.sports-game-head small{display:block;color:var(--mut)}.sports-game-head b{display:block;font-size:1.1rem}.sports-scoreboard{display:flex;gap:7px;flex-wrap:wrap}.sports-scoreboard span{min-width:65px;padding:7px 10px;border-radius:12px;background:#f0ecf7;text-align:center}.sports-scoreboard span.active{background:var(--p);color:#fff}.sports-scoreboard small,.sports-scoreboard b{display:block}.add-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}.add-head h2{margin:0}.upload-box{display:block;border:2px dashed var(--p);border-radius:16px;padding:16px;text-align:center;background:#f7f2ff}.upload-box input{margin-top:10px!important}.import-item.team img{object-fit:contain!important;padding:8px;background:#fff}.logo img{object-fit:contain!important;background:#fff!important;padding:18px!important}@media(max-width:560px){.sports-names{grid-template-columns:1fr}.sports-game-head{grid-template-columns:1fr}.sports-scoreboard{order:3}.sports-game-head .secondary{width:100%}}
+/* V5 - καθαρή κεφαλίδα και QuizBall */
+.topbar{grid-template-columns:58px minmax(0,1fr) 82px;gap:10px;padding-top:14px}
+.brand-box{min-height:58px;background:#fff;border:1px solid #fff;border-radius:18px;box-shadow:0 10px 26px #3b26651c;display:flex;flex-direction:column;justify-content:center;padding:10px 15px;overflow:hidden}
+.brand-box h1{font-size:1.15rem;line-height:1.2;white-space:normal;word-break:normal}
+.header-box{height:58px;border:0;border-radius:18px;background:#fff;box-shadow:0 10px 26px #3b26651c;font-weight:800;color:var(--txt)}
+.settings-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:5px}.settings-box span{font-size:1.25rem}.settings-box small{font-size:.65rem}.back-box{font-size:1.5rem}
+.quizball-hero{width:100%;border:0;border-radius:24px;padding:18px;background:linear-gradient(135deg,#0f766e,#16a34a 58%,#84cc16);color:#fff;display:grid;grid-template-columns:58px 1fr 24px;align-items:center;gap:12px;text-align:left;box-shadow:0 12px 28px #16653435}.quizball-icon{font-size:2.6rem}.quizball-hero b{display:block;font-size:1.35rem}.quizball-hero small{display:block;margin-top:4px;line-height:1.35;opacity:.92}.quizball-arrow{font-size:2.2rem}
+.quizball-title{padding:18px;display:flex;align-items:center;gap:14px;margin-bottom:14px;background:linear-gradient(135deg,#052e2b,#166534);color:#fff}.quizball-title>span{font-size:3rem}.quizball-title h2{margin:0;font-size:1.45rem}.quizball-title p{margin:4px 0 0;opacity:.85}
+.quiz-category-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.quiz-category{min-height:142px;border:0;border-radius:22px;padding:16px;color:#fff;text-align:left;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 10px 24px #1f29372c}.quiz-category i{font-style:normal;font-size:2.2rem}.quiz-category b{font-size:1.08rem}.quiz-category small{line-height:1.3}.quiz-category.playerid{background:linear-gradient(135deg,#2563eb,#4338ca)}.quiz-category.logoquiz{background:linear-gradient(135deg,#f97316,#dc2626)}.quiz-category.footballers{background:linear-gradient(135deg,#16a34a,#047857)}.quiz-category.history{background:linear-gradient(135deg,#7c3aed,#4c1d95)}.quiz-category.audience{background:linear-gradient(135deg,#0891b2,#0e7490);grid-column:1/-1;min-height:118px}.manage-quiz{margin-top:12px;border:1px solid #d8d0e8;border-radius:16px;padding:14px;background:#fff;font-weight:800;color:var(--p)}
+.quiz-chip{display:inline-block;padding:7px 11px;border-radius:999px;background:#ede9fe;color:#5b21b6;font-weight:800;font-size:.8rem}.text-quiz-card h2{font-size:1.35rem;line-height:1.35;margin:18px 0}.question-list{margin-top:20px}.question-list h3{margin:18px 0 6px}.question-row{display:grid;grid-template-columns:1fr auto auto;gap:7px;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}.question-row div{min-width:0}.question-row b,.question-row small{display:block}.question-row small{color:var(--mut);margin-top:4px}.question-row button{padding:9px!important}
+@media(max-width:420px){.topbar{grid-template-columns:50px minmax(0,1fr) 70px}.brand-box h1{font-size:1rem}.settings-box small{font-size:.58rem}.quiz-category-grid{grid-template-columns:1fr 1fr}.quiz-category{min-height:132px;padding:13px}.quiz-category small{font-size:.78rem}}
+
+/* QuizBall ολοκληρωμένο παιχνίδι */
+.qb-category-list{display:grid;gap:9px}.qb-choice{margin:0!important;display:flex!important;align-items:center;gap:12px;padding:13px;border:1px solid var(--border);border-radius:16px;background:#faf9fd}.qb-choice.active{border-color:#16a34a;background:#f0fdf4}.qb-choice input{width:22px!important;height:22px;margin:0!important}.qb-choice span{display:block}.qb-choice b,.qb-choice small{display:block}.qb-choice small{color:var(--mut);margin-top:3px}.qb-choice:has(input:disabled){opacity:.5}.rounds-info{display:flex;justify-content:space-between;align-items:center;margin:14px 0;padding:13px;border-radius:14px;background:#ede9fe}.rounds-info small{color:var(--mut)}.qb-question-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.logo-mask{position:relative}.logo-mask:after{content:"";position:absolute;left:10%;right:10%;top:3%;height:20%;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:#ffffffa8;border-radius:12px;pointer-events:none}.written-answer{display:flex;gap:8px;margin-top:14px}.written-answer input{flex:1;min-width:0;border:1px solid var(--border);border-radius:14px;padding:13px}.qb-helps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}.help-btn{border:1px solid #d8d0e8;border-radius:14px;padding:12px;background:#fff;font-weight:800}.help-btn small{display:block;color:var(--mut);font-weight:600;margin-top:3px}.help-btn.used,.help-btn:disabled{opacity:.45}.quiz-results{text-align:center;padding:24px}.result-ball{font-size:4rem}.quiz-results h2{font-size:1.6rem}.result-row{display:flex;justify-content:space-between;align-items:center;padding:14px;border-bottom:1px solid var(--border);font-size:1.05rem}.result-row:first-child{background:#fefce8;border-radius:14px}.result-row b{white-space:nowrap}@media(max-width:520px){.rounds-info{align-items:flex-start;flex-direction:column;gap:4px}.written-answer{flex-direction:column}.qb-helps{grid-template-columns:1fr 1fr}}
+.top5-panel{margin-top:14px}.top5-inputs{display:grid;gap:10px;margin:12px 0}.top5-inputs input,#qbTop5Fifth{width:100%;box-sizing:border-box}.top5-decision{margin-top:14px;padding:14px;border-radius:14px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35)}.top5-decision p{margin-top:0}.top5-decision .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.top5-panel .correct-input{border-color:#16a34a;background:rgba(22,163,74,.08)}
+
+/* QuizBall creator credit — εμφανίζεται μόνο στην αρχική οθόνη του QuizBall */
+.quizball-credit{margin:.35rem 0 0;font-size:.78rem;opacity:.82;font-style:italic;line-height:1.35}
+.quizball-credit strong{font-style:normal;letter-spacing:.02em}
+
+.top5-mistake-note{margin:0 0 10px;font-weight:700;color:#f4c95d}.wrong-input{border-color:#ef5350!important;background:rgba(239,83,80,.12)!important}
+
+/* V12 — Responsive/mobile-first βελτιώσεις για iPhone, Android, tablet και υπολογιστή */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+button,input,select{touch-action:manipulation}
+button{min-height:44px;-webkit-tap-highlight-color:transparent}
+input,select{font-size:16px}
+.app{width:100%;max-width:1180px;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));padding-bottom:max(24px,env(safe-area-inset-bottom))}
+
+/* Το QuizBall γεμίζει σωστά τον διαθέσιμο χώρο χωρίς να γίνεται υπερβολικά πλατύ */
+#sports{width:100%}
+#quizSetup,#quizGame,#quizResults{width:100%;max-width:920px;margin-inline:auto}
+#sports .form-card,#sports .quiz-card,#sports .sports-game-head,#sports .quizball-title{border-radius:20px}
+#sports .primary,#sports .secondary,#sports .help-btn{min-height:48px}
+#sports .qb-choice{min-height:62px}
+#sports .qb-choice span{min-width:0}
+#sports .qb-choice b{font-size:1rem}
+#sports .qb-choice small{line-height:1.35}
+#sports .image-box{height:clamp(220px,42vw,390px)}
+#sports .image-box.logo img{max-width:100%;max-height:100%}
+#sports .qb-question-top{gap:10px;flex-wrap:wrap}
+#sports #qbQuestion{font-size:clamp(1.2rem,3vw,1.7rem);line-height:1.35;text-align:center;margin:16px 0}
+#sports .options button{min-height:54px;font-size:1rem}
+#sports .written-answer input,#sports .top5-inputs input,#sports #qbTop5Fifth{min-height:50px;font-size:16px}
+#sports .top5-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}
+#sports .sports-scoreboard{justify-content:center}
+#sports .sports-scoreboard span{min-width:90px}
+#sports .qb-helps button{min-height:54px}
+
+/* Tablet / desktop */
+@media (min-width:768px){
+  .app{padding-left:24px;padding-right:24px}
+  .topbar{position:sticky;top:0;z-index:10;padding:14px 0;background:linear-gradient(#eee8fff2,#eee8ffcc,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  #quizSetup{display:grid;grid-template-columns:1fr 1.15fr;gap:16px;align-items:start}
+  #quizSetup>.quizball-title{grid-column:1/-1}
+  #quizSetup>.form-card{margin-bottom:0}
+  #sports .qb-category-list{grid-template-columns:1fr 1fr}
+  #sports .qb-choice:nth-child(n+4){grid-column:auto}
+  #sports .sports-game-head{grid-template-columns:minmax(180px,1fr) auto auto}
+  #sports .quiz-card{padding:28px}
+  #sports .options{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #sports .top5-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Μεγάλος υπολογιστής */
+@media (min-width:1024px){
+  #quizGame{max-width:980px}
+  #sports .quiz-card{padding:32px 40px}
+  #sports .image-box{height:410px}
+  #sports .written-answer{max-width:720px;margin:16px auto 0}
+  #sports .qb-helps{max-width:720px;margin:18px auto}
+  #sports .top5-panel{max-width:760px;margin:14px auto 0}
+}
+
+/* Κινητά */
+@media (max-width:767px){
+  .app{max-width:100%;padding-top:env(safe-area-inset-top)}
+  .topbar{grid-template-columns:48px minmax(0,1fr) 68px;gap:7px;padding:10px 0 12px}
+  .header-box{height:52px;border-radius:15px}
+  .brand-box{min-height:52px;border-radius:15px;padding:8px 11px}
+  .brand-box h1{font-size:.98rem}
+  .settings-box span{font-size:1.1rem}
+  .settings-box small{font-size:.55rem}
+  #sports .quizball-title{padding:15px;gap:10px}
+  #sports .quizball-title>span{font-size:2.35rem}
+  #sports .quizball-title h2{font-size:1.3rem}
+  #sports .quizball-title p{font-size:.86rem}
+  #sports .quizball-credit{font-size:.72rem}
+  #sports .form-card,#sports .quiz-card{padding:16px}
+  #sports .sports-game-head{padding:12px;grid-template-columns:1fr;gap:10px}
+  #sports .sports-scoreboard{order:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+  #sports .sports-scoreboard span{min-width:0;padding:7px 5px}
+  #sports .sports-game-head .secondary{order:3;width:100%}
+  #sports .qb-category-list{gap:8px}
+  #sports .qb-choice{padding:11px;gap:10px}
+  #sports .rounds-info{font-size:.92rem}
+  #sports .image-box{height:min(62vw,300px);border-radius:16px}
+  #sports .image-box.logo img{padding:14px!important}
+  #sports .logo-mask:after{left:6%;right:6%;height:22%}
+  #sports .options{grid-template-columns:1fr;gap:9px}
+  #sports .written-answer{flex-direction:column}
+  #sports .written-answer button{width:100%}
+  #sports .top5-inputs{grid-template-columns:1fr}
+  #sports .top5-decision .actions{grid-template-columns:1fr}
+  #sports .qb-helps{grid-template-columns:1fr 1fr;gap:8px}
+  #sports .quiz-results{padding:22px 16px}
+}
+
+/* Πολύ μικρές οθόνες iPhone */
+@media (max-width:380px){
+  .app{padding-left:max(9px,env(safe-area-inset-left));padding-right:max(9px,env(safe-area-inset-right))}
+  #sports .form-card,#sports .quiz-card{padding:13px}
+  #sports .qb-choice b{font-size:.93rem}
+  #sports .qb-choice small{font-size:.76rem}
+  #sports .sports-scoreboard{grid-template-columns:1fr}
+  #sports .qb-helps{grid-template-columns:1fr}
+  #sports .image-box{height:240px}
+}
+
+/* Οριζόντια χρήση κινητού */
+@media (orientation:landscape) and (max-height:540px) and (min-width:600px){
+  #quizGame{max-width:100%}
+  #sports .sports-game-head{position:sticky;top:0;z-index:8}
+  #sports .quiz-card{display:grid;grid-template-columns:minmax(250px,42%) 1fr;column-gap:18px;align-items:start}
+  #sports .qb-question-top,#sports #qbQuestion,#sports .options,#sports .written-answer,#sports .top5-panel,#sports .qb-helps,#sports #qbMsg,#sports #qbNext{grid-column:2}
+  #sports .image-box{grid-column:1;grid-row:1/10;height:calc(100vh - 145px);min-height:230px;position:sticky;top:95px}
+}
+#sports .image-box.footballer-photo{background:#e9e6ef}
+#sports .image-box.footballer-photo img{object-fit:cover;padding:0;background:transparent}
+#sports .image-box.footballer-photo+ #qbQuestion{margin-top:14px}
+
+/* Player ID category */
+#sports .player-id-card{max-width:760px;margin:0 auto 16px;padding:18px;border:1px solid #d8d0e8;border-radius:22px;background:linear-gradient(145deg,#111827,#312e81);color:#fff;box-shadow:0 16px 34px #312e8130}
+#sports .player-id-title{text-align:center;font-weight:1000;letter-spacing:.18em;font-size:1.08rem;margin-bottom:15px;color:#facc15}
+#sports .player-id-route{display:grid;gap:8px}
+#sports .player-id-stop{display:grid;grid-template-columns:34px 1fr;align-items:center;gap:10px;padding:9px 11px;border-radius:14px;background:#ffffff12;border:1px solid #ffffff18}
+#sports .player-id-stop:not(:last-child){position:relative}
+#sports .player-id-dot{width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#facc15;color:#111827;font-weight:900}
+#sports .player-id-stop b,#sports .player-id-stop small{display:block}
+#sports .player-id-stop b{font-size:1rem}
+#sports .player-id-stop small{margin-top:2px;color:#dbeafe;font-weight:700}
+@media(max-width:520px){#sports .player-id-card{padding:13px;border-radius:18px}#sports .player-id-stop{padding:8px;grid-template-columns:30px 1fr}#sports .player-id-dot{width:27px;height:27px}#sports .player-id-stop b{font-size:.9rem}#sports .player-id-stop small{font-size:.78rem}}

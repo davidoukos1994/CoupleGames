@@ -10,10 +10,10 @@
 </head>
 <body>
 <div class="app">
-<header>
-<button id="back" class="icon hidden">←</button>
-<div><h1 id="title">RetroGames By D.Lemonis</h1><p id="subtitle" class="hidden"></p></div>
-<button id="settingsBtn" class="icon">⚙️</button>
+<header class="topbar">
+<button id="back" class="header-box back-box hidden" aria-label="Πίσω">←</button>
+<div class="brand-box"><h1 id="title">RetroGames By D.Lemonis</h1><p id="subtitle" class="hidden"></p></div>
+<button id="settingsBtn" class="header-box settings-box" aria-label="Ρυθμίσεις"><span>⚙️</span><small>Ρυθμίσεις</small></button>
 </header>
 
 <main>
@@ -32,9 +32,11 @@
 <div class="grid">
 <button class="game purple" data-screen="wheel"><i>🎡</i><b>Τροχός Τύχης</b><small>Δικά σας challenges</small></button>
 <button class="game cyan" data-screen="flags"><i>🌍</i><b>Σημαίες & Χώρες</b><small>Μάντεψε τη χώρα</small></button>
-<button class="game sport" data-screen="sports"><i>⚽</i><b>Αθλητισμός</b><small>Παίκτες και ομάδες</small></button>
 <button class="game dark" data-screen="stats"><i>🏆</i><b>Στατιστικά</b><small>Σκορ παιχνιδιών</small></button>
 </div>
+
+<h2>QuizBall</h2>
+<button class="quizball-hero" data-screen="sports"><span class="quizball-icon">⚽</span><span><b>QuizBall</b><small>PlayerID, Logo Quiz, Footballers, Ιστορία και Ερωτήσεις κοινού</small></span><span class="quizball-arrow">›</span></button>
 </section>
 
 <section id="tic" class="screen">
@@ -80,59 +82,69 @@
 </section>
 
 <section id="sports" class="screen">
-<div id="sportsStart" class="card form-card sports-start">
-<h2>Έναρξη παιχνιδιού</h2>
-<label>Παιχνίδι
-<select id="sportsGameType">
-<option value="players">Μάντεψε τον ποδοσφαιριστή</option>
-<option value="teams">Μάντεψε το σήμα ομάδας</option>
-</select>
-</label>
-<label>Αριθμός παικτών
-<select id="sportsPlayerCount">
-<option value="1">1 παίκτης</option>
-<option value="2">2 παίκτες</option>
-<option value="3">3 παίκτες</option>
-</select>
-</label>
-<div id="sportsNames" class="sports-names"></div>
-<button id="startSportsGame" class="primary full">Έναρξη παιχνιδιού</button>
-<button id="openSportsAdd" class="secondary full">Μαζική προσθήκη φωτογραφιών</button>
+<div id="quizSetup">
+  <div class="quizball-title card"><span>⚽</span><div><h2>QuizBall</h2><p>Ξεχωριστό παιχνίδι ποδοσφαιρικών γνώσεων</p><p class="quizball-credit">Inspired from <strong>ΑΙΜΙΛΙΟΣ ΟΙΚΟΝΟΜΙΔΗΣ</strong> (creator QuizBall)</p></div></div>
+  <div class="card form-card">
+    <h2>Εκκίνηση παιχνιδιού</h2>
+    <label>Αριθμός παικτών
+      <select id="qbPlayerCount"><option value="1">1 παίκτης</option><option value="2">2 παίκτες</option><option value="3">3 παίκτες</option></select>
+    </label>
+    <div id="qbNames" class="sports-names"></div>
+  </div>
+  <div class="card form-card">
+    <h2>Επιλογή κατηγοριών</h2>
+    <p class="helper">Κάθε επιλεγμένη κατηγορία παίζεται μία φορά από κάθε παίκτη.</p>
+    <div class="qb-category-list">
+      <label class="qb-choice active"><input type="checkbox" value="logo1" checked><span><b>Logo Quiz ×1</b><small>3 επιλογές · 1 πόντος</small></span></label>
+      <label class="qb-choice"><input type="checkbox" value="logo2"><span><b>Logo Quiz ×2</b><small>Γράφεις την ομάδα · 2 πόντοι</small></span></label>
+      <label class="qb-choice"><input type="checkbox" value="top5"><span><b>TOP 5 ×3</b><small>Βρες 5 σωστές για 3 πόντους · έχεις δικαίωμα 1 λάθους</small></span></label>
+      <label class="qb-choice"><input type="checkbox" value="playerid"><span><b>Player ID ×2</b><small>Καρτέλα πορείας καριέρας · γράφεις τον παίκτη · 2 πόντοι</small></span></label>
+      <label class="qb-choice"><input type="checkbox" value="footballers"><span><b>Footballers ×1</b><small>Φωτογραφία παίκτη · 4 επιλογές · 1 πόντος</small></span></label>
+      <label class="qb-choice"><input type="checkbox" value="history" disabled><span><b>Ιστορία</b><small>Θα ενεργοποιηθεί όταν προστεθούν οι ερωτήσεις</small></span></label>
+      <label class="qb-choice"><input type="checkbox" value="audience"><span><b>Ερωτήσεις κοινού ×1</b><small>Γράφεις την απάντηση · 1 πόντος · 50-50 διαθέσιμο</small></span></label>
+    </div>
+    <div id="qbRoundsInfo" class="rounds-info"></div>
+    <button id="qbStart" class="primary full">Έναρξη παιχνιδιού</button>
+  </div>
 </div>
 
-<div id="sportsGame" class="hidden">
-<div class="sports-game-head card">
-<div><small>Παίζει τώρα</small><b id="sportsTurnName">Παίκτης 1</b></div>
-<div id="sportsScoreboard" class="sports-scoreboard"></div>
-<button id="endSportsGame" class="secondary">Τέλος παιχνιδιού</button>
+<div id="quizGame" class="hidden">
+  <div class="sports-game-head card">
+    <div><small>Παίζει τώρα</small><b id="qbTurnName"></b><small id="qbProgress"></small></div>
+    <div id="qbScoreboard" class="sports-scoreboard"></div>
+    <button id="qbQuit" class="secondary">Τέλος παιχνιδιού</button>
+  </div>
+  <div class="card quiz-card">
+    <div class="qb-question-top"><span id="qbCategory" class="quiz-chip"></span><b id="qbPoints"></b></div>
+    <div id="qbImageBox" class="image-box logo logo-mask"><img id="qbLogo" alt="Εικόνα ερώτησης"><div id="qbLogoFallback">⚽</div></div>
+    <div id="qbPlayerIdCard" class="player-id-card hidden"></div>
+    <h2 id="qbQuestion">Ποια ομάδα είναι;</h2>
+    <div id="qbMultiple" class="options"></div>
+    <div id="qbWritten" class="written-answer hidden"><input id="qbAnswer" type="text" autocomplete="off" placeholder="Γράψε την απάντηση"><button id="qbSubmit" class="primary">Απάντηση</button></div>
+    <div id="qbTop5" class="top5-panel hidden">
+      <p class="helper">Βρες και τις 5 σωστές απαντήσεις. Έχεις ένα λάθος ως μαξιλαράκι ασφαλείας.</p>
+      <div id="qbTop5Inputs" class="top5-inputs"></div>
+      <button id="qbTop5Check4" class="primary full">Έλεγχος απαντήσεων</button>
+      <div id="qbTop5Decision" class="top5-decision hidden">
+        <p><b>Βρήκες 4 σωστές, αλλά χρησιμοποίησες το μαξιλαράκι σου.</b> Σταματάς για 1 πόντο ή δίνεις ακόμη μία απάντηση για να φτάσεις τις 5 σωστές και τους 3 πόντους; Αν κάνεις δεύτερο λάθος, χάνεις την ερώτηση.</p>
+        <div class="actions"><button id="qbTop5Stop">Σταματάω · +1</button><button id="qbTop5Risk" class="primary">Συνεχίζω για 3</button></div>
+      </div>
+      <div id="qbTop5RiskBox" class="hidden">
+        <input id="qbTop5Fifth" type="text" autocomplete="off" placeholder="Τελευταία απάντηση">
+        <button id="qbTop5Submit5" class="primary full">Έλεγχος τελευταίας απάντησης</button>
+      </div>
+    </div>
+    <div class="qb-helps">
+      <button id="qb5050" class="help-btn">50-50 <small>1 χρήση</small></button>
+      <button id="qbDouble" class="help-btn">×2 Πόντοι <small>1 χρήση</small></button>
+    </div>
+    <p id="qbMsg" class="msg"></p>
+    <button id="qbNext" class="primary full hidden">Επόμενος γύρος</button>
+  </div>
 </div>
 
-<div id="playersPane" class="pane">
-<div class="card quiz-card"><div class="image-box"><img id="playerImg" alt="Φωτογραφία ποδοσφαιριστή"><div id="playerFallback">⚽</div></div>
-<h2>Ποιος ποδοσφαιριστής είναι;</h2><div id="playerOptions" class="options"></div><p id="playerMsg" class="msg"></p>
-<div class="row"><span></span><button id="nextPlayer" class="primary">Επόμενος</button></div></div>
-</div>
-
-<div id="teamsPane" class="pane">
-<div class="card quiz-card"><div class="image-box logo"><img id="teamImg" alt="Σήμα ομάδας"><div id="teamFallback">🛡️</div></div>
-<h2>Ποιο σήμα ομάδας είναι;</h2><div id="teamOptions" class="options"></div><p id="teamMsg" class="msg"></p>
-<div class="row"><span></span><button id="nextTeam" class="primary">Επόμενο</button></div></div>
-</div>
-</div>
-
-<div id="addPane" class="hidden">
-<div class="add-head"><button id="backFromAdd" class="secondary">← Πίσω</button><h2>Μαζική προσθήκη</h2></div>
-<div class="card form-card"><h2>Ποδοσφαιριστές</h2>
-<p class="helper">Διάλεξε πολλές φωτογραφίες μαζί. Κάτω από κάθε φωτογραφία γράψε το όνομα του ποδοσφαιριστή.</p>
-<label class="upload-box">Επιλογή πολλών φωτογραφιών<input id="bulkPlayerPhotos" type="file" accept="image/*" multiple></label>
-<div id="playerImportEditor" class="import-editor"></div>
-<button id="saveBulkPlayers" class="primary full hidden">Αποθήκευση ποδοσφαιριστών</button></div>
-<div class="card form-card"><h2>Σήματα ομάδων</h2>
-<p class="helper">Διάλεξε πολλά σήματα μαζί. Κάτω από κάθε εικόνα γράψε ποια ομάδα είναι.</p>
-<label class="upload-box">Επιλογή πολλών σημάτων<input id="bulkTeamPhotos" type="file" accept="image/*" multiple></label>
-<div id="teamImportEditor" class="import-editor"></div>
-<button id="saveBulkTeams" class="primary full hidden">Αποθήκευση σημάτων</button></div>
-<div class="card list-card"><h3>Επεξεργασία αποθηκευμένων φωτογραφιών</h3><div id="customList"></div></div>
+<div id="quizResults" class="hidden">
+  <div class="card quiz-results"><div class="result-ball">🏆</div><h2>Τέλος παιχνιδιού</h2><div id="qbFinal"></div><button id="qbAgain" class="primary full">Νέο παιχνίδι</button></div>
 </div>
 </section>
 
