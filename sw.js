@@ -1,5 +1,5 @@
 const C='retrogames-dlemonis-v24-sprite-fix-2';
-const A=['./','index.html','style.css?v=24-sprite-fix2','app.js?v=24-sprite-fix2','manifest.json','icon.svg','assets/library.json','assets/gaming-background.svg','assets/flags-sprite.webp'];
+const A=['./','index.html','style.css?v=24-sprite-fix2','app.js?v=24-sprite-fix2','manifest.json','icon.svg','assets/library.json','assets/gaming-background.svg','assets/flags-world.webp'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(A)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim()});
 self.addEventListener('fetch',e=>{

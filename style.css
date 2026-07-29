@@ -269,3 +269,6 @@ body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{dis
 .flag-editor-preview{width:68px;height:44px;border-radius:8px;border:1px solid #d8ddeb;background-color:#fff;background-repeat:no-repeat}
 .flag-editor-row{grid-template-columns:76px 1fr 44px!important}
 @media(max-width:520px){.flag-image-wrap{width:100%}.flag-editor-row{grid-template-columns:70px 1fr 42px!important}}
+
+/* Find the Flags — 195 χώρες σε ένα sprite */
+.flag-setup{max-width:760px;margin:auto}.flag-choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px 0 24px}.flag-choice-grid label{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px;border:1px solid rgba(120,120,180,.25);border-radius:16px;background:rgba(255,255,255,.82);font-weight:800;cursor:pointer}.flag-choice-grid input{width:20px;height:20px}.wide{width:100%}.flag-results{max-width:600px;margin:auto;text-align:center}.flag-results strong{display:block;font-size:3rem;margin:20px}.row.end{justify-content:flex-end}.flag-image{background-color:#fff;border-radius:18px;box-shadow:0 8px 26px rgba(0,0,0,.12)}@media(max-width:620px){.flag-choice-grid{grid-template-columns:1fr}.flag-choice-grid.rounds{grid-template-columns:repeat(3,1fr)}.flag-choice-grid label{padding:13px 8px}}

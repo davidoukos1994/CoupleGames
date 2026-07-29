@@ -48,3 +48,10 @@ V12: Responsive/mobile-first προσαρμογή QuizBall για iPhone, Androi
 
 
 V24 Sprite έκδοση: οι ευρωπαϊκές σημαίες έχουν ενωθεί στο assets/flags-sprite.webp και εμφανίζονται μία-μία μέσα στο Find the Flags. Τα υπόλοιπα παιχνίδια παραμένουν ίδια.
+
+
+## Find the Flags V27
+- 195 χώρες με ελληνικά ονόματα.
+- Όλες οι σημαίες είναι αποθηκευμένες σε ένα αρχείο `assets/flags-world.webp`.
+- Επιλογή Ευρώπη, Rest of World ή Όλος ο κόσμος.
+- Επιλογή 5, 10 ή 15 γύρων.

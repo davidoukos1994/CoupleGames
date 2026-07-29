@@ -95,9 +95,22 @@
 </section>
 
 <section id="flags" class="screen">
-<div class="card quiz-card"><div class="flag-image-wrap"><div id="flagImage" class="flag-image" role="img" aria-label="Σημαία χώρας"></div></div><h2>Ποια χώρα είναι;</h2>
+<div id="flagSetup" class="card flag-setup">
+<h2>Find the Flags</h2><p>Διάλεξε περιοχή και αριθμό γύρων</p>
+<h3>Περιοχή</h3><div class="flag-choice-grid">
+<label><input type="radio" name="flagRegion" value="europe"> Ευρώπη</label>
+<label><input type="radio" name="flagRegion" value="world"> Rest of World</label>
+<label><input type="radio" name="flagRegion" value="all" checked> Όλος ο κόσμος</label></div>
+<h3>Γύροι</h3><div class="flag-choice-grid rounds">
+<label><input type="radio" name="flagRounds" value="5"> 5</label>
+<label><input type="radio" name="flagRounds" value="10" checked> 10</label>
+<label><input type="radio" name="flagRounds" value="15"> 15</label></div>
+<button id="startFlags" class="primary wide">Έναρξη</button></div>
+<div id="flagGame" class="card quiz-card hidden"><div class="row"><b id="flagRoundText">Γύρος 1 / 10</b><b>Σκορ: <span id="flagScore">0</span></b></div>
+<div class="flag-image-wrap"><div id="flagImage" class="flag-image" role="img" aria-label="Σημαία χώρας"></div></div><h2>Ποια χώρα είναι;</h2>
 <div id="flagOptions" class="options"></div><p id="flagMsg" class="msg"></p>
-<div class="row"><b>Σκορ: <span id="flagScore">0</span></b><button id="nextFlag" class="primary">Επόμενη</button></div></div>
+<div class="row end"><button id="nextFlag" class="primary">Επόμενη</button></div></div>
+<div id="flagResults" class="card hidden flag-results"><h2>Τέλος παιχνιδιού</h2><p>Τελικό σκορ</p><strong id="flagFinalScore">0 / 10</strong><button id="playFlagsAgain" class="primary wide">Νέο παιχνίδι</button></div>
 </section>
 
 <section id="sports" class="screen qb-dark">
