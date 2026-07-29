@@ -127,6 +127,7 @@ function md5(str){function cmn(q,a,b,x,s,t){a=(a+q+x+t)|0;return (((a<<s)|(a>>>(
 let folderPlayers=[];
 let folderTeams=[];
 let folderQuestions={footballers:[],history:[],audience:[]};
+let folderSprites={};
 
 async function loadFolderLibrary(){
   try{
@@ -135,11 +136,13 @@ async function loadFolderLibrary(){
     const library=await response.json();
     folderPlayers=Array.isArray(library.players)?library.players:[];
     folderTeams=Array.isArray(library.teams)?library.teams:[];
+    folderSprites=library.sprites||{};
     const q=library.questions||{};
     folderQuestions={footballers:Array.isArray(q.footballers)?q.footballers:[],history:Array.isArray(q.history)?q.history:[],audience:Array.isArray(q.audience)?q.audience:[]};
   }catch(error){
     folderPlayers=[];
     folderTeams=[];
+    folderSprites={};
     folderQuestions={footballers:[],history:[],audience:[]};
   }
 }
@@ -151,7 +154,24 @@ function folderLibraryStatus(){
   box.innerHTML=`<b>Περιεχόμενο μέσα στο ZIP:</b> ${folderPlayers.length} ποδοσφαιριστές, ${folderTeams.length} σήματα και ${totalQuestions} ερωτήσεις.`;
 }
 
-function setImg(img,fb,url){fb.style.display='none';img.style.display='block';img.onload=()=>{fb.style.display='none';img.style.display='block'};img.onerror=()=>{img.style.display='none';fb.style.display='grid'};img.src=url}
+function setImg(img,fb,url){
+  fb.style.display='none';img.style.display='block';
+  img.style.backgroundImage='';img.style.backgroundSize='';img.style.backgroundPosition='';img.style.backgroundRepeat='';
+  img.removeAttribute('src');
+  if(typeof url==='string'&&url.startsWith('sprite:')){
+    const parts=url.split(':'),kind=parts[1],idx=Number(parts[2]),cfg=folderSprites[kind];
+    if(!cfg||!Number.isFinite(idx)){img.style.display='none';fb.style.display='grid';return}
+    const col=idx%cfg.cols,row=Math.floor(idx/cfg.cols);
+    img.style.backgroundImage=`url('${cfg.file}')`;
+    img.style.backgroundSize=`${cfg.cols*100}% ${cfg.rows*100}%`;
+    img.style.backgroundPosition=`${cfg.cols===1?0:col*(100/(cfg.cols-1))}% ${cfg.rows===1?0:row*(100/(cfg.rows-1))}%`;
+    img.style.backgroundRepeat='no-repeat';
+    return;
+  }
+  img.onload=()=>{fb.style.display='none';img.style.display='block'};
+  img.onerror=()=>{img.style.display='none';fb.style.display='grid'};
+  img.src=url;
+}
 function showQuizBallHub(){showQB('setup');renderQBNames();updateQBRounds()}
 function showQB(part){['quizSetup','quizGame','quizResults'].forEach(id=>$('#'+id).classList.add('hidden'));$('#quiz'+part[0].toUpperCase()+part.slice(1)).classList.remove('hidden')}
 const qbLabels={logo1:'Logo Quiz ×1',logo2:'Logo Quiz ×2',top5:'TOP 5 ×3',playerid:'Player ID ×2',footballers:'Footballers ×1',audience:'Ερωτήσεις κοινού ×1'};

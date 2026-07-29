@@ -277,3 +277,11 @@ body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{dis
 
 #quoteOptions button.selected{outline:4px solid #f59e0b;transform:translateY(-2px);box-shadow:0 8px 20px #f59e0b55}
 #quoteConfirm{margin-top:14px}
+
+/* Stable QuizBall V2: high-quality sprite rendering */
+#sports #qbLogo{background-color:#fff;background-repeat:no-repeat;image-rendering:auto}
+#sports .image-box.logo #qbLogo{padding:0!important;object-fit:unset}
+#sports .image-box.footballer-photo #qbLogo{padding:0!important;object-fit:unset;background-color:#e9e6ef}
+#sports .image-box.logo{min-height:320px}
+.quote-game-image{max-height:440px;min-height:260px;background-color:#111827;background-repeat:no-repeat;background-position:center}
+@media(max-width:520px){#sports .image-box.logo{min-height:270px}.quote-game-image{min-height:240px;max-height:360px}}

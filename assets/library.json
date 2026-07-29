@@ -2,269 +2,269 @@
   "players": [
     {
       "name": "Demis Nikolaidis",
-      "img": "assets/players/demis-nikolaidis.jpg"
+      "img": "sprite:players:0"
     },
     {
       "name": "Jude Bellingham",
-      "img": "assets/players/jude-bellingham.webp"
+      "img": "sprite:players:1"
     },
     {
       "name": "Wayne Rooney",
-      "img": "assets/players/wayne-rooney.jpg"
+      "img": "sprite:players:2"
     },
     {
       "name": "Angelos Charisteas",
-      "img": "assets/players/angelos-charisteas.jpg"
+      "img": "sprite:players:3"
     },
     {
       "name": "Hulk",
-      "img": "assets/players/hulk.jpg"
+      "img": "sprite:players:4"
     },
     {
       "name": "Luciano Galletti",
-      "img": "assets/players/luciano-galletti.jpg"
+      "img": "sprite:players:5"
     },
     {
       "name": "Djibril Cissé",
-      "img": "assets/players/djibril-cisse.jpg"
+      "img": "sprite:players:6"
     },
     {
       "name": "Zinedine Zidane",
-      "img": "assets/players/zinedine-zidane.webp"
+      "img": "sprite:players:7"
     },
     {
       "name": "Ronaldinho",
-      "img": "assets/players/ronaldinho.webp"
+      "img": "sprite:players:8"
     },
     {
       "name": "Thierry Henry",
-      "img": "assets/players/thierry-henry.jpg"
+      "img": "sprite:players:9"
     },
     {
       "name": "Giovanni Silva de Oliveira",
-      "img": "assets/players/giovanni.jpg"
+      "img": "sprite:players:10"
     },
     {
       "name": "David Beckham",
-      "img": "assets/players/david-beckham.webp"
+      "img": "sprite:players:11"
     },
     {
       "name": "Zlatan Ibrahimović",
-      "img": "assets/players/zlatan-ibrahimovic.jpg"
+      "img": "sprite:players:12"
     },
     {
       "name": "Luka Modrić",
-      "img": "assets/players/luka-modric.jpg"
+      "img": "sprite:players:13"
     },
     {
       "name": "Juninho Pernambucano",
-      "img": "assets/players/juninho-pernambucano.jpg"
+      "img": "sprite:players:14"
     },
     {
       "name": "David Luiz",
-      "img": "assets/players/david-luiz.jpg"
+      "img": "sprite:players:15"
     },
     {
       "name": "Rivaldo",
-      "img": "assets/players/rivaldo.jpg"
+      "img": "sprite:players:16"
     },
     {
       "name": "Kaká",
-      "img": "assets/players/kaka.webp"
+      "img": "sprite:players:17"
     }
   ],
   "teams": [
     {
       "name": "AEK",
-      "img": "assets/teams/Aek .png"
+      "img": "sprite:teams:0"
     },
     {
       "name": "Ajax",
-      "img": "assets/teams/Ajax .png"
+      "img": "sprite:teams:1"
     },
     {
       "name": "Alaves",
-      "img": "assets/teams/Alaves .png"
+      "img": "sprite:teams:2"
     },
     {
       "name": "Alkmaar",
-      "img": "assets/teams/Alkmaar .png"
+      "img": "sprite:teams:3"
     },
     {
       "name": "Arsenal",
-      "img": "assets/teams/Arsenal .png"
+      "img": "sprite:teams:4"
     },
     {
       "name": "Atletico Madrid",
-      "img": "assets/teams/Atletico Madrid .png"
+      "img": "sprite:teams:5"
     },
     {
       "name": "Atletico Mineiro",
-      "img": "assets/teams/Atletico Mineiro .png"
+      "img": "sprite:teams:6"
     },
     {
       "name": "Atromitos",
-      "img": "assets/teams/Atromitos .png"
+      "img": "sprite:teams:7"
     },
     {
       "name": "Bayer Leverkusen",
-      "img": "assets/teams/Bayern leverkusen .png"
+      "img": "sprite:teams:8"
     },
     {
       "name": "Benfica",
-      "img": "assets/teams/Benfica .png"
+      "img": "sprite:teams:9"
     },
     {
       "name": "Besiktas",
-      "img": "assets/teams/Beshiktas .png"
+      "img": "sprite:teams:10"
     },
     {
       "name": "Borussia Dortmund",
-      "img": "assets/teams/Borusia dortmund.png"
+      "img": "sprite:teams:11"
     },
     {
       "name": "Chelsea",
-      "img": "assets/teams/Chelsea-logos.cc.png"
+      "img": "sprite:teams:12"
     },
     {
       "name": "Como",
-      "img": "assets/teams/Como .png"
+      "img": "sprite:teams:13"
     },
     {
       "name": "Fenerbahce",
-      "img": "assets/teams/Fenerbahce .png"
+      "img": "sprite:teams:14"
     },
     {
       "name": "Feyenoord",
-      "img": "assets/teams/Feyenoord .png"
+      "img": "sprite:teams:15"
     },
     {
       "name": "Fiorentina",
-      "img": "assets/teams/Fiorentina .png"
+      "img": "sprite:teams:16"
     },
     {
       "name": "Flamengo",
-      "img": "assets/teams/Flamengo .png"
+      "img": "sprite:teams:17"
     },
     {
       "name": "Galatasaray",
-      "img": "assets/teams/Galatasaray .png"
+      "img": "sprite:teams:18"
     },
     {
       "name": "Gremio",
-      "img": "assets/teams/Gremio .png"
+      "img": "sprite:teams:19"
     },
     {
       "name": "Lazio",
-      "img": "assets/teams/Lazio .png"
+      "img": "sprite:teams:20"
     },
     {
       "name": "Lille",
-      "img": "assets/teams/Lille.png"
+      "img": "sprite:teams:21"
     },
     {
       "name": "Liverpool",
-      "img": "assets/teams/Liverpool.cc.png"
+      "img": "sprite:teams:22"
     },
     {
       "name": "Lyon",
-      "img": "assets/teams/Lyon.png"
+      "img": "sprite:teams:23"
     },
     {
       "name": "Manchester City",
-      "img": "assets/teams/Manchester City-logos.cc.png"
+      "img": "sprite:teams:24"
     },
     {
       "name": "Marseille",
-      "img": "assets/teams/Marsellie .png"
+      "img": "sprite:teams:25"
     },
     {
       "name": "Monaco",
-      "img": "assets/teams/Monaco .png"
+      "img": "sprite:teams:26"
     },
     {
       "name": "Napoli",
-      "img": "assets/teams/Napoli .png"
+      "img": "sprite:teams:27"
     },
     {
       "name": "Newcastle",
-      "img": "assets/teams/Newcastle .png"
+      "img": "sprite:teams:28"
     },
     {
       "name": "Nottingham forest",
-      "img": "assets/teams/Nottingham forest .png"
+      "img": "sprite:teams:29"
     },
     {
       "name": "Olympiacos",
-      "img": "assets/teams/Olympiakos .png"
+      "img": "sprite:teams:30"
     },
     {
       "name": "PSV Eindhoven",
-      "img": "assets/teams/PSV Aithofen .png"
+      "img": "sprite:teams:31"
     },
     {
       "name": "Panathinaikos",
-      "img": "assets/teams/Panathinaikos .png"
+      "img": "sprite:teams:32"
     },
     {
       "name": "PAOK",
-      "img": "assets/teams/Paok .png"
+      "img": "sprite:teams:33"
     },
     {
       "name": "Porto",
-      "img": "assets/teams/Porto .png"
+      "img": "sprite:teams:34"
     },
     {
       "name": "Real Madrid",
-      "img": "assets/teams/Real Madrid Logos.cc.png"
+      "img": "sprite:teams:35"
     },
     {
       "name": "Roma",
-      "img": "assets/teams/Roma.png"
+      "img": "sprite:teams:36"
     },
     {
       "name": "Schalke",
-      "img": "assets/teams/Schalke .png"
+      "img": "sprite:teams:37"
     },
     {
       "name": "Sevilla",
-      "img": "assets/teams/Sevilla .png"
+      "img": "sprite:teams:38"
     },
     {
       "name": "Tottenham",
-      "img": "assets/teams/Tottenham .png"
+      "img": "sprite:teams:39"
     },
     {
       "name": "Villarreal",
-      "img": "assets/teams/Villarreal .png"
+      "img": "sprite:teams:40"
     },
     {
       "name": "West Ham",
-      "img": "assets/teams/West Ham .png"
+      "img": "sprite:teams:41"
     },
     {
       "name": "Manchester United",
-      "img": "assets/teams/_manchester-united_logos.cc.png"
+      "img": "sprite:teams:42"
     },
     {
       "name": "Arsenal",
-      "img": "assets/teams/arsenal_logos.cc.png"
+      "img": "sprite:teams:43"
     },
     {
       "name": "Barcelona",
-      "img": "assets/teams/barcelona-logos.cc.png"
+      "img": "sprite:teams:44"
     },
     {
       "name": "Bayern Munich",
-      "img": "assets/teams/bayern munich-logos.cc.png"
+      "img": "sprite:teams:45"
     },
     {
       "name": "Paris Saint-Germain",
-      "img": "assets/teams/france_paris-saint-germain_.png"
+      "img": "sprite:teams:46"
     },
     {
       "name": "Inter",
-      "img": "assets/teams/inter-logos.cc.png"
+      "img": "sprite:teams:47"
     }
   ],
   "questions": {
@@ -272,5 +272,17 @@
     "footballers": [],
     "history": [],
     "audience": []
+  },
+  "sprites": {
+    "teams": {
+      "file": "assets/teams-sprite.webp",
+      "cols": 6,
+      "rows": 8
+    },
+    "players": {
+      "file": "assets/players-sprite.webp",
+      "cols": 5,
+      "rows": 4
+    }
   }
 }

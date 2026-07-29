@@ -1,3 +1,9 @@
+Stable QuizBall V2
+
+- Sprites for flags, TV quotes, team logos and footballers.
+- Confirmation button added to Find the Flags.
+- Clearer logo and TV Quote images.
+
 # RetroGames By D.Lemonis — Stable QuizBall V1
 
 Stable έκδοση με:
