@@ -280,25 +280,25 @@ function renderTop5Inputs(){const box=$('#qbTop5Inputs');box.innerHTML='';for(le
 function applyLogoMask(team){
   const box=$('#qbImageBox'),top=box?.querySelector('.logo-cover-top'),mid=box?.querySelector('.logo-cover-mid');
   if(!top||!mid)return;
-  [top,mid].forEach(x=>{x.style.display='none';x.style.left='';x.style.right='';x.style.top='';x.style.height='';x.style.width=''});
+  [top,mid].forEach(x=>{x.style.setProperty('display','none','important');['left','right','top','height','width'].forEach(k=>x.style.removeProperty(k));});
   const n=(team?.name||'').toLowerCase();
   const masks={
-    'olympiacos':[[18,24,64,12],[24,66,52,10]],'panathinaikos':[[18,18,64,12],[28,68,44,10]],'arsenal':[[26,14,48,12]],
-    'manchester city':[[22,16,56,11],[35,68,30,9]],'chelsea':[[18,15,64,10],[30,72,40,9]],'real madrid':[[30,68,40,10]],
-    'barcelona':[[30,18,40,10]],'bayern munich':[[18,18,64,10],[24,70,52,9]],'paris saint-germain':[[16,16,68,10],[22,72,56,9]],
-    'liverpool':[[28,70,44,10]],'manchester united':[[18,15,64,11],[24,70,52,10]],'tottenham':[[24,70,52,10]],
-    'newcastle':[[18,72,64,10]],'west ham':[[25,18,50,11],[30,70,40,9]],'fenerbahce':[[16,18,68,10],[26,72,48,9]],
-    'feyenoord':[[20,18,60,10],[25,72,50,9]],'ajax':[[26,14,48,10]],'roma':[[30,69,40,9]],'paok':[[30,15,40,10]],
+    'olympiacos':[[10,20,80,16],[18,66,64,13]],'panathinaikos':[[12,20,76,16],[25,70,50,12]],'arsenal':[[26,14,48,12]],
+    'manchester city':[[22,16,56,11],[35,68,30,9]],'chelsea':[[12,18,76,15],[22,70,56,12]],'real madrid':[[30,68,40,10]],
+    'barcelona':[[30,18,40,10]],'bayern munich':[[12,18,76,15],[18,70,64,12]],'paris saint-germain':[[12,18,76,15],[18,70,64,13]],
+    'liverpool':[[28,70,44,10]],'manchester united':[[10,18,80,16],[17,70,66,13]],'tottenham':[[24,70,52,10]],
+    'newcastle':[[18,72,64,10]],'west ham':[[25,18,50,11],[30,70,40,9]],'fenerbahce':[[10,18,80,16],[20,70,60,12]],
+    'feyenoord':[[12,18,76,15],[20,70,60,12]],'ajax':[[26,14,48,10]],'roma':[[30,69,40,9]],'paok':[[30,15,40,10]],
     'aek':[[26,14,48,10]],'porto':[[30,72,40,9]],'benfica':[[28,72,44,9]],'schalke':[[32,25,36,18]],'napoli':[[35,35,30,28]],
     'inter':[[31,27,38,34]],'atletico madrid':[[25,16,50,10]],'atletico mineiro':[[28,35,44,12]],'lille':[[28,64,44,12]],
     'bayer leverkusen':[[27,19,46,10],[33,69,34,9]],'borussia dortmund':[[30,31,40,20]],'psv eindhoven':[[28,27,44,18]],
-    'alkmaar':[[28,34,44,18]],'gremio':[[22,17,56,9],[25,70,50,9]],'galatasaray':[[28,72,44,9]],'flamengo':[[24,18,52,10]],
+    'alkmaar':[[28,34,44,18]],'gremio':[[12,18,76,15],[18,70,64,12]],'galatasaray':[[28,72,44,9]],'flamengo':[[24,18,52,10]],
     'sevilla':[[32,28,36,16]],'como':[[26,21,48,18]],'fiorentina':[[34,70,32,9]],'lazio':[[26,70,48,9]],
-    'monaco':[[28,23,44,10]],'alaves':[[18,18,64,10],[28,70,44,9]],'atromitos':[[17,18,66,10],[28,70,44,9]],
+    'monaco':[[28,23,44,10]],'alaves':[[10,18,80,16],[22,70,56,12]],'atromitos':[[10,17,80,17],[25,68,50,12]],
     'besiktas':[[34,18,32,11],[33,69,34,9]],'nottingham forest':[[28,66,44,12]],'lyon':[[24,18,52,15]],'marseille':[[34,34,32,26]]
   };
   const arr=masks[n]||[[25,12,50,8]];
-  [top,mid].forEach((el,i)=>{const m=arr[i];if(!m)return;el.style.display='block';el.style.left=m[0]+'%';el.style.width=m[2]+'%';el.style.right='auto';el.style.top=m[1]+'%';el.style.height=m[3]+'%';});
+  [top,mid].forEach((el,i)=>{const m=arr[i];if(!m)return;el.style.setProperty('display','block','important');el.style.setProperty('left',m[0]+'%','important');el.style.setProperty('width',m[2]+'%','important');el.style.setProperty('right','auto','important');el.style.setProperty('top',m[1]+'%','important');el.style.setProperty('height',m[3]+'%','important');});
 }
 function startQuestion(){const cat=qb.currentCat,p=currentQBPlayer();qb.current=cat==='top5'?nextTop5():cat==='audience'?nextAudience():cat==='playerid'?nextPlayerId():cat==='footballers'?nextFootballer():nextQBTeam();qb.answered=false;qb.selectedCorrect=null;qb.selectedButton=null;$('#qbConfirm').classList.add('hidden');$('#qbConfirm').disabled=true;$('#qbCategory').textContent=qbLabels[cat];const base=['logo1','footballers','audience'].includes(cat)?1:['logo2','playerid'].includes(cat)?2:3;$('#qbPoints').textContent=(cat==='top5'?'1 ή 3':base*(qb.doubleActive?2:1))+' πόντοι'+(qb.doubleActive?' · ×2 ενεργό':'');$('#qbMsg').textContent='';$('#qbNext').classList.add('hidden');$('#qbMultiple').innerHTML='';$('#qbAnswer').value='';const written=['logo2','audience','playerid'].includes(cat);$('#qbMultiple').classList.toggle('hidden',!['logo1','footballers'].includes(cat));$('#qbWritten').classList.toggle('hidden',!written);$('#qbTop5').classList.toggle('hidden',cat!=='top5');$('#qbImageBox').classList.toggle('hidden',['top5','audience','playerid'].includes(cat));$('#qbPlayerIdCard').classList.toggle('hidden',cat!=='playerid');$('#qbImageBox').classList.toggle('logo',cat!=='footballers');$('#qbImageBox').classList.toggle('footballer-photo',cat==='footballers');$('#qb5050').disabled=!['logo1','footballers','audience'].includes(cat)||qb.used50[p];$('#qb5050').classList.toggle('used',qb.used50[p]);if(cat==='top5'){$('#qbQuestion').textContent=qb.current.question;renderTop5Inputs();$('#qbTop5Decision').classList.add('hidden');$('#qbTop5RiskBox').classList.add('hidden');$('#qbTop5Check4').classList.remove('hidden');$('#qbTop5Fifth').value=''}else if(cat==='playerid'){$('#qbQuestion').textContent='Ποιος ποδοσφαιριστής είναι;';$('#qbAnswer').placeholder='Γράψε το όνομα του παίκτη';$('#qbPlayerIdCard').innerHTML='<div class="player-id-title">PLAYER ID</div><div class="player-id-route">'+qb.current.career.map((x,i)=>'<div class="player-id-stop"><span class="player-id-dot">'+(i+1)+'</span><div><b>'+x[0]+'</b><small>'+x[1]+'</small></div></div>').join('')+'</div>'}else if(cat==='audience'){$('#qbQuestion').textContent=qb.current.question;$('#qbAnswer').placeholder='Γράψε την απάντηση'}else{$('#qbQuestion').textContent=cat==='footballers'?'Ποιος ποδοσφαιριστής είναι;':'Ποια ομάδα είναι;';$('#qbAnswer').placeholder='Γράψε το όνομα της ομάδας';setImg($('#qbLogo'),$('#qbLogoFallback'),qb.current.img);if(cat!=='footballers')applyLogoMask(qb.current)}if(['logo1','footballers'].includes(cat)){const pool=cat==='footballers'?folderPlayers:folderTeams;const wrong=shuffle(pool.filter(x=>x.name!==qb.current.name)).slice(0,cat==='footballers'?3:2);for(const o of shuffle([qb.current,...wrong])){const b=document.createElement('button');b.textContent=o.name;b.onclick=()=>selectQBChoice(o.name===qb.current.name,b);$('#qbMultiple').append(b)}}showQBStage('qbQuestionCard')}
 function correctAnswerText(){return qb.currentCat==='audience'?qb.current.answers.join(' ή '):qb.currentCat==='top5'?qb.current.answers.join(', '):qb.current.name}
