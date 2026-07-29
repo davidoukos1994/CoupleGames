@@ -347,3 +347,18 @@ body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{dis
 #sports .image-box.logo{background:#fff!important;min-height:390px!important;overflow:hidden!important}
 #sports .image-box.logo img{width:100%!important;height:100%!important;object-fit:contain!important;padding:14px!important;box-sizing:border-box!important;background:#fff!important}
 #sports .image-box.logo .logo-cover{background:rgba(255,255,255,.86)!important;backdrop-filter:blur(7px)!important;-webkit-backdrop-filter:blur(7px)!important;box-shadow:0 0 8px rgba(255,255,255,.9)!important;border-radius:7px!important}
+
+
+/* Stable 8: Retro Arcade, responsive Logo Quiz and Pac-Man */
+.arcade-hero{width:100%;display:flex;align-items:center;gap:15px;text-align:left;padding:19px;border-radius:22px;border:1px solid rgba(96,165,250,.5);background:linear-gradient(135deg,rgba(30,64,175,.88),rgba(88,28,135,.88));color:#fff;box-shadow:0 16px 35px rgba(0,0,0,.2)}
+.arcade-hero-icon{font-size:2.7rem}.arcade-hero b{display:block;font-size:1.35rem}.arcade-hero small{display:block;opacity:.8;margin-top:4px}.arcade-hero .quizball-arrow{margin-left:auto;font-size:2rem}.arcade-intro{display:flex;align-items:center;gap:14px}.arcade-intro>span{font-size:3rem}.arcade-intro h2,.arcade-intro p{margin:0}.arcade-grid{margin-top:14px}.pac-card{background:linear-gradient(145deg,#fde047,#f59e0b)!important;color:#111827!important}.pac-wrap{width:min(94vw,560px);margin:0 auto 12px;border:5px solid #1d4ed8;border-radius:18px;overflow:hidden;background:#020617;box-shadow:0 0 28px rgba(37,99,235,.4)}#pacCanvas{display:block;width:100%;height:auto;aspect-ratio:1/1}.pac-head{grid-template-columns:repeat(3,1fr)}
+/* Hide team wording more cleanly, while keeping the crest visible. */
+#sports .image-box.logo .logo-cover{background:rgba(255,255,255,.91)!important;backdrop-filter:blur(11px)!important;-webkit-backdrop-filter:blur(11px)!important;box-shadow:0 0 12px rgba(255,255,255,.98)!important}
+@media(min-width:700px){
+  #sports .image-box.logo{width:min(100%,680px)!important;height:460px!important;min-height:0!important;margin:0 auto!important}
+  #sports .image-box.logo #qbLogo{width:100%!important;height:100%!important;max-width:520px!important;max-height:420px!important;margin:auto!important;padding:22px!important;object-fit:contain!important}
+}
+@media(max-width:699px){
+  #sports .image-box.logo{height:auto!important;min-height:0!important;aspect-ratio:1/1.05!important}
+  #sports .image-box.logo #qbLogo{padding:10px!important}
+}

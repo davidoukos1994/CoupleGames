@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=stable7">
+<link rel="stylesheet" href="style.css?v=stable8">
 </head>
 <body class="home-view">
 <div class="app">
@@ -24,19 +24,11 @@
 </div>
 <section id="home" class="screen active">
 
-<h2>Κλασικά</h2>
-<div class="grid">
-<button class="game red" data-screen="tic"><i>❌⭕</i><b>Τρίλιζα</b><small>Κλασικό 3×3</small></button>
-<button class="game blue" data-screen="connect"><i>🔴🟡</i><b>Σκορ 4</b><small>4 στη σειρά</small></button>
-<button class="game green" data-screen="hang"><i>🔤</i><b>Κρεμάλα</b><small>Δική σας λέξη</small></button>
-<button class="game gold" data-screen="coin"><i>🪙</i><b>Κορώνα–Γράμματα</b><small>Ρίξε το νόμισμα</small></button>
-<button class="game sos-card" data-screen="sos"><i>SOS</i><b>SOS</b><small>Σχημάτισε όσες περισσότερες λέξεις SOS μπορείς</small></button>
-<button class="game snake-card" data-screen="snake"><i>🐍</i><b>Φιδάκι</b><small>Φάε τα μήλα και κάνε ρεκόρ</small></button>
-<button class="game mines-card" data-screen="mines"><i>💣</i><b>Ναρκαλιευτής</b><small>Βρες όλα τα ασφαλή τετράγωνα</small></button>
-</div>
+<h2>Retro Arcade</h2>
+<button class="arcade-hero" data-screen="arcade"><span class="arcade-hero-icon">🕹️</span><span><b>Retro Arcade</b><small>Τρίλιζα, Σκορ 4, SOS, Φιδάκι, Ναρκαλιευτής, Pac-Man και άλλα</small></span><span class="quizball-arrow">›</span></button>
 
-<h2>Challenges & Γνώσεις</h2>
-<div class="grid">
+<h2>Ξεχωριστά παιχνίδια</h2>
+<div class="grid featured-games">
 <button class="game purple" data-screen="wheel"><i>🎡</i><b>Τροχός Τύχης</b><small>Δικά σας challenges</small></button>
 <button class="game cyan" type="button" onclick="location.href='find-the-flags.html'"><i>🌍</i><b>Find the Flags</b><small>Μάντεψε τη χώρα</small></button>
 </div>
@@ -53,6 +45,20 @@
 <div class="home-brand-banner" aria-label="RetroGames By D.Lemonis">
   <strong>RetroGames By D.Lemonis</strong>
   <small>Collection of Party Games</small>
+</div>
+</section>
+
+<section id="arcade" class="screen">
+<div class="arcade-intro card"><span>🕹️</span><div><h2>Retro Arcade</h2><p>Όλα τα κλασικά παιχνίδια σε μία κατηγορία.</p></div></div>
+<div class="grid arcade-grid">
+<button class="game red" data-screen="tic"><i>❌⭕</i><b>Τρίλιζα</b><small>Κλασικό 3×3</small></button>
+<button class="game blue" data-screen="connect"><i>🔴🟡</i><b>Σκορ 4</b><small>4 στη σειρά</small></button>
+<button class="game green" data-screen="hang"><i>🔤</i><b>Κρεμάλα</b><small>Δική σας λέξη</small></button>
+<button class="game gold" data-screen="coin"><i>🪙</i><b>Κορώνα–Γράμματα</b><small>Ρίξε το νόμισμα</small></button>
+<button class="game sos-card" data-screen="sos"><i>SOS</i><b>SOS</b><small>Σχημάτισε όσες περισσότερες λέξεις SOS μπορείς</small></button>
+<button class="game snake-card" data-screen="snake"><i>🐍</i><b>Φιδάκι</b><small>Φάε τα μήλα και κάνε ρεκόρ</small></button>
+<button class="game mines-card" data-screen="mines"><i>💣</i><b>Ναρκαλιευτής</b><small>Βρες όλα τα ασφαλή τετράγωνα</small></button>
+<button class="game pac-card" data-screen="pacman"><i>🟡</i><b>Pac-Man</b><small>Φάε τις τελείες και ξέφυγε από τα φαντάσματα</small></button>
 </div>
 </section>
 
@@ -89,6 +95,15 @@
 <p id="snakeMsg" class="msg">Πάτησε Έναρξη</p>
 <div class="snake-pad"><button data-dir="up">▲</button><div><button data-dir="left">◀</button><button data-dir="down">▼</button><button data-dir="right">▶</button></div></div>
 <div class="actions"><button id="snakeStart" class="primary">Έναρξη</button><button id="snakePause">Παύση</button><button id="snakeReset">Νέο παιχνίδι</button></div>
+</section>
+
+
+<section id="pacman" class="screen">
+<div class="card arcade-head pac-head"><div><small>Σκορ</small><b id="pacScore">0</b></div><div><small>Ρεκόρ</small><b id="pacBest">0</b></div><div><small>Ζωές</small><b id="pacLives">3</b></div></div>
+<div class="pac-wrap"><canvas id="pacCanvas" width="420" height="420" aria-label="Παιχνίδι Pac-Man"></canvas></div>
+<p id="pacMsg" class="msg">Πάτησε Έναρξη</p>
+<div class="snake-pad pac-pad"><button data-pac-dir="up">▲</button><div><button data-pac-dir="left">◀</button><button data-pac-dir="down">▼</button><button data-pac-dir="right">▶</button></div></div>
+<div class="actions"><button id="pacStart" class="primary">Έναρξη</button><button id="pacPause">Παύση</button><button id="pacReset">Νέο παιχνίδι</button></div>
 </section>
 
 <section id="mines" class="screen">

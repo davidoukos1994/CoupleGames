@@ -41,8 +41,8 @@ function options(container,items,correct,onPick){
     container.appendChild(b);
   });
 }
-const meta={home:["RetroGames By D.Lemonis",""],tic:["Τρίλιζα","Τρία σύμβολα στη σειρά"],connect:["Σκορ 4","Τέσσερα πιόνια στη σειρά"],hang:["Κρεμάλα","Μάντεψε τη λέξη"],coin:["Κορώνα–Γράμματα","Ρίξε το νόμισμα"],sos:["SOS","Σχημάτισε τις περισσότερες λέξεις SOS"],snake:["Φιδάκι","Φάε τα μήλα και κάνε ρεκόρ"],mines:["Ναρκαλιευτής","Βρες όλα τα ασφαλή τετράγωνα"],wheel:["Τροχός Τύχης","Challenges που αλλάζεις εσύ"],flags:["Find the Flags","Μάντεψε τη χώρα"],sports:["QuizBall","Ποδοσφαιρικά παιχνίδια και ερωτήσεις"],quotes:["TV Quote Challenge","Μάντεψε την ελληνική σειρά από τη διάσημη ατάκα"],stats:["Στατιστικά","Τα σκορ σας"],settings:["Ρυθμίσεις","Ονόματα παικτών"]};
-function go(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$('#title').textContent=meta[id][0];$('#subtitle').textContent=meta[id][1]||'';$('#subtitle').classList.toggle('hidden',!meta[id][1]);$('#back').classList.toggle('hidden',id==='home');document.body.classList.toggle('home-view',id==='home');const playerBar=$('#gamePlayersBar');if(playerBar)playerBar.classList.toggle('hidden',id==='home'||id==='settings');const sb=$('#settingsBtn');if(sb)sb.classList.toggle('hidden',id==='settings');scrollTo(0,0);if(id==='wheel')drawWheel();if(id==='flags')newFlag();if(id==='sports')showQuizBallHub();if(id==='quotes')showQuoteHub()}
+const meta={arcade:["Retro Arcade","Κλασικά παιχνίδια"],pacman:["Pac-Man","Φάε τις τελείες και ξέφυγε από τα φαντάσματα"],home:["RetroGames By D.Lemonis",""],tic:["Τρίλιζα","Τρία σύμβολα στη σειρά"],connect:["Σκορ 4","Τέσσερα πιόνια στη σειρά"],hang:["Κρεμάλα","Μάντεψε τη λέξη"],coin:["Κορώνα–Γράμματα","Ρίξε το νόμισμα"],sos:["SOS","Σχημάτισε τις περισσότερες λέξεις SOS"],snake:["Φιδάκι","Φάε τα μήλα και κάνε ρεκόρ"],mines:["Ναρκαλιευτής","Βρες όλα τα ασφαλή τετράγωνα"],wheel:["Τροχός Τύχης","Challenges που αλλάζεις εσύ"],flags:["Find the Flags","Μάντεψε τη χώρα"],sports:["QuizBall","Ποδοσφαιρικά παιχνίδια και ερωτήσεις"],quotes:["TV Quote Challenge","Μάντεψε την ελληνική σειρά από τη διάσημη ατάκα"],stats:["Στατιστικά","Τα σκορ σας"],settings:["Ρυθμίσεις","Ονόματα παικτών"]};
+function go(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$('#title').textContent=meta[id][0];$('#subtitle').textContent=meta[id][1]||'';$('#subtitle').classList.toggle('hidden',!meta[id][1]);$('#back').classList.toggle('hidden',id==='home');document.body.classList.toggle('home-view',id==='home');const playerBar=$('#gamePlayersBar');if(playerBar)playerBar.classList.toggle('hidden',['home','settings','arcade','snake','mines','pacman'].includes(id));const sb=$('#settingsBtn');if(sb)sb.classList.toggle('hidden',id==='settings');scrollTo(0,0);if(id==='wheel')drawWheel();if(id==='flags')newFlag();if(id==='sports')showQuizBallHub();if(id==='quotes')showQuoteHub();if(id==='pacman')drawPac()}
 $$('[data-screen]').forEach(b=>b.onclick=()=>go(b.dataset.screen));$("#back").onclick=()=>go("home");const settingsHeader=$("#settingsBtn");if(settingsHeader)settingsHeader.onclick=()=>go("settings");
 function setText(sel,value){let el=$(sel);if(el)el.textContent=value}
 function update(){let[a,b]=d.players;if($("#quickP1")&&document.activeElement!==$("#quickP1"))$("#quickP1").value=a;if($("#quickP2")&&document.activeElement!==$("#quickP2"))$("#quickP2").value=b;setText("#ticN1",a);setText("#ticN2",b);setText("#conN1",a);setText("#conN2",b);setText("#ticS1",d.tic.p1);setText("#ticS2",d.tic.p2);setText("#conS1",d.con.p1);setText("#conS2",d.con.p2);if($("#p1Input"))$("#p1Input").value=a;if($("#p2Input"))$("#p2Input").value=b;setText("#flagScore",d.flags);setText("#stTic",d.tic.p1+"-"+d.tic.p2);setText("#stCon",d.con.p1+"-"+d.con.p2);setText("#stFlag",d.flags);setText("#stPlayers",d.playersScore);renderWheel();renderWheelPlayers();renderCoin();renderCustom();renderQuestionList();renderQuoteList();updateQuoteCount();renderFlagEditor()}
@@ -347,7 +347,7 @@ async function initApp(){
   folderLibraryStatus();
   update();resetT();resetC();drawWheel();
 }
-if(navigator.serviceWorker&&typeof navigator.serviceWorker.register==="function")addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=stable3fix").then(r=>r.update()).catch(()=>{}));
+if(navigator.serviceWorker&&typeof navigator.serviceWorker.register==="function")addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=stable8").then(r=>r.update()).catch(()=>{}));
 initApp();
 
 // V22: κεντρικές διορθώσεις παιχνιδιών
@@ -389,3 +389,47 @@ function floodMine(i){const stack=[i],seen=new Set();while(stack.length){const k
 function revealAllMines(){mineCells.forEach(c=>{if(c.mine)c.open=true})}
 function openMine(i){if(mineOver||mineCells[i].flag)return;if(!mineStarted){buildMines(i);mineStarted=true;startMineTimer()}const c=mineCells[i];if(c.mine){c.open=true;mineOver=true;clearInterval(mineTimer);revealAllMines();$('#minesNew').textContent='😵';$('#minesMsg').textContent='Έπεσες σε νάρκη!';renderMines();return}floodMine(i);const safe=mineCells.filter(c=>!c.mine);if(safe.every(c=>c.open)){mineOver=true;clearInterval(mineTimer);mineCells.forEach(c=>{if(c.mine)c.flag=true});mineFlags=mineCount;$('#minesNew').textContent='😎';$('#minesMsg').textContent='Νίκη! Άνοιξες όλα τα ασφαλή τετράγωνα.';updateMineHud()}renderMines()}
 $('#minesNew')&&($('#minesNew').onclick=newMines);$('#minesLevel')&&($('#minesLevel').onchange=newMines);newMines();
+
+
+// ===== Pac-Man (Retro Arcade) =====
+const pacCanvas=$('#pacCanvas'),pacCtx=pacCanvas?.getContext('2d');
+const PAC_MAP=[
+'#####################',
+'#.........#.........#',
+'#.###.###.#.###.###.#',
+'#o###.###.#.###.###o#',
+'#...................#',
+'#.###.#.#####.#.###.#',
+'#.....#...#...#.....#',
+'#####.### # ###.#####',
+'    #.#       #.#    ',
+'#####.# ##G## #.#####',
+'     .  #GGG#  .     ',
+'#####.# ##### #.#####',
+'    #.#       #.#    ',
+'#####.# ##### #.#####',
+'#.........#.........#',
+'#.###.###.#.###.###.#',
+'#o..#.....P.....#..o#',
+'###.#.#.#####.#.#.###',
+'#.....#...#...#.....#',
+'#.#######.#.#######.#',
+'#...................#',
+'#####################'];
+let pacGrid=[],pac={x:10,y:16,dx:0,dy:0,nx:0,ny:0},pacGhosts=[],pacTimer=null,pacRunning=false,pacPaused=false,pacScore=0,pacLives=3,pacTickNo=0;
+const PAC_CELL=20;
+function pacBest(){return Number(localStorage.getItem('retrogames.pac.best')||0)}
+function updatePacHud(){if($('#pacScore'))$('#pacScore').textContent=pacScore;if($('#pacBest'))$('#pacBest').textContent=pacBest();if($('#pacLives'))$('#pacLives').textContent=pacLives}
+function resetPacPositions(){pac={x:10,y:16,dx:0,dy:0,nx:0,ny:0};pacGhosts=[{x:9,y:10,dx:1,dy:0,c:'#ef4444'},{x:10,y:10,dx:-1,dy:0,c:'#ec4899'},{x:11,y:10,dx:0,dy:-1,c:'#22d3ee'}]}
+function newPac(){clearInterval(pacTimer);pacTimer=null;pacRunning=false;pacPaused=false;pacScore=0;pacLives=3;pacTickNo=0;pacGrid=PAC_MAP.map(r=>r.split('').map(ch=>ch==='.'||ch==='o'?ch:' '));resetPacPositions();updatePacHud();drawPac();if($('#pacMsg'))$('#pacMsg').textContent='Πάτησε Έναρξη'}
+function pacWall(x,y){return y<0||y>=PAC_MAP.length||x<0||x>=PAC_MAP[0].length||PAC_MAP[y][x]==='#'}
+function pacMovePossible(x,y,dx,dy){return !pacWall(x+dx,y+dy)}
+function setPacDir(dx,dy){pac.nx=dx;pac.ny=dy}
+function drawPac(){if(!pacCtx)return;const w=pacCanvas.width,h=pacCanvas.height,s=Math.min(w/PAC_MAP[0].length,h/PAC_MAP.length),ox=(w-PAC_MAP[0].length*s)/2,oy=(h-PAC_MAP.length*s)/2;pacCtx.fillStyle='#020617';pacCtx.fillRect(0,0,w,h);for(let y=0;y<PAC_MAP.length;y++)for(let x=0;x<PAC_MAP[y].length;x++){if(PAC_MAP[y][x]==='#'){pacCtx.strokeStyle='#2563eb';pacCtx.lineWidth=2;pacCtx.strokeRect(ox+x*s+1,oy+y*s+1,s-2,s-2)}const d=pacGrid[y]?.[x];if(d==='.'||d==='o'){pacCtx.fillStyle='#fde68a';pacCtx.beginPath();pacCtx.arc(ox+(x+.5)*s,oy+(y+.5)*s,d==='o'?s*.19:s*.07,0,Math.PI*2);pacCtx.fill()}}pacCtx.fillStyle='#facc15';pacCtx.beginPath();const ang=pacTickNo%2?0.28:0.08;pacCtx.moveTo(ox+(pac.x+.5)*s,oy+(pac.y+.5)*s);pacCtx.arc(ox+(pac.x+.5)*s,oy+(pac.y+.5)*s,s*.42,ang,Math.PI*2-ang);pacCtx.closePath();pacCtx.fill();pacGhosts.forEach(g=>{const cx=ox+(g.x+.5)*s,cy=oy+(g.y+.5)*s;pacCtx.fillStyle=g.c;pacCtx.beginPath();pacCtx.arc(cx,cy-s*.08,s*.35,Math.PI,0);pacCtx.lineTo(cx+s*.35,cy+s*.34);pacCtx.lineTo(cx+s*.17,cy+s*.22);pacCtx.lineTo(cx,cy+s*.34);pacCtx.lineTo(cx-s*.17,cy+s*.22);pacCtx.lineTo(cx-s*.35,cy+s*.34);pacCtx.closePath();pacCtx.fill();pacCtx.fillStyle='#fff';pacCtx.beginPath();pacCtx.arc(cx-s*.12,cy-s*.08,s*.09,0,Math.PI*2);pacCtx.arc(cx+s*.12,cy-s*.08,s*.09,0,Math.PI*2);pacCtx.fill()})}
+function pacRemaining(){return pacGrid.reduce((n,r)=>n+r.filter(x=>x==='.'||x==='o').length,0)}
+function ghostStep(g){const dirs=[[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy])=>pacMovePossible(g.x,g.y,dx,dy)&&!(dx===-g.dx&&dy===-g.dy));if(!dirs.length){g.dx=-g.dx;g.dy=-g.dy}else{dirs.sort((a,b)=>{const da=Math.abs(g.x+a[0]-pac.x)+Math.abs(g.y+a[1]-pac.y),db=Math.abs(g.x+b[0]-pac.x)+Math.abs(g.y+b[1]-pac.y);return (Math.random()<.65?da-db:Math.random()-.5)});[g.dx,g.dy]=dirs[0]}g.x+=g.dx;g.y+=g.dy}
+function pacHit(){return pacGhosts.some(g=>g.x===pac.x&&g.y===pac.y)}
+function losePacLife(){pacLives--;updatePacHud();if(pacLives<=0){clearInterval(pacTimer);pacRunning=false;if(pacScore>pacBest())localStorage.setItem('retrogames.pac.best',pacScore);updatePacHud();drawPac();pacCtx.save();pacCtx.fillStyle='rgba(2,6,23,.82)';pacCtx.fillRect(0,pacCanvas.height/2-50,pacCanvas.width,100);pacCtx.fillStyle='#fff';pacCtx.font='900 38px Arial';pacCtx.textAlign='center';pacCtx.textBaseline='middle';pacCtx.fillText('ΕΧΑΣΕΣ',pacCanvas.width/2,pacCanvas.height/2);pacCtx.restore();$('#pacMsg').textContent='Τέλος παιχνιδιού · Σκορ '+pacScore;return}resetPacPositions();$('#pacMsg').textContent='Έχασες μία ζωή';drawPac()}
+function pacTick(){if(pacPaused)return;pacTickNo++;if(pacMovePossible(pac.x,pac.y,pac.nx,pac.ny)){pac.dx=pac.nx;pac.dy=pac.ny}if(pacMovePossible(pac.x,pac.y,pac.dx,pac.dy)){pac.x+=pac.dx;pac.y+=pac.dy}if(pacGrid[pac.y]?.[pac.x]==='.'||pacGrid[pac.y]?.[pac.x]==='o'){pacScore+=pacGrid[pac.y][pac.x]==='o'?50:10;pacGrid[pac.y][pac.x]=' ';updatePacHud()}if(pacHit())return losePacLife();if(pacTickNo%2===0)pacGhosts.forEach(ghostStep);if(pacHit())return losePacLife();if(!pacRemaining()){clearInterval(pacTimer);pacRunning=false;if(pacScore>pacBest())localStorage.setItem('retrogames.pac.best',pacScore);updatePacHud();$('#pacMsg').textContent='Νίκη! Καθάρισες όλο το ταμπλό 🎉'}drawPac()}
+function startPac(){if(pacRunning){pacPaused=false;$('#pacMsg').textContent='';return}pacRunning=true;pacPaused=false;clearInterval(pacTimer);pacTimer=setInterval(pacTick,145);$('#pacMsg').textContent=''}
+$('#pacStart')&&($('#pacStart').onclick=startPac);$('#pacPause')&&($('#pacPause').onclick=()=>{if(!pacRunning)return;pacPaused=!pacPaused;$('#pacMsg').textContent=pacPaused?'Παύση':''});$('#pacReset')&&($('#pacReset').onclick=newPac);$$('[data-pac-dir]').forEach(b=>b.onclick=()=>{const m={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};setPacDir(...m[b.dataset.pacDir]);startPac()});addEventListener('keydown',e=>{if(!$('#pacman')?.classList.contains('active'))return;const m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};if(m[e.key]){e.preventDefault();setPacDir(...m[e.key]);startPac()}});let pacTouch=null;pacCanvas?.addEventListener('touchstart',e=>{const t=e.touches[0];pacTouch={x:t.clientX,y:t.clientY}},{passive:true});pacCanvas?.addEventListener('touchend',e=>{if(!pacTouch)return;const t=e.changedTouches[0],dx=t.clientX-pacTouch.x,dy=t.clientY-pacTouch.y;if(Math.max(Math.abs(dx),Math.abs(dy))>18){if(Math.abs(dx)>Math.abs(dy))setPacDir(dx>0?1:-1,0);else setPacDir(0,dy>0?1:-1);startPac()}pacTouch=null},{passive:true});newPac();
