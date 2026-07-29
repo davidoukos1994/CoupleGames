@@ -1,5 +1,5 @@
-const C='retrogames-v30-confirm-answer';
-const A=['./','index.html','style.css?v=242','app.js?v=242','manifest.json','icon.svg','assets/library.json','assets/gaming-background.svg','find-the-flags.html','assets/flags-world.webp','assets/flags-world.json'];
+const C='stable-quizball-v1-sprite';
+const A=["./","index.html","style.css?v=stable1sprite","app.js?v=stable1sprite","manifest.json","icon.svg","assets/library.json","assets/gaming-background.svg","find-the-flags.html","assets/flags-world.webp","assets/flags-world.json","assets/quotes-sprite.webp"];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(A)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim()});
 self.addEventListener('fetch',e=>{

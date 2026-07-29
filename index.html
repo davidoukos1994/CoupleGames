@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=28">
+<link rel="stylesheet" href="style.css?v=stable1sprite">
 </head>
 <body class="home-view">
 <div class="app">
@@ -42,7 +42,7 @@
 <button class="quizball-hero" data-screen="sports"><span class="quizball-icon">⚽</span><span><b>QuizBall</b><small>PlayerID, Logo Quiz, Footballers, Ιστορία και Ερωτήσεις κοινού</small></span><span class="quizball-arrow">›</span></button>
 
 <h2>Σειρές & Ταινίες</h2>
-<button class="quote-game-hero" data-screen="quotes"><span class="quote-game-icon">🎬</span><span><b>Βρες τη σειρά/ταινία από την ατάκα</b><small>Φωτογραφία, ατάκα και 4 επιλογές</small></span><span class="quizball-arrow">›</span></button>
+<button class="quote-game-hero" data-screen="quotes"><span class="quote-game-icon">🎬</span><span><b>TV Quote Challenge</b><small>Μάντεψε την ελληνική σειρά από τη διάσημη ατάκα</small></span><span class="quizball-arrow">›</span></button>
 
 <div class="home-settings-wrap">
   <button class="home-settings-btn" data-screen="settings"><span>⚙️</span><span><b>Ρυθμίσεις</b><small>Ονόματα παικτών και επιλογές</small></span><span>›</span></button>
@@ -141,7 +141,7 @@
 
 <section id="quotes" class="screen">
 <div id="quoteHub">
-  <div class="card quote-cover"><div class="quote-cover-icon">🎬</div><h2>Βρες τη σειρά/ταινία<br>από την ατάκα</h2><p>Διάβασε την ατάκα και διάλεξε τη σωστή απάντηση.</p></div>
+  <div class="card quote-cover"><div class="quote-cover-icon">🎬</div><h2>TV Quote Challenge</h2><p>Δες τη φωτογραφία, διάβασε την ατάκα και μάντεψε την ελληνική σειρά.</p></div>
   <div class="quote-hub-actions">
     <button id="quotePlayBtn" class="primary full">▶ ΕΝΑΡΞΗ ΠΑΙΧΝΙΔΙΟΥ</button>
     <button id="quoteManageBtn" class="secondary full">＋ ΠΡΟΣΘΗΚΗ / ΕΠΕΞΕΡΓΑΣΙΑ ΕΡΩΤΗΣΕΩΝ</button>
@@ -170,8 +170,9 @@
   <div class="card quiz-card quote-card">
     <div id="quoteGameImage" class="quote-game-image hidden"><img alt="Εικόνα ερώτησης"></div>
     <blockquote id="quoteGameText"></blockquote>
-    <h3>Από ποια σειρά ή ταινία είναι;</h3>
+    <h3>Από ποια ελληνική σειρά είναι;</h3>
     <div id="quoteOptions" class="options"></div>
+    <button id="quoteConfirm" class="primary full" disabled>ΕΠΙΒΕΒΑΙΩΣΗ ΑΠΑΝΤΗΣΗΣ</button>
     <p id="quoteMsg" class="msg"></p>
     <button id="quoteNext" class="primary full hidden">ΕΠΟΜΕΝΗ ΕΡΩΤΗΣΗ</button>
   </div>
@@ -194,7 +195,7 @@
 <div class="card form-card settings-games"><h2>Διορθώσεις παιχνιδιών</h2>
 <p class="helper">Άνοιξε γρήγορα το παιχνίδι που θέλεις να διορθώσεις ή να ενημερώσεις.</p>
 <button id="settingsWheel" class="settings-link"><span>🎡</span><span><b>Τροχός Τύχης</b><small>Προσθήκη, αλλαγή και διαγραφή επιλογών</small></span><span>›</span></button>
-<button id="settingsQuotes" class="settings-link"><span>🎬</span><span><b>Σειρές & Ταινίες</b><small>Προσθήκη και επεξεργασία ερωτήσεων</small></span><span>›</span></button>
+<button id="settingsQuotes" class="settings-link"><span>🎬</span><span><b>TV Quote Challenge</b><small>Προσθήκη και επεξεργασία ερωτήσεων</small></span><span>›</span></button>
 <button id="settingsQuizball" class="settings-link"><span>⚽</span><span><b>QuizBall</b><small>Άνοιγμα κατηγοριών και ερωτήσεων</small></span><span>›</span></button>
 </div>
 
@@ -208,6 +209,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=29"></script>
+<script src="app.js?v=stable1sprite"></script>
 </body>
 </html>
