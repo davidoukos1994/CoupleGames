@@ -343,3 +343,7 @@ body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{dis
 .mines-board button.open{border:1px solid #94a3b8;background:#e2e8f0}.mines-board button.mine{background:#fecaca}.mines-board button.flagged{background:#fde68a}
 .mines-board button.n1{color:#2563eb}.mines-board button.n2{color:#15803d}.mines-board button.n3{color:#dc2626}.mines-board button.n4{color:#6d28d9}.mines-board button.n5,.mines-board button.n6,.mines-board button.n7,.mines-board button.n8{color:#111827}
 @media(max-width:700px){.snake-pad{display:block}.arcade-head,.mines-head{gap:8px}.arcade-head>div,.mines-head>div{min-width:70px}.mines-board{gap:1px;padding:4px}.mines-board button{border-width:1px}}
+/* Stable 7: καθαρό ολόκληρο σήμα */
+#sports .image-box.logo{background:#fff!important;min-height:390px!important;overflow:hidden!important}
+#sports .image-box.logo img{width:100%!important;height:100%!important;object-fit:contain!important;padding:14px!important;box-sizing:border-box!important;background:#fff!important}
+#sports .image-box.logo .logo-cover{background:rgba(255,255,255,.86)!important;backdrop-filter:blur(7px)!important;-webkit-backdrop-filter:blur(7px)!important;box-shadow:0 0 8px rgba(255,255,255,.9)!important;border-radius:7px!important}

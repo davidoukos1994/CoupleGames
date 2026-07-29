@@ -1,5 +1,5 @@
-const C='stable-quizball-v5-logo-sos-lines';
-const A=["./","index.html","style.css?v=stable6","app.js?v=stable6","manifest.json","icon.svg","assets/library.json","assets/gaming-background.svg","find-the-flags.html","assets/flags-world.webp","assets/flags-world.json","assets/quotes-sprite.webp","assets/teams-sprite.webp","assets/players-sprite.webp"];
+const C='stable-quizball-v7-clean-logos-snake';
+const A=["./","index.html","style.css?v=stable7","app.js?v=stable7","manifest.json","icon.svg","assets/library.json","assets/gaming-background.svg","find-the-flags.html","assets/flags-world.webp","assets/flags-world.json","assets/quotes-sprite.webp","assets/teams-sprite.webp","assets/players-sprite.webp"];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(A)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim()});
 self.addEventListener('fetch',e=>{
