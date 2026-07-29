@@ -1,4 +1,15 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function shuffle(items){
+  const a=[...items];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+// Συμβατότητα με παλαιότερα τμήματα που αφαιρέθηκαν από την αρχική.
+function renderCustom(){}
+function renderQuestionList(){}
 const D={players:["Παίκτης 1","Παίκτης 2"],tic:{p1:0,p2:0},con:{p1:0,p2:0},flags:0,playersScore:0,teamsScore:0,wheel:["Φιλί","Μασάζ 10 λεπτά","Διαλέγει ταινία","Κερνάει καφέ","Διαλέγει τραγούδι","Κάνει μια χάρη","Χορός 30 δευτερόλεπτα","Μίμηση χαρακτήρα","Αστεία ιστορία","Διάλεξε επόμενο παιχνίδι","Τραγούδησε ένα ρεφρέν","Μυστική πρόκληση"],wheelPlayers:["Παίκτης 1","Παίκτης 2"],wheelPlayerIndex:0,coin:[],customPlayers:[],customTeams:[],quizQuestions:{footballers:[],history:[],audience:[]}};
 let d=JSON.parse(localStorage.getItem("retroGamesDLemonis")||"null")||structuredClone(D);
 d.quizQuestions=d.quizQuestions||{footballers:[],history:[],audience:[]};
@@ -221,7 +232,7 @@ async function initApp(){
   folderLibraryStatus();
   update();resetT();resetC();drawWheel();
 }
-if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=28").then(r=>r.update()).catch(()=>{}));
+if(navigator.serviceWorker&&typeof navigator.serviceWorker.register==="function")addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=29").then(r=>r.update()).catch(()=>{}));
 initApp();
 
 // V22: κεντρικές διορθώσεις παιχνιδιών
