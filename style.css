@@ -269,3 +269,8 @@ body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{dis
 .flag-editor-preview{width:68px;height:44px;object-fit:cover;border-radius:8px;border:1px solid #d8ddeb;background:#fff}
 .flag-editor-row{grid-template-columns:76px 1fr 44px!important}
 @media(max-width:520px){.flag-image-wrap{width:100%}.flag-editor-row{grid-template-columns:70px 1fr 42px!important}}
+
+/* V30: επιλογή πριν την επιβεβαίωση στο QuizBall */
+#qbMultiple button.selected{outline:3px solid #35d6ff;box-shadow:0 0 0 3px rgba(53,214,255,.22),0 0 22px rgba(53,214,255,.45);transform:translateY(-1px)}
+#qbConfirm{margin-top:14px}
+#qbConfirm:disabled{opacity:.45;cursor:not-allowed}
