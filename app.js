@@ -172,5 +172,5 @@ async function initApp(){
   folderLibraryStatus();
   update();resetT();resetC();drawWheel();
 }
-if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=19").then(r=>r.update()).catch(()=>{}));
 initApp();

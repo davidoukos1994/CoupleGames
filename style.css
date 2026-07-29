@@ -208,3 +208,15 @@ body:before{content:"△  ○  ×  □\A   🎮      △\A □      ○      ×\
 /* Παιχνίδι ατάκας */
 .quote-cover{text-align:center;padding:28px 18px;background:linear-gradient(145deg,#111827,#581c87);color:#fff}.quote-cover-icon{font-size:4rem}.quote-cover h2{margin:8px 0;color:#f5d0fe}.quote-cover p{color:#e9d5ff}.quote-hub-actions{display:grid;gap:12px}.centered{text-align:center}.quote-preview,.quote-game-image{overflow:hidden;border-radius:18px;background:#111827}.quote-preview{height:190px;margin:0 0 14px}.quote-preview img,.quote-game-image img{width:100%;height:100%;object-fit:cover}.form-card textarea{width:100%;resize:vertical;border:1px solid #ddd3ea;border-radius:12px;padding:12px;font:inherit}.quote-list-row span{min-width:0}.quote-list-row small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px;color:var(--muted);margin-top:3px}.quote-score{display:flex;justify-content:space-between;align-items:center;font-size:1.05rem}.quote-score b{color:#7c3aed;font-size:1.3rem}.quote-card blockquote{margin:16px 0;padding:18px;border-left:5px solid #7c3aed;border-radius:12px;background:#f3e8ff;font-size:1.25rem;font-weight:800;line-height:1.45}.quote-card h3{text-align:center}.quote-game-image{height:min(45vh,340px)}.quote-results{text-align:center;padding:30px}.quote-results>div{font-size:4rem}.quote-results strong{display:block;font-size:3rem;color:#7c3aed;margin:12px 0 22px}
 @media(max-width:420px){.header-spacer{width:70px}.quote-game-hero{grid-template-columns:48px 1fr 20px;padding:15px}.quote-game-icon{font-size:2.2rem}.quote-card blockquote{font-size:1.08rem}}
+
+/* V19 - PlayStation-inspired background and clearer glass cards */
+html,body{background:#071a4a!important}
+body{background-image:linear-gradient(180deg,rgba(2,8,23,.10),rgba(2,8,23,.38)),url("assets/gaming-background.svg")!important;background-size:cover!important;background-position:center top!important;background-attachment:fixed!important}
+body:before{content:""!important;display:none!important}
+.app{position:relative}
+#home .card,.home-settings-btn,.brand-box{background:rgba(255,255,255,.90)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:rgba(255,255,255,.68)!important;box-shadow:0 14px 34px rgba(1,8,25,.22)!important}
+.topbar{background:linear-gradient(180deg,rgba(7,26,74,.88),rgba(7,26,74,.55),transparent)!important}
+.brand-box h1{color:#151126}
+#home h2{color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.home-settings-wrap{border-top-color:rgba(255,255,255,.28)!important}
+@media(max-width:620px){body{background-position:50% top!important;background-size:auto 1200px!important;background-repeat:repeat-y!important}}

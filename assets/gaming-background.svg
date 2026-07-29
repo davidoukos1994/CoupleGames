@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2200" role="img" aria-label="Gaming background">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="18%" r="85%">
+      <stop offset="0" stop-color="#244fb5"/>
+      <stop offset="0.34" stop-color="#102f7d"/>
+      <stop offset="0.72" stop-color="#081947"/>
+      <stop offset="1" stop-color="#030817"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#60a5fa" stop-opacity=".75"/>
+      <stop offset=".5" stop-color="#2563eb" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#2563eb" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pad" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#263c67"/>
+      <stop offset=".52" stop-color="#101b34"/>
+      <stop offset="1" stop-color="#050a16"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="35"/></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="28" stdDeviation="30" flood-color="#000" flood-opacity=".7"/></filter>
+  </defs>
+  <rect width="1600" height="2200" fill="url(#bg)"/>
+  <ellipse cx="800" cy="720" rx="730" ry="610" fill="url(#glow)" filter="url(#blur)"/>
+  <g fill="none" stroke-linecap="round" opacity=".28">
+    <path d="M110 360C460 80 1060 80 1490 420" stroke="#60a5fa" stroke-width="18"/>
+    <path d="M20 640C430 310 1190 280 1590 670" stroke="#8b5cf6" stroke-width="11"/>
+    <path d="M100 920C480 640 1120 610 1510 930" stroke="#22d3ee" stroke-width="8"/>
+  </g>
+  <g opacity=".3" stroke-width="18" fill="none">
+    <path d="M225 250l52 90h-104z" stroke="#5eead4"/>
+    <circle cx="1360" cy="300" r="47" stroke="#60a5fa"/>
+    <path d="M190 1450l80 80m0-80l-80 80" stroke="#f472b6"/>
+    <rect x="1280" y="1430" width="92" height="92" rx="8" stroke="#c4b5fd"/>
+    <path d="M1250 1870l52 90h-104z" stroke="#5eead4"/>
+    <circle cx="300" cy="1900" r="47" stroke="#60a5fa"/>
+  </g>
+  <g transform="translate(245 390) scale(1.04)" filter="url(#shadow)" opacity=".88">
+    <path d="M200 325C120 330 65 414 42 520L5 690c-18 85 86 126 145 61l145-158h510l145 158c59 65 163 24 145-61l-37-170c-23-106-78-190-158-195l-170-8c-52-3-95 20-125 62H425c-30-42-73-65-125-62z" fill="url(#pad)" stroke="#6f8fc9" stroke-width="6"/>
+    <path d="M425 379h250l-31 145H456z" fill="#0d172b" stroke="#5d78ad" stroke-width="5"/>
+    <circle cx="348" cy="540" r="66" fill="#080e1c" stroke="#415b8b" stroke-width="5"/>
+    <circle cx="752" cy="540" r="66" fill="#080e1c" stroke="#415b8b" stroke-width="5"/>
+    <circle cx="348" cy="540" r="35" fill="#151f36"/>
+    <circle cx="752" cy="540" r="35" fill="#151f36"/>
+    <g fill="#a8b6d2">
+      <rect x="181" y="435" width="34" height="112" rx="8"/>
+      <rect x="142" y="474" width="112" height="34" rx="8"/>
+    </g>
+    <g fill="none" stroke-width="10" opacity=".95">
+      <path d="M900 438l25 42h-50z" stroke="#4ade80"/>
+      <circle cx="980" cy="485" r="24" stroke="#fb7185"/>
+      <path d="M885 550l42 42m0-42l-42 42" stroke="#60a5fa"/>
+      <rect x="955" y="545" width="49" height="49" rx="4" stroke="#f9a8d4"/>
+    </g>
+    <circle cx="550" cy="585" r="21" fill="#2463ba" stroke="#73a6f6" stroke-width="4"/>
+  </g>
+  <g opacity=".11" fill="#fff" font-family="Arial, sans-serif" font-weight="700" font-size="86">
+    <text x="140" y="1150">△</text><text x="420" y="1250">○</text><text x="730" y="1130">×</text><text x="1060" y="1260">□</text>
+    <text x="1260" y="1100">△</text><text x="180" y="1740">□</text><text x="600" y="1660">×</text><text x="970" y="1800">○</text>
+  </g>
+</svg>
