@@ -154,3 +154,46 @@ input,select{font-size:16px}
 #sports .player-id-stop b{font-size:1rem}
 #sports .player-id-stop small{margin-top:2px;color:#dbeafe;font-weight:700}
 @media(max-width:520px){#sports .player-id-card{padding:13px;border-radius:18px}#sports .player-id-stop{padding:8px;grid-template-columns:30px 1fr}#sports .player-id-dot{width:27px;height:27px}#sports .player-id-stop b{font-size:.9rem}#sports .player-id-stop small{font-size:.78rem}}
+
+/* QuizBall V16 dark game layout */
+#sports.qb-dark{--qb-bg:#030817;--qb-card:#071126;--qb-line:#1d3557;--qb-blue:#42a5ff;--qb-green:#15803d;--qb-text:#f8fafc;--qb-muted:#a9b9cf;background:radial-gradient(circle at top,#0c1b38 0,#030817 42%,#02050c 100%);color:var(--qb-text);padding:12px;border-radius:24px}
+#sports .qb-dark-card,#sports .qb-cover{background:linear-gradient(155deg,#071126,#020713);border:1px solid var(--qb-line);color:var(--qb-text);box-shadow:0 14px 36px #0008}
+#sports .qb-cover{text-align:center;padding:28px 18px;margin-bottom:14px;background:linear-gradient(#020713dd,#071126ee),repeating-linear-gradient(0deg,#11213a 0 2px,transparent 2px 28px)}
+#sports .qb-cover .qb-ball{font-size:4.6rem;filter:drop-shadow(0 0 18px #28a8ff)}
+#sports .qb-cover h2{font-size:clamp(2.2rem,8vw,4rem);margin:0;color:#54b6ff;text-shadow:0 0 12px #168aff,0 0 28px #9333ea;letter-spacing:.04em}
+#sports .qb-cover p,#sports .qb-cover small{display:block;color:#dbeafe;margin:8px 0 0}
+#sports .qb-cover strong{display:block;color:#fde047;font-size:1.05rem;margin-top:4px}
+#sports .qb-dark-card h2{color:var(--qb-blue);text-align:center;letter-spacing:.04em}
+#sports .qb-dark-card label,#sports .qb-dark-card .helper{color:#dbeafe}
+#sports .qb-dark-card input,#sports .qb-dark-card select{background:#020713;color:#fff;border-color:#294566}
+#sports .qb-choice{background:#071126;border-color:#294566;color:#fff}
+#sports .qb-choice.active{background:#0b2240;border-color:#42a5ff;box-shadow:0 0 0 1px #42a5ff55 inset}
+#sports .qb-choice small,#sports .sports-game-head small,#sports .help-btn small{color:var(--qb-muted)}
+#sports .rounds-info{background:#071a33;border:1px solid #294566;color:#fff}
+#sports .sports-scoreboard span{background:#0b1930;color:#fff;border:1px solid #294566}
+#sports .sports-scoreboard span.active{background:#0c4a6e;border-color:#38bdf8;box-shadow:0 0 16px #38bdf855}
+#sports .secondary{background:#081225;color:#fff;border-color:#294566}
+#sports .primary{background:linear-gradient(#1d9b3f,#0d6b2b);border:1px solid #3fd35e;color:#fff;box-shadow:0 4px 12px #0f7a3633}
+#sports .quiz-chip{background:#0b3260;color:#63b3ff;border:1px solid #2e6ca8}
+#sports .qb-pick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#sports .qb-pick-card{min-height:92px;padding:16px;border-radius:16px;background:linear-gradient(145deg,#0b1a34,#071126);border:1px solid #31547b;color:#fff;text-align:left;box-shadow:0 8px 18px #0005}
+#sports .qb-pick-card:active{transform:scale(.98)}
+#sports .qb-pick-card b,#sports .qb-pick-card small{display:block}
+#sports .qb-pick-card b{color:#5bb8ff;font-size:1.05rem}.qb-pick-card small{margin-top:7px;color:#c4d3e7}
+#sports .qb-before-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+#sports .help-btn{background:#081225;color:#47aaff;border-color:#31547b}
+#sports .pass-btn{border:1px solid #ef4444;border-radius:14px;padding:12px;background:#3b0a12;color:#fff;font-weight:900}
+#sports .pass-btn small{display:block;color:#fecaca;margin-top:3px}
+#sports .options button{background:#081225;color:#fff;border-color:#31547b}
+#sports .options button.correct{background:#0f5132!important;border-color:#22c55e!important;color:#fff!important}
+#sports .options button.wrong{background:#5f1111!important;border-color:#ef4444!important;color:#fff!important}
+#sports .image-box{background:#fff;border:1px solid #31547b;overflow:hidden}
+#sports .logo-mask:after{display:none!important}
+#sports .logo-cover{display:none;position:absolute;z-index:3;left:13%;right:13%;background:#fff;border-radius:10px;pointer-events:none;box-shadow:0 0 18px #fff}
+#sports .image-box.logo .logo-cover{display:block}
+#sports .logo-cover-top{top:5%;height:18%}
+#sports .logo-cover-mid{top:48%;height:18%;opacity:.96}
+#sports .footballer-photo .logo-cover{display:none!important}
+#sports #qbMsg{min-height:54px;color:#f8fafc;background:#071a33;border:1px solid #294566;border-radius:14px;padding:12px;text-align:center}
+#sports .result-row{border-color:#294566;color:#fff}.result-row:first-child{background:#3b3108}
+@media(max-width:560px){#sports{padding:6px!important;border-radius:0!important}#sports .qb-pick-grid,#sports .qb-before-actions{grid-template-columns:1fr}#sports .qb-cover{padding:20px 12px}#sports .qb-cover .qb-ball{font-size:3.5rem}}
