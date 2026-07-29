@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=24-sprite-fix2">
+<link rel="stylesheet" href="style.css?v=241">
 </head>
 <body class="home-view">
 <div class="app">
@@ -35,7 +35,7 @@
 <h2>Challenges & Γνώσεις</h2>
 <div class="grid">
 <button class="game purple" data-screen="wheel"><i>🎡</i><b>Τροχός Τύχης</b><small>Δικά σας challenges</small></button>
-<button class="game cyan" data-screen="flags"><i>🌍</i><b>Find the Flags</b><small>Μάντεψε τη χώρα</small></button>
+<button class="game cyan" type="button" onclick="location.href='find-the-flags.html'"><i>🌍</i><b>Find the Flags</b><small>Μάντεψε τη χώρα</small></button>
 </div>
 
 <h2>QuizBall</h2>
@@ -95,22 +95,9 @@
 </section>
 
 <section id="flags" class="screen">
-<div id="flagSetup" class="card flag-setup">
-<h2>Find the Flags</h2><p>Διάλεξε περιοχή και αριθμό γύρων</p>
-<h3>Περιοχή</h3><div class="flag-choice-grid">
-<label><input type="radio" name="flagRegion" value="europe"> Ευρώπη</label>
-<label><input type="radio" name="flagRegion" value="world"> Rest of World</label>
-<label><input type="radio" name="flagRegion" value="all" checked> Όλος ο κόσμος</label></div>
-<h3>Γύροι</h3><div class="flag-choice-grid rounds">
-<label><input type="radio" name="flagRounds" value="5"> 5</label>
-<label><input type="radio" name="flagRounds" value="10" checked> 10</label>
-<label><input type="radio" name="flagRounds" value="15"> 15</label></div>
-<button id="startFlags" class="primary wide">Έναρξη</button></div>
-<div id="flagGame" class="card quiz-card hidden"><div class="row"><b id="flagRoundText">Γύρος 1 / 10</b><b>Σκορ: <span id="flagScore">0</span></b></div>
-<div class="flag-image-wrap"><div id="flagImage" class="flag-image" role="img" aria-label="Σημαία χώρας"></div></div><h2>Ποια χώρα είναι;</h2>
+<div class="card quiz-card"><div class="flag-image-wrap"><img id="flagImage" class="flag-image" src="assets/flags/greece.webp" alt="Σημαία χώρας"></div><h2>Ποια χώρα είναι;</h2>
 <div id="flagOptions" class="options"></div><p id="flagMsg" class="msg"></p>
-<div class="row end"><button id="nextFlag" class="primary">Επόμενη</button></div></div>
-<div id="flagResults" class="card hidden flag-results"><h2>Τέλος παιχνιδιού</h2><p>Τελικό σκορ</p><strong id="flagFinalScore">0 / 10</strong><button id="playFlagsAgain" class="primary wide">Νέο παιχνίδι</button></div>
+<div class="row"><b>Σκορ: <span id="flagScore">0</span></b><button id="nextFlag" class="primary">Επόμενη</button></div></div>
 </section>
 
 <section id="sports" class="screen qb-dark">
@@ -221,6 +208,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=24-sprite-fix2"></script>
+<script src="app.js?v=241"></script>
 </body>
 </html>
