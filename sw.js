@@ -1,5 +1,5 @@
-const C='retrogames-dlemonis-v20';
-const A=['./','index.html','style.css?v=20','app.js?v=20','manifest.json','icon.svg','assets/library.json','assets/gaming-background.svg'];
+const C='retrogames-dlemonis-v23';
+const A=['./','index.html','style.css?v=23','app.js?v=23','manifest.json','icon.svg','assets/library.json','assets/gaming-background.svg'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(A)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim()});
 self.addEventListener('fetch',e=>{

@@ -1,19 +1,36 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const D={players:["Παίκτης 1","Παίκτης 2"],tic:{p1:0,p2:0},con:{p1:0,p2:0},flags:0,playersScore:0,teamsScore:0,wheel:["Φιλί","Μασάζ 10 λεπτά","Διαλέγει ταινία","Κερνάει καφέ","Διαλέγει τραγούδι","Κάνει μια χάρη"],coin:[],customPlayers:[],customTeams:[],quizQuestions:{footballers:[],history:[],audience:[]}};
+const D={players:["Παίκτης 1","Παίκτης 2"],tic:{p1:0,p2:0},con:{p1:0,p2:0},flags:0,playersScore:0,teamsScore:0,wheel:["Φιλί","Μασάζ 10 λεπτά","Διαλέγει ταινία","Κερνάει καφέ","Διαλέγει τραγούδι","Κάνει μια χάρη","Χορός 30 δευτερόλεπτα","Μίμηση χαρακτήρα","Αστεία ιστορία","Διάλεξε επόμενο παιχνίδι","Τραγούδησε ένα ρεφρέν","Μυστική πρόκληση"],wheelPlayers:["Παίκτης 1","Παίκτης 2"],wheelPlayerIndex:0,coin:[],customPlayers:[],customTeams:[],quizQuestions:{footballers:[],history:[],audience:[]}};
 let d=JSON.parse(localStorage.getItem("retroGamesDLemonis")||"null")||structuredClone(D);
 d.quizQuestions=d.quizQuestions||{footballers:[],history:[],audience:[]};
 for(const k of ['footballers','history','audience'])d.quizQuestions[k]=Array.isArray(d.quizQuestions[k])?d.quizQuestions[k]:[];
 d.customPlayers=Array.isArray(d.customPlayers)?d.customPlayers:[];d.customTeams=Array.isArray(d.customTeams)?d.customTeams:[];
 d.quoteQuestions=Array.isArray(d.quoteQuestions)?d.quoteQuestions:[];
+d.wheel=Array.isArray(d.wheel)&&d.wheel.length?d.wheel:D.wheel.slice();
+d.wheelPlayers=Array.isArray(d.wheelPlayers)&&d.wheelPlayers.length?d.wheelPlayers:["Παίκτης 1","Παίκτης 2"];
+d.wheelPlayerIndex=Number.isInteger(d.wheelPlayerIndex)?d.wheelPlayerIndex:0;
 // Τα ονόματα ξεκινούν καθαρά σε κάθε νέο άνοιγμα της εφαρμογής.
 d.players=["Παίκτης 1","Παίκτης 2"];
 const save=()=>{localStorage.setItem("retroGamesDLemonis",JSON.stringify(d));update()};
 function toast(t){let e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
+function options(container,items,correct,onPick){
+  container.innerHTML="";
+  items.forEach(value=>{
+    const b=document.createElement("button");
+    b.type="button";
+    b.textContent=value;
+    b.onclick=()=>{
+      [...container.querySelectorAll("button")].forEach(x=>{x.disabled=true;if(x.textContent===correct)x.classList.add("correct")});
+      if(value!==correct)b.classList.add("wrong");
+      onPick(value,b);
+    };
+    container.appendChild(b);
+  });
+}
 const meta={home:["RetroGames By D.Lemonis",""],tic:["Τρίλιζα","Τρία σύμβολα στη σειρά"],connect:["Σκορ 4","Τέσσερα πιόνια στη σειρά"],hang:["Κρεμάλα","Μάντεψε τη λέξη"],coin:["Κορώνα–Γράμματα","Ρίξε το νόμισμα"],wheel:["Τροχός Τύχης","Challenges που αλλάζεις εσύ"],flags:["Find the Flags","Μάντεψε τη χώρα"],sports:["QuizBall","Ποδοσφαιρικά παιχνίδια και ερωτήσεις"],quotes:["Βρες τη σειρά/ταινία","Από ποια σειρά ή ταινία είναι η ατάκα;"],stats:["Στατιστικά","Τα σκορ σας"],settings:["Ρυθμίσεις","Ονόματα παικτών"]};
 function go(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$('#title').textContent=meta[id][0];$('#subtitle').textContent=meta[id][1]||'';$('#subtitle').classList.toggle('hidden',!meta[id][1]);$('#back').classList.toggle('hidden',id==='home');document.body.classList.toggle('home-view',id==='home');const playerBar=$('#gamePlayersBar');if(playerBar)playerBar.classList.toggle('hidden',id==='home'||id==='settings');const sb=$('#settingsBtn');if(sb)sb.classList.toggle('hidden',id==='settings');scrollTo(0,0);if(id==='wheel')drawWheel();if(id==='flags')newFlag();if(id==='sports')showQuizBallHub();if(id==='quotes')showQuoteHub()}
 $$('[data-screen]').forEach(b=>b.onclick=()=>go(b.dataset.screen));$("#back").onclick=()=>go("home");const settingsHeader=$("#settingsBtn");if(settingsHeader)settingsHeader.onclick=()=>go("settings");
 function setText(sel,value){let el=$(sel);if(el)el.textContent=value}
-function update(){let[a,b]=d.players;if($("#quickP1")&&document.activeElement!==$("#quickP1"))$("#quickP1").value=a;if($("#quickP2")&&document.activeElement!==$("#quickP2"))$("#quickP2").value=b;setText("#ticN1",a);setText("#ticN2",b);setText("#conN1",a);setText("#conN2",b);setText("#ticS1",d.tic.p1);setText("#ticS2",d.tic.p2);setText("#conS1",d.con.p1);setText("#conS2",d.con.p2);if($("#p1Input"))$("#p1Input").value=a;if($("#p2Input"))$("#p2Input").value=b;setText("#flagScore",d.flags);setText("#stTic",d.tic.p1+"-"+d.tic.p2);setText("#stCon",d.con.p1+"-"+d.con.p2);setText("#stFlag",d.flags);setText("#stPlayers",d.playersScore);renderWheel();renderCoin();renderCustom();renderQuestionList();renderQuoteList();updateQuoteCount()}
+function update(){let[a,b]=d.players;if($("#quickP1")&&document.activeElement!==$("#quickP1"))$("#quickP1").value=a;if($("#quickP2")&&document.activeElement!==$("#quickP2"))$("#quickP2").value=b;setText("#ticN1",a);setText("#ticN2",b);setText("#conN1",a);setText("#conN2",b);setText("#ticS1",d.tic.p1);setText("#ticS2",d.tic.p2);setText("#conS1",d.con.p1);setText("#conS2",d.con.p2);if($("#p1Input"))$("#p1Input").value=a;if($("#p2Input"))$("#p2Input").value=b;setText("#flagScore",d.flags);setText("#stTic",d.tic.p1+"-"+d.tic.p2);setText("#stCon",d.con.p1+"-"+d.con.p2);setText("#stFlag",d.flags);setText("#stPlayers",d.playersScore);renderWheel();renderWheelPlayers();renderCoin();renderCustom();renderQuestionList();renderQuoteList();updateQuoteCount();renderFlagEditor()}
 $("#saveSettings").onclick=()=>{d.players=[$("#p1Input").value.trim()||"Παίκτης 1",$("#p2Input").value.trim()||"Παίκτης 2"];save();toast("Αποθηκεύτηκαν")};
 
 function saveQuickPlayers(){
@@ -24,7 +41,7 @@ function saveQuickPlayers(){
 ["#quickP1","#quickP2"].forEach(sel=>{const el=$(sel);if(!el)return;el.addEventListener("change",saveQuickPlayers);el.addEventListener("blur",saveQuickPlayers);el.addEventListener("keydown",e=>{if(e.key==="Enter")el.blur()})});
 
 let tb=Array(9).fill(""),tp="X",to=false;
-function drawT(){let e=$("#ticBoard");e.innerHTML="";tb.forEach((v,i)=>{let b=document.createElement("button");b.className="tic-cell";b.textContent=v==="X"?"❌":v==="O"?"⭕":"";b.onclick=()=>{if(to||tb[i])return;tb[i]=tp;drawT();let w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(a=>a.every(k=>tb[k]===tp));if(w){to=true;d.tic[tp==="X"?"p1":"p2"]++;$("#ticMsg").textContent="Νίκησε ο "+d.players[tp==="X"?0:1];save();return}if(tb.every(Boolean)){to=true;$("#ticMsg").textContent="Ισοπαλία";return}tp=tp==="X"?"O":"X";$("#ticTurn").textContent=tp==="X"?"❌":"⭕";$("#ticMsg").textContent="Παίζει ο "+d.players[tp==="X"?0:1]};e.append(b)})}
+function drawT(){let e=$("#ticBoard");e.innerHTML="";tb.forEach((v,i)=>{let b=document.createElement("button");b.className="tic-cell";b.dataset.index=i;b.textContent=v==="X"?"❌":v==="O"?"⭕":"";b.onclick=()=>{if(to||tb[i])return;tb[i]=tp;drawT();let winLine=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].find(a=>a.every(k=>tb[k]===tp));if(winLine){to=true;winLine.forEach(k=>e.querySelector(`[data-index="${k}"]`)?.classList.add("winning"));d.tic[tp==="X"?"p1":"p2"]++;$("#ticMsg").textContent="Νίκησε ο "+d.players[tp==="X"?0:1];save();return}if(tb.every(Boolean)){to=true;$("#ticMsg").textContent="Ισοπαλία";return}tp=tp==="X"?"O":"X";$("#ticTurn").textContent=tp==="X"?"❌":"⭕";$("#ticMsg").textContent="Παίζει ο "+d.players[tp==="X"?0:1]};e.append(b)})}
 function resetT(){tb=Array(9).fill("");tp="X";to=false;$("#ticTurn").textContent="❌";$("#ticMsg").textContent="Παίζει ο "+d.players[0];drawT()}$("#ticNew").onclick=resetT;$("#ticReset").onclick=()=>{d.tic={p1:0,p2:0};save();resetT()};
 
 let cb,p=1,co=false;
@@ -41,23 +58,53 @@ function renderH(){let f=["🙂","😐","😟","😨","😵","💀","☠️"];$(
 $("#flipCoin").onclick=()=>{let c=$("#coinDisc");c.classList.remove("flip");void c.offsetWidth;c.classList.add("flip");setTimeout(()=>{let r=Math.random()<.5?"Κορώνα":"Γράμματα";c.textContent=r==="Κορώνα"?"👑":"🔤";$("#coinResult").textContent=r;d.coin.unshift(r);d.coin=d.coin.slice(0,20);save()},850)};
 function renderCoin(){$("#coinHistory").innerHTML=d.coin.length?d.coin.map((x,i)=>"<div class='custom-row'><span>"+(i+1)+". "+x+"</span></div>").join(""):"Δεν υπάρχουν ρίψεις."}
 
-let ang=0,spin=false;const cols=["#ef4444","#f59e0b","#10b981","#06b6d4","#3b82f6","#8b5cf6","#ec4899","#64748b"];
-function drawWheel(){let c=$("#wheelCanvas"),x=c.getContext("2d"),n=d.wheel.length||1;x.clearRect(0,0,700,700);for(let i=0;i<n;i++){let a=ang+i*2*Math.PI/n,b=ang+(i+1)*2*Math.PI/n;x.beginPath();x.moveTo(350,350);x.arc(350,350,330,a,b);x.fillStyle=cols[i%cols.length];x.fill();x.save();x.translate(350,350);x.rotate((a+b)/2);x.textAlign="right";x.fillStyle="white";x.font="bold 25px sans-serif";x.fillText(d.wheel[i].slice(0,21),305,8);x.restore()}x.beginPath();x.arc(350,350,50,0,Math.PI*2);x.fillStyle="white";x.fill()}
-$("#spinWheel").onclick=()=>{if(spin||d.wheel.length<2)return;spin=true;let st=ang,ex=Math.PI*2*(5+Math.random()*4),t0=performance.now();function a(t){let q=Math.min(1,(t-t0)/3500);ang=st+ex*(1-Math.pow(1-q,3));drawWheel();if(q<1)requestAnimationFrame(a);else{spin=false;let n=d.wheel.length,v=(((-Math.PI/2-ang)%(Math.PI*2))+Math.PI*2)%(Math.PI*2),i=Math.floor(v/(Math.PI*2/n));$("#wheelResult").textContent=d.wheel[i]}}requestAnimationFrame(a)};
-$("#addWheel").onclick=()=>{let v=$("#wheelInput").value.trim();if(!v)return;d.wheel.push(v);$("#wheelInput").value="";save();drawWheel()};
-function renderWheel(){let e=$("#wheelItems");e.innerHTML="";d.wheel.forEach((v,i)=>{let r=document.createElement("div"),s=document.createElement("span"),ed=document.createElement("button"),del=document.createElement("button");s.textContent=v;ed.textContent="✏️";del.textContent="🗑️";ed.onclick=()=>{let nv=prompt("Αλλαγή",v);if(nv){d.wheel[i]=nv;save();drawWheel()}};del.onclick=()=>{if(d.wheel.length<=2)return toast("Χρειάζονται 2 επιλογές");d.wheel.splice(i,1);save();drawWheel()};r.append(s,ed,del);e.append(r)})}
+let ang=0,spin=false;const cols=["#ef4444","#f59e0b","#10b981","#06b6d4","#3b82f6","#8b5cf6","#ec4899","#64748b","#14b8a6","#f97316","#6366f1","#84cc16"];
+function currentWheelPlayer(){if(!d.wheelPlayers.length)d.wheelPlayers=["Παίκτης 1","Παίκτης 2"];d.wheelPlayerIndex%=d.wheelPlayers.length;return d.wheelPlayers[d.wheelPlayerIndex]}
+function drawWheel(){let c=$("#wheelCanvas"),x=c.getContext("2d"),n=d.wheel.length||1;x.clearRect(0,0,700,700);for(let i=0;i<n;i++){let a=ang+i*2*Math.PI/n,b=ang+(i+1)*2*Math.PI/n;x.beginPath();x.moveTo(350,350);x.arc(350,350,330,a,b);x.fillStyle=cols[i%cols.length];x.fill();x.save();x.translate(350,350);x.rotate((a+b)/2);x.textAlign="right";x.fillStyle="white";x.font="bold 22px sans-serif";x.fillText(d.wheel[i].slice(0,22),305,8);x.restore()}x.beginPath();x.arc(350,350,50,0,Math.PI*2);x.fillStyle="white";x.fill()}
+function renderWheelPlayers(){const list=$("#wheelPlayersList"),cur=$("#wheelCurrentPlayer");if(cur)cur.textContent=currentWheelPlayer();if(!list)return;list.innerHTML="";d.wheelPlayers.forEach((name,i)=>{const row=document.createElement("div");row.className="wheel-player-chip"+(i===d.wheelPlayerIndex?" active":"");const input=document.createElement("input");input.value=name;input.maxLength=24;input.onchange=()=>{d.wheelPlayers[i]=input.value.trim()||`Παίκτης ${i+1}`;save()};const del=document.createElement("button");del.textContent="×";del.title="Διαγραφή παίκτη";del.onclick=()=>{if(d.wheelPlayers.length<=2)return toast("Χρειάζονται τουλάχιστον 2 παίκτες");d.wheelPlayers.splice(i,1);if(d.wheelPlayerIndex>=d.wheelPlayers.length)d.wheelPlayerIndex=0;save()};row.append(input,del);list.append(row)})}
+$("#addWheelPlayer").onclick=()=>{let v=$("#wheelPlayerInput").value.trim();if(!v)return;if(d.wheelPlayers.length>=12)return toast("Μέχρι 12 παίκτες");d.wheelPlayers.push(v);$("#wheelPlayerInput").value="";save()};
+$("#spinWheel").onclick=()=>{if(spin||d.wheel.length<2)return;spin=true;const player=currentWheelPlayer();let st=ang,ex=Math.PI*2*(5+Math.random()*4),t0=performance.now();function a(t){let q=Math.min(1,(t-t0)/3500);ang=st+ex*(1-Math.pow(1-q,3));drawWheel();if(q<1)requestAnimationFrame(a);else{spin=false;let n=d.wheel.length,v=(((-Math.PI/2-ang)%(Math.PI*2))+Math.PI*2)%(Math.PI*2),i=Math.floor(v/(Math.PI*2/n));$("#wheelResult").textContent=player+": "+d.wheel[i];d.wheelPlayerIndex=(d.wheelPlayerIndex+1)%d.wheelPlayers.length;save()}}requestAnimationFrame(a)};
+$("#addWheel").onclick=()=>{let v=$("#wheelInput").value.trim();if(!v)return;if(d.wheel.length>=12)return toast("Ο τροχός χωράει έως 12 επιλογές");d.wheel.push(v);$("#wheelInput").value="";save();drawWheel()};
+function renderWheel(){let e=$("#wheelItems");if(!e)return;e.innerHTML="";d.wheel.forEach((v,i)=>{let r=document.createElement("div"),s=document.createElement("span"),ed=document.createElement("button"),del=document.createElement("button");s.textContent=(i+1)+". "+v;ed.textContent="✏️";del.textContent="🗑️";ed.onclick=()=>{let nv=prompt("Αλλαγή",v);if(nv){d.wheel[i]=nv;save();drawWheel()}};del.onclick=()=>{if(d.wheel.length<=2)return toast("Χρειάζονται 2 επιλογές");d.wheel.splice(i,1);save();drawWheel()};r.append(s,ed,del);e.append(r)})}
 
-const flags=[
+const defaultFlags=[
 ["🇬🇷","Ελλάδα"],["🇨🇾","Κύπρος"],["🇮🇹","Ιταλία"],["🇪🇸","Ισπανία"],["🇫🇷","Γαλλία"],["🇩🇪","Γερμανία"],["🇵🇹","Πορτογαλία"],["🇬🇧","Ηνωμένο Βασίλειο"],["🇮🇪","Ιρλανδία"],["🇮🇸","Ισλανδία"],["🇳🇴","Νορβηγία"],["🇸🇪","Σουηδία"],["🇫🇮","Φινλανδία"],["🇩🇰","Δανία"],["🇳🇱","Ολλανδία"],["🇧🇪","Βέλγιο"],["🇱🇺","Λουξεμβούργο"],["🇨🇭","Ελβετία"],["🇦🇹","Αυστρία"],["🇵🇱","Πολωνία"],["🇨🇿","Τσεχία"],["🇸🇰","Σλοβακία"],["🇭🇺","Ουγγαρία"],["🇷🇴","Ρουμανία"],["🇧🇬","Βουλγαρία"],["🇭🇷","Κροατία"],["🇷🇸","Σερβία"],["🇸🇮","Σλοβενία"],["🇧🇦","Βοσνία και Ερζεγοβίνη"],["🇲🇪","Μαυροβούνιο"],["🇦🇱","Αλβανία"],["🇲🇰","Βόρεια Μακεδονία"],["🇲🇹","Μάλτα"],["🇪🇪","Εσθονία"],["🇱🇻","Λετονία"],["🇱🇹","Λιθουανία"],["🇺🇦","Ουκρανία"],["🇲🇩","Μολδαβία"],["🇬🇪","Γεωργία"],["🇦🇲","Αρμενία"],["🇦🇿","Αζερμπαϊτζάν"],["🇹🇷","Τουρκία"],
 ["🇺🇸","ΗΠΑ"],["🇨🇦","Καναδάς"],["🇲🇽","Μεξικό"],["🇧🇷","Βραζιλία"],["🇦🇷","Αργεντινή"],["🇺🇾","Ουρουγουάη"],["🇵🇾","Παραγουάη"],["🇨🇱","Χιλή"],["🇵🇪","Περού"],["🇧🇴","Βολιβία"],["🇨🇴","Κολομβία"],["🇻🇪","Βενεζουέλα"],["🇪🇨","Ισημερινός"],["🇨🇷","Κόστα Ρίκα"],["🇵🇦","Παναμάς"],["🇨🇺","Κούβα"],["🇯🇲","Τζαμάικα"],["🇩🇴","Δομινικανή Δημοκρατία"],
 ["🇯🇵","Ιαπωνία"],["🇨🇳","Κίνα"],["🇰🇷","Νότια Κορέα"],["🇰🇵","Βόρεια Κορέα"],["🇮🇳","Ινδία"],["🇵🇰","Πακιστάν"],["🇧🇩","Μπανγκλαντές"],["🇱🇰","Σρι Λάνκα"],["🇳🇵","Νεπάλ"],["🇹🇭","Ταϊλάνδη"],["🇻🇳","Βιετνάμ"],["🇮🇩","Ινδονησία"],["🇲🇾","Μαλαισία"],["🇸🇬","Σιγκαπούρη"],["🇵🇭","Φιλιππίνες"],["🇲🇳","Μογγολία"],["🇰🇿","Καζακστάν"],["🇺🇿","Ουζμπεκιστάν"],["🇮🇱","Ισραήλ"],["🇯🇴","Ιορδανία"],["🇱🇧","Λίβανος"],["🇸🇦","Σαουδική Αραβία"],["🇦🇪","Ηνωμένα Αραβικά Εμιράτα"],["🇶🇦","Κατάρ"],["🇮🇶","Ιράκ"],["🇮🇷","Ιράν"],
 ["🇪🇬","Αίγυπτος"],["🇲🇦","Μαρόκο"],["🇩🇿","Αλγερία"],["🇹🇳","Τυνησία"],["🇱🇾","Λιβύη"],["🇿🇦","Νότια Αφρική"],["🇳🇬","Νιγηρία"],["🇬🇭","Γκάνα"],["🇸🇳","Σενεγάλη"],["🇨🇲","Καμερούν"],["🇨🇮","Ακτή Ελεφαντοστού"],["🇰🇪","Κένυα"],["🇪🇹","Αιθιοπία"],["🇹🇿","Τανζανία"],["🇺🇬","Ουγκάντα"],["🇲🇬","Μαδαγασκάρη"],
 ["🇦🇺","Αυστραλία"],["🇳🇿","Νέα Ζηλανδία"],["🇫🇯","Φίτζι"]
 ];
+d.customFlagList=Array.isArray(d.customFlagList)&&d.customFlagList.length>=4?d.customFlagList.map(x=>[String(x[0]||"🏳️"),String(x[1]||"").trim()]).filter(x=>x[1]):defaultFlags.map(x=>[...x]);
+function activeFlags(){return d.customFlagList.length>=4?d.customFlagList:defaultFlags}
 let flagDeck=[];
 let currentFlag=null;
-function refillFlagDeck(){flagDeck=shuffle([...flags]);}
-function newFlag(){if(!flagDeck.length)refillFlagDeck();let q=flagDeck.pop();if(currentFlag&&q[1]===currentFlag[1]&&flagDeck.length){flagDeck.unshift(q);q=flagDeck.pop()}currentFlag=q;$("#flagEmoji").textContent=q[0];$("#flagMsg").textContent="";let wrong=shuffle(flags.filter(x=>x[1]!==q[1])).slice(0,3);let o=shuffle([q,...wrong]).map(x=>x[1]);options($("#flagOptions"),o,q[1],a=>{if(a===q[1]){d.flags++;save();$("#flagMsg").textContent="Σωστά"}else $("#flagMsg").textContent="Η σωστή απάντηση είναι "+q[1]})}$("#nextFlag").onclick=newFlag;
+function refillFlagDeck(){flagDeck=shuffle(activeFlags().map(x=>[...x]));}
+function newFlag(){
+  const list=activeFlags();
+  if(list.length<4){$("#flagMsg").textContent="Χρειάζονται τουλάχιστον 4 χώρες";return}
+  if(!flagDeck.length)refillFlagDeck();
+  let q=flagDeck.pop();
+  if(currentFlag&&q[1]===currentFlag[1]&&flagDeck.length){flagDeck.unshift(q);q=flagDeck.pop()}
+  currentFlag=q;$("#flagEmoji").textContent=q[0];$("#flagMsg").textContent="";
+  let wrong=shuffle(list.filter(x=>x[1]!==q[1])).slice(0,3);
+  let o=shuffle([q,...wrong]).map(x=>x[1]);
+  options($("#flagOptions"),o,q[1],a=>{if(a===q[1]){d.flags++;save();$("#flagMsg").textContent="Σωστά"}else $("#flagMsg").textContent="Η σωστή απάντηση είναι "+q[1]})
+}
+$("#nextFlag").onclick=newFlag;
+function renderFlagEditor(){
+  const box=$("#flagEditorList");if(!box)return;box.innerHTML="";
+  d.customFlagList.forEach((item,i)=>{
+    const row=document.createElement("div");row.className="flag-editor-row";
+    const emoji=document.createElement("input");emoji.value=item[0];emoji.maxLength=8;emoji.setAttribute("aria-label","Σημαία");
+    const country=document.createElement("input");country.value=item[1];country.setAttribute("aria-label","Χώρα");
+    const del=document.createElement("button");del.textContent="🗑️";del.title="Διαγραφή";
+    emoji.onchange=()=>{d.customFlagList[i][0]=emoji.value.trim()||"🏳️";flagDeck=[];save()};
+    country.onchange=()=>{const v=country.value.trim();if(v){d.customFlagList[i][1]=v;flagDeck=[];save()}else country.value=d.customFlagList[i][1]};
+    del.onclick=()=>{if(d.customFlagList.length<=4)return toast("Χρειάζονται τουλάχιστον 4 χώρες");d.customFlagList.splice(i,1);flagDeck=[];save();renderFlagEditor()};
+    row.append(emoji,country,del);box.append(row);
+  });
+}
+
 
 function commons(file){
   const normalized=file.replace(/ /g,"_");
@@ -179,5 +226,12 @@ async function initApp(){
   folderLibraryStatus();
   update();resetT();resetC();drawWheel();
 }
-if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=19").then(r=>r.update()).catch(()=>{}));
+if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=21").then(r=>r.update()).catch(()=>{}));
 initApp();
+
+// V22: κεντρικές διορθώσεις παιχνιδιών
+const settingsWheel=$("#settingsWheel");if(settingsWheel)settingsWheel.onclick=()=>go("wheel");
+const settingsQuotes=$("#settingsQuotes");if(settingsQuotes)settingsQuotes.onclick=()=>{go("quotes");showQuoteManager()};
+const settingsQuizball=$("#settingsQuizball");if(settingsQuizball)settingsQuizball.onclick=()=>go("sports");
+const addFlagItem=$("#addFlagItem");if(addFlagItem)addFlagItem.onclick=()=>{const emoji=$("#newFlagEmoji").value.trim()||"🏳️",country=$("#newFlagCountry").value.trim();if(!country)return toast("Γράψε όνομα χώρας");d.customFlagList.push([emoji,country]);$("#newFlagEmoji").value="";$("#newFlagCountry").value="";flagDeck=[];save();renderFlagEditor()};
+const resetFlags=$("#resetFlags");if(resetFlags)resetFlags.onclick=()=>{if(!confirm("Να επανέλθει η αρχική λίστα χωρών;"))return;d.customFlagList=defaultFlags.map(x=>[...x]);flagDeck=[];save();renderFlagEditor();toast("Η λίστα επανήλθε")};

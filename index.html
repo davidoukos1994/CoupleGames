@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=20">
+<link rel="stylesheet" href="style.css?v=23">
 </head>
-<body>
+<body class="home-view">
 <div class="app">
 <header class="topbar">
 <button id="back" class="header-box back-box hidden" aria-label="Πίσω">←</button>
@@ -36,7 +36,6 @@
 <div class="grid">
 <button class="game purple" data-screen="wheel"><i>🎡</i><b>Τροχός Τύχης</b><small>Δικά σας challenges</small></button>
 <button class="game cyan" data-screen="flags"><i>🌍</i><b>Find the Flags</b><small>Μάντεψε τη χώρα</small></button>
-<button class="game dark" data-screen="stats"><i>🏆</i><b>Στατιστικά</b><small>Σκορ παιχνιδιών</small></button>
 </div>
 
 <h2>QuizBall</h2>
@@ -83,9 +82,14 @@
 </section>
 
 <section id="wheel" class="screen">
+<div class="card wheel-players-card">
+  <div class="wheel-turn-head"><span>Παίζει τώρα</span><strong id="wheelCurrentPlayer">Παίκτης 1</strong></div>
+  <div class="inline"><input id="wheelPlayerInput" type="text" placeholder="Όνομα νέου παίκτη" maxlength="24"><button id="addWheelPlayer">＋</button></div>
+  <div id="wheelPlayersList" class="wheel-players-list"></div>
+</div>
 <div class="wheel-wrap"><canvas id="wheelCanvas" width="700" height="700"></canvas><div class="pointer">▼</div></div>
 <button id="spinWheel" class="primary full">Γύρισε τον τροχό</button><p id="wheelResult" class="msg"></p>
-<div class="card form-card"><h3>Επιλογές τροχού</h3>
+<div class="card form-card"><h3>Επιλογές τροχού (έως 12)</h3><p class="helper">Ο τροχός ξεκινά με 12 επιλογές. Μπορείς να τις αλλάξεις, να τις διαγράψεις ή να προσθέσεις νέες μέχρι το όριο.</p>
 <div class="inline"><input id="wheelInput" type="text" placeholder="Νέο challenge"><button id="addWheel">＋</button></div>
 <div id="wheelItems"></div></div>
 </section>
@@ -179,24 +183,31 @@
 </div>
 </section>
 
-<section id="stats" class="screen">
-<div class="stat-grid">
-<div class="card"><small>Τρίλιζα</small><b id="stTic">0-0</b></div>
-<div class="card"><small>Σκορ 4</small><b id="stCon">0-0</b></div>
-<div class="card"><small>Σημαίες</small><b id="stFlag">0</b></div>
-<div class="card"><small>Ποδοσφαιριστές</small><b id="stPlayers">0</b></div>
-</div>
-</section>
+
 
 <section id="settings" class="screen">
-<div class="card form-card"><h2>Ρυθμίσεις</h2>
+<div class="card form-card"><h2>Ονόματα παικτών</h2>
 <label>Παίκτης 1<input id="p1Input" type="text"></label>
 <label>Παίκτης 2<input id="p2Input" type="text"></label>
-<button id="saveSettings" class="primary full">Αποθήκευση</button></div>
+<button id="saveSettings" class="primary full">Αποθήκευση ονομάτων</button></div>
+
+<div class="card form-card settings-games"><h2>Διορθώσεις παιχνιδιών</h2>
+<p class="helper">Άνοιξε γρήγορα το παιχνίδι που θέλεις να διορθώσεις ή να ενημερώσεις.</p>
+<button id="settingsWheel" class="settings-link"><span>🎡</span><span><b>Τροχός Τύχης</b><small>Προσθήκη, αλλαγή και διαγραφή επιλογών</small></span><span>›</span></button>
+<button id="settingsQuotes" class="settings-link"><span>🎬</span><span><b>Σειρές & Ταινίες</b><small>Προσθήκη και επεξεργασία ερωτήσεων</small></span><span>›</span></button>
+<button id="settingsQuizball" class="settings-link"><span>⚽</span><span><b>QuizBall</b><small>Άνοιγμα κατηγοριών και ερωτήσεων</small></span><span>›</span></button>
+</div>
+
+<div class="card form-card"><h2>Find the Flags</h2>
+<p class="helper">Μπορείς να διορθώσεις το όνομα χώρας, να αλλάξεις τη σημαία ή να προσθέσεις νέα χώρα.</p>
+<div class="flag-editor-add"><input id="newFlagEmoji" type="text" maxlength="8" placeholder="🇬🇷"><input id="newFlagCountry" type="text" placeholder="Όνομα χώρας"><button id="addFlagItem" class="primary">＋</button></div>
+<div id="flagEditorList" class="flag-editor-list"></div>
+<button id="resetFlags" class="secondary full">Επαναφορά αρχικής λίστας</button>
+</div>
 </section>
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=20"></script>
+<script src="app.js?v=23"></script>
 </body>
 </html>

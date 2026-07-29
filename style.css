@@ -233,3 +233,31 @@ body.home-view .topbar{display:none}
 .home-brand-banner strong{display:block;font-size:clamp(1.3rem,5vw,2rem);line-height:1.15;white-space:nowrap}
 .home-brand-banner small{display:block;margin-top:7px;opacity:.82;letter-spacing:.04em}
 @media(max-width:420px){.game-players-bar{gap:8px;padding:12px}.game-players-bar input{font-size:.95rem}.home-brand-banner strong{font-size:1.25rem}}
+
+
+/* V21: στην αρχική αφαιρείται εντελώς η πάνω κεφαλίδα/μικρό λογότυπο. */
+body.home-view .topbar{display:none!important}
+body.home-view main{padding-top:12px}
+
+/* V22: καθαρή αρχική και εργαλεία διορθώσεων */
+.home-view .topbar{display:none!important}
+.settings-games{display:grid;gap:10px}
+.settings-link{width:100%;display:grid;grid-template-columns:42px 1fr 22px;align-items:center;gap:10px;padding:14px;border:1px solid var(--border);border-radius:16px;background:#fff;text-align:left;color:var(--txt)}
+.settings-link>span:first-child{font-size:1.55rem}.settings-link b,.settings-link small{display:block}.settings-link small{margin-top:3px;color:var(--mut)}
+.flag-editor-add{display:grid;grid-template-columns:82px 1fr 48px;gap:8px;margin:12px 0}.flag-editor-add input{margin:0!important;min-width:0}
+.flag-editor-list{display:grid;gap:8px;margin:12px 0 18px}.flag-editor-row{display:grid;grid-template-columns:72px 1fr 44px;gap:8px;align-items:center}.flag-editor-row input{width:100%;margin:0!important}.flag-editor-row button{height:44px;border:0;border-radius:12px;background:#fee2e2}
+#flags .options{margin:18px 0;display:grid!important;visibility:visible!important;opacity:1!important}
+#flags .options button{display:block!important;color:#171025!important;background:#fff!important;min-height:50px;font-size:1rem}
+#flags .options button.correct{background:#dcfce7!important}#flags .options button.wrong{background:#fee2e2!important}
+@media(max-width:520px){.flag-editor-add{grid-template-columns:70px 1fr 46px}.flag-editor-row{grid-template-columns:64px 1fr 42px}}
+
+/* V23: καθαρή αρχική, γραμμή νίκης και πολυπαίκτης τροχός */
+body.home-view .topbar{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{display:none!important}
+.tic-board{position:relative}
+.tic-cell.winning{position:relative;z-index:1;background:rgba(34,197,94,.22)!important;box-shadow:inset 0 0 0 4px #22c55e,0 0 18px rgba(34,197,94,.7);animation:ticWinPulse .7s ease-in-out infinite alternate}
+@keyframes ticWinPulse{from{transform:scale(1)}to{transform:scale(1.04)}}
+.wheel-players-card{margin-bottom:16px}
+.wheel-turn-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.wheel-turn-head span{color:var(--muted)}.wheel-turn-head strong{font-size:1.2rem;color:#6d28d9}
+.wheel-players-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.wheel-player-chip{display:grid;grid-template-columns:minmax(90px,1fr) 32px;align-items:center;gap:4px;padding:5px;border:1px solid var(--border);border-radius:12px;background:#fff}.wheel-player-chip.active{border-color:#7c3aed;box-shadow:0 0 0 3px #7c3aed22}.wheel-player-chip input{border:0!important;margin:0!important;padding:8px!important;background:transparent!important;min-width:90px}.wheel-player-chip button{border:0;border-radius:9px;background:#fee2e2;color:#b91c1c;height:34px}
+@media(max-width:520px){.wheel-players-list{display:grid;grid-template-columns:1fr 1fr}.wheel-player-chip input{min-width:0}.wheel-turn-head{align-items:flex-start;flex-direction:column;gap:3px}}
