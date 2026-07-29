@@ -69,22 +69,23 @@ function renderWheel(){let e=$("#wheelItems");if(!e)return;e.innerHTML="";d.whee
 
 const defaultFlags=[["sprite:albania","Αλβανία"],["sprite:andorra","Ανδόρα"],["sprite:austria","Αυστρία"],["sprite:belarus","Λευκορωσία"],["sprite:belgium","Βέλγιο"],["sprite:bosnia","Βοσνία και Ερζεγοβίνη"],["sprite:bulgaria","Βουλγαρία"],["sprite:croatia","Κροατία"],["sprite:czechia","Τσεχία"],["sprite:denmark","Δανία"],["sprite:england","Αγγλία"],["sprite:estonia","Εσθονία"],["sprite:finland","Φινλανδία"],["sprite:france","Γαλλία"],["sprite:germany","Γερμανία"],["sprite:greece","Ελλάδα"],["sprite:hungary","Ουγγαρία"],["sprite:iceland","Ισλανδία"],["sprite:ireland","Ιρλανδία"],["sprite:italy","Ιταλία"],["sprite:kosovo","Κόσοβο"],["sprite:latvia","Λετονία"],["sprite:liechtenstein","Λιχτενστάιν"],["sprite:lithuania","Λιθουανία"],["sprite:luxembourg","Λουξεμβούργο"],["sprite:north-macedonia","Βόρεια Μακεδονία"],["sprite:malta","Μάλτα"],["sprite:moldova","Μολδαβία"],["sprite:monaco","Μονακό"],["sprite:montenegro","Μαυροβούνιο"],["sprite:netherlands","Ολλανδία"],["sprite:northern-ireland","Βόρεια Ιρλανδία"],["sprite:norway","Νορβηγία"],["sprite:poland","Πολωνία"],["sprite:portugal","Πορτογαλία"],["sprite:romania","Ρουμανία"],["sprite:russia","Ρωσία"],["sprite:san-marino","Άγιος Μαρίνος"],["sprite:scotland","Σκωτία"],["sprite:serbia","Σερβία"],["sprite:slovakia","Σλοβακία"],["sprite:slovenia","Σλοβενία"],["sprite:spain","Ισπανία"],["sprite:sweden","Σουηδία"],["sprite:switzerland","Ελβετία"],["sprite:turkey","Τουρκία"],["sprite:ukraine","Ουκρανία"],["sprite:united-kingdom","Ηνωμένο Βασίλειο"],["sprite:vatican-city","Βατικανό"],["sprite:wales","Ουαλία"],["sprite:european-union","Ευρωπαϊκή Ένωση"]];
 const FLAG_SPRITE={url:"assets/flags-sprite.webp",cellW:320,cellH:200,cols:8,rows:7,map:{"albania":{"x":0,"y":0},"andorra":{"x":1,"y":0},"austria":{"x":2,"y":0},"belarus":{"x":3,"y":0},"belgium":{"x":4,"y":0},"bosnia":{"x":5,"y":0},"bulgaria":{"x":6,"y":0},"croatia":{"x":7,"y":0},"czechia":{"x":0,"y":1},"denmark":{"x":1,"y":1},"england":{"x":2,"y":1},"estonia":{"x":3,"y":1},"european-union":{"x":4,"y":1},"finland":{"x":5,"y":1},"france":{"x":6,"y":1},"germany":{"x":7,"y":1},"greece":{"x":0,"y":2},"hungary":{"x":1,"y":2},"iceland":{"x":2,"y":2},"ireland":{"x":3,"y":2},"italy":{"x":4,"y":2},"kosovo":{"x":5,"y":2},"latvia":{"x":6,"y":2},"liechtenstein":{"x":7,"y":2},"lithuania":{"x":0,"y":3},"luxembourg":{"x":1,"y":3},"malta":{"x":2,"y":3},"moldova":{"x":3,"y":3},"monaco":{"x":4,"y":3},"montenegro":{"x":5,"y":3},"netherlands":{"x":6,"y":3},"north-macedonia":{"x":7,"y":3},"northern-ireland":{"x":0,"y":4},"norway":{"x":1,"y":4},"poland":{"x":2,"y":4},"portugal":{"x":3,"y":4},"romania":{"x":4,"y":4},"russia":{"x":5,"y":4},"san-marino":{"x":6,"y":4},"scotland":{"x":7,"y":4},"serbia":{"x":0,"y":5},"slovakia":{"x":1,"y":5},"slovenia":{"x":2,"y":5},"spain":{"x":3,"y":5},"sweden":{"x":4,"y":5},"switzerland":{"x":5,"y":5},"turkey":{"x":6,"y":5},"ukraine":{"x":7,"y":5},"united-kingdom":{"x":0,"y":6},"vatican-city":{"x":1,"y":6},"wales":{"x":2,"y":6}}};
-const FLAG_PIXEL="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-function setFlagVisual(img,source,alt=""){
-  img.alt=alt;
+function setFlagVisual(el,source,alt=""){
+  el.setAttribute("aria-label",alt);
+  el.title=alt;
+  el.style.backgroundRepeat="no-repeat";
+  el.style.backgroundPosition="center";
   if(source&&source.startsWith("sprite:")){
     const key=source.slice(7),pos=FLAG_SPRITE.map[key];
     if(pos){
-      img.src=FLAG_PIXEL;
-      img.style.backgroundImage=`url(${FLAG_SPRITE.url})`;
-      img.style.backgroundRepeat="no-repeat";
-      img.style.backgroundSize=`${FLAG_SPRITE.cols*100}% ${FLAG_SPRITE.rows*100}%`;
-      img.style.backgroundPosition=`${FLAG_SPRITE.cols===1?0:(pos.x/(FLAG_SPRITE.cols-1))*100}% ${FLAG_SPRITE.rows===1?0:(pos.y/(FLAG_SPRITE.rows-1))*100}%`;
-      img.style.objectFit="contain";
+      el.style.backgroundImage=`url("${FLAG_SPRITE.url}")`;
+      el.style.backgroundSize=`${FLAG_SPRITE.cols*100}% ${FLAG_SPRITE.rows*100}%`;
+      el.style.backgroundPosition=`${FLAG_SPRITE.cols===1?0:(pos.x/(FLAG_SPRITE.cols-1))*100}% ${FLAG_SPRITE.rows===1?0:(pos.y/(FLAG_SPRITE.rows-1))*100}%`;
       return;
     }
   }
-  img.style.backgroundImage="";img.style.backgroundRepeat="";img.style.backgroundSize="";img.style.backgroundPosition="";img.src=source;
+  el.style.backgroundImage=source?`url("${source}")`:"";
+  el.style.backgroundSize="contain";
+  el.style.backgroundPosition="center";
 }
 // V24 Sprite: όλες οι ευρωπαϊκές σημαίες βρίσκονται σε ένα αρχείο και εμφανίζονται ξεχωριστά.
 
@@ -110,7 +111,7 @@ function renderFlagEditor(){
   const box=$("#flagEditorList");if(!box)return;box.innerHTML="";
   d.customFlagList.forEach((item,i)=>{
     const row=document.createElement("div");row.className="flag-editor-row";
-    const preview=document.createElement("img");preview.className="flag-editor-preview";setFlagVisual(preview,item[0],item[1]);
+    const preview=document.createElement("div");preview.className="flag-editor-preview";preview.setAttribute("role","img");setFlagVisual(preview,item[0],item[1]);
     const country=document.createElement("input");country.value=item[1];country.setAttribute("aria-label","Χώρα");
     const del=document.createElement("button");del.textContent="🗑️";del.title="Διαγραφή";
     country.onchange=()=>{const v=country.value.trim();if(v){d.customFlagList[i][1]=v;flagDeck=[];save()}else country.value=d.customFlagList[i][1]};

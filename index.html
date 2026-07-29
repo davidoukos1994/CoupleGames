@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=24-sprite">
+<link rel="stylesheet" href="style.css?v=24-sprite-fix2">
 </head>
 <body class="home-view">
 <div class="app">
@@ -95,7 +95,7 @@
 </section>
 
 <section id="flags" class="screen">
-<div class="card quiz-card"><div class="flag-image-wrap"><img id="flagImage" class="flag-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Σημαία χώρας"></div><h2>Ποια χώρα είναι;</h2>
+<div class="card quiz-card"><div class="flag-image-wrap"><div id="flagImage" class="flag-image" role="img" aria-label="Σημαία χώρας"></div></div><h2>Ποια χώρα είναι;</h2>
 <div id="flagOptions" class="options"></div><p id="flagMsg" class="msg"></p>
 <div class="row"><b>Σκορ: <span id="flagScore">0</span></b><button id="nextFlag" class="primary">Επόμενη</button></div></div>
 </section>
@@ -208,6 +208,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=24-sprite"></script>
+<script src="app.js?v=24-sprite-fix2"></script>
 </body>
 </html>
