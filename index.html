@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=stable1sprite">
+<link rel="stylesheet" href="style.css?v=stable3fix">
 </head>
 <body class="home-view">
 <div class="app">
@@ -143,7 +143,9 @@
 <div id="quoteHub">
   <div class="card quote-cover"><div class="quote-cover-icon">🎬</div><h2>TV Quote Challenge</h2><p>Δες τη φωτογραφία, διάβασε την ατάκα και μάντεψε την ελληνική σειρά.</p></div>
   <div class="quote-hub-actions">
-    <button id="quotePlayBtn" class="primary full">▶ ΕΝΑΡΞΗ ΠΑΙΧΝΙΔΙΟΥ</button>
+    <div class="quote-level-title">Διάλεξε επίπεδο</div>
+    <button id="quoteBeginnerBtn" class="primary full">🖼️ ΑΡΧΑΡΙΟΣ · ΜΕ ΦΩΤΟΓΡΑΦΙΑ</button>
+    <button id="quoteAdvancedBtn" class="secondary full">💬 ΠΡΟΧΩΡΗΜΕΝΟΣ · ΜΟΝΟ ΑΤΑΚΑ</button>
     <button id="quoteManageBtn" class="secondary full">＋ ΠΡΟΣΘΗΚΗ / ΕΠΕΞΕΡΓΑΣΙΑ ΕΡΩΤΗΣΕΩΝ</button>
   </div>
   <p id="quoteCount" class="helper centered"></p>
@@ -166,7 +168,7 @@
 </div>
 
 <div id="quoteGame" class="hidden">
-  <div class="card quote-score"><span>Γύρος <b id="quoteRound">1</b></span><span>Σκορ <b id="quoteScore">0</b></span></div>
+  <div class="card quote-score"><span>Γύρος <b id="quoteRound">1</b></span><span id="quoteLevelBadge" class="quote-level-badge">Αρχάριος</span><span>Σκορ <b id="quoteScore">0</b></span></div>
   <div class="card quiz-card quote-card">
     <div id="quoteGameImage" class="quote-game-image hidden"><img alt="Εικόνα ερώτησης"></div>
     <blockquote id="quoteGameText"></blockquote>
@@ -209,6 +211,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=stable1sprite"></script>
+<script src="app.js?v=stable3fix"></script>
 </body>
 </html>

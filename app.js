@@ -162,10 +162,14 @@ function setImg(img,fb,url){
     const parts=url.split(':'),kind=parts[1],idx=Number(parts[2]),cfg=folderSprites[kind];
     if(!cfg||!Number.isFinite(idx)){img.style.display='none';fb.style.display='grid';return}
     const col=idx%cfg.cols,row=Math.floor(idx/cfg.cols);
-    img.style.backgroundImage=`url('${cfg.file}')`;
+    // Ένα διάφανο pixel κρατά το <img> ενεργό σε όλους τους browsers,
+    // ώστε να εμφανίζεται σωστά το sprite ως background (Chrome/iPhone/GitHub Pages).
+    img.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+    img.style.backgroundImage=`url('${cfg.file}?v=stable3fix')`;
     img.style.backgroundSize=`${cfg.cols*100}% ${cfg.rows*100}%`;
     img.style.backgroundPosition=`${cfg.cols===1?0:col*(100/(cfg.cols-1))}% ${cfg.rows===1?0:row*(100/(cfg.rows-1))}%`;
     img.style.backgroundRepeat='no-repeat';
+    img.style.backgroundColor=kind==='teams'?'#fff':'#e9e6ef';
     return;
   }
   img.onload=()=>{fb.style.display='none';img.style.display='block'};
@@ -237,7 +241,7 @@ $('#qbAgain').onclick=()=>showQuizBallHub();
 
 // ===== Βρες τη σειρά/ταινία από την ατάκα =====
 let quoteDraftImage='';
-let quoteState={bag:[],current:null,score:0,round:0,answered:false,selected:null};
+let quoteState={bag:[],current:null,score:0,round:0,answered:false,selected:null,level:'beginner'};
 function showQuotePart(id){['quoteHub','quoteManager','quoteGame','quoteResults'].forEach(x=>$('#'+x).classList.add('hidden'));$('#'+id).classList.remove('hidden')}
 function showQuoteHub(){showQuotePart('quoteHub');updateQuoteCount()}
 function updateQuoteCount(){const e=$('#quoteCount');if(e)e.textContent=(d.quoteQuestions?.length||0)+' αποθηκευμένες ερωτήσεις'}
@@ -247,20 +251,20 @@ $('#quoteManagerBack').onclick=showQuoteHub;
 $('#quoteImage').onchange=e=>{const f=e.target.files?.[0];if(!f){quoteDraftImage='';$('#quotePreview').classList.add('hidden');return}const r=new FileReader();r.onload=()=>{quoteDraftImage=r.result;$('#quotePreview img').src=quoteDraftImage;$('#quotePreview').classList.remove('hidden')};r.readAsDataURL(f)};
 $('#quoteSave').onclick=()=>{const quote=$('#quoteText').value.trim(),correct=$('#quoteCorrect').value.trim(),wrongs=[$('#quoteWrong1').value,$('#quoteWrong2').value,$('#quoteWrong3').value].map(x=>x.trim());if(!quote||!correct||wrongs.some(x=>!x))return toast('Συμπλήρωσε την ατάκα και τις 4 επιλογές');const all=[correct,...wrongs].map(normalizeAnswer);if(new Set(all).size<4)return toast('Οι 4 επιλογές πρέπει να είναι διαφορετικές');d.quoteQuestions.push({quote,correct,wrongs,image:quoteDraftImage});['quoteText','quoteCorrect','quoteWrong1','quoteWrong2','quoteWrong3'].forEach(id=>$('#'+id).value='');$('#quoteImage').value='';quoteDraftImage='';$('#quotePreview').classList.add('hidden');save();toast('Η ερώτηση αποθηκεύτηκε')};
 function refillQuoteBag(){quoteState.bag=shuffle((d.quoteQuestions||[]).map((_,i)=>i))}
-function startQuoteGame(){if(!(d.quoteQuestions||[]).length)return toast('Πρόσθεσε πρώτα τουλάχιστον μία ερώτηση');quoteState={bag:[],current:null,score:0,round:0,answered:false,selected:null};refillQuoteBag();showQuotePart('quoteGame');nextQuoteQuestion()}
+function startQuoteGame(level='beginner'){if(!(d.quoteQuestions||[]).length)return toast('Πρόσθεσε πρώτα τουλάχιστον μία ερώτηση');quoteState={bag:[],current:null,score:0,round:0,answered:false,selected:null,level};refillQuoteBag();$('#quoteLevelBadge').textContent=level==='advanced'?'Προχωρημένος':'Αρχάριος';showQuotePart('quoteGame');nextQuoteQuestion()}
 function showQuoteImage(image){const imgBox=$('#quoteGameImage');const img=imgBox.querySelector('img');imgBox.style.backgroundImage='';imgBox.style.backgroundSize='';imgBox.style.backgroundPosition='';imgBox.style.backgroundRepeat='';if(!image){img.removeAttribute('src');img.classList.remove('hidden');imgBox.classList.add('hidden');return}if(typeof image==='string'&&image.startsWith('sprite:')){const idx=Number(image.split(':')[1]);const col=idx%4,row=Math.floor(idx/4);img.removeAttribute('src');img.classList.add('hidden');imgBox.style.backgroundImage="url('assets/quotes-sprite.webp')";imgBox.style.backgroundSize='400% 500%';imgBox.style.backgroundPosition=`${col*(100/3)}% ${row*25}%`;imgBox.style.backgroundRepeat='no-repeat';imgBox.classList.remove('hidden');return}img.classList.remove('hidden');img.src=image;imgBox.classList.remove('hidden')}
-function nextQuoteQuestion(){if(!quoteState.bag.length)return finishQuoteGame();const idx=quoteState.bag.pop();quoteState.current=d.quoteQuestions[idx];quoteState.round++;quoteState.answered=false;quoteState.selected=null;$('#quoteRound').textContent=quoteState.round;$('#quoteScore').textContent=quoteState.score;$('#quoteMsg').textContent='';$('#quoteNext').classList.add('hidden');const confirm=$('#quoteConfirm');confirm.classList.remove('hidden');confirm.disabled=true;const q=quoteState.current;$('#quoteGameText').textContent='«'+q.quote+'»';showQuoteImage(q.image);const opts=$('#quoteOptions');opts.innerHTML='';shuffle([q.correct,...q.wrongs]).forEach(answer=>{const b=document.createElement('button');b.textContent=answer;b.onclick=()=>selectQuoteAnswer(answer,b);opts.append(b)})}
+function nextQuoteQuestion(){if(!quoteState.bag.length)return finishQuoteGame();const idx=quoteState.bag.pop();quoteState.current=d.quoteQuestions[idx];quoteState.round++;quoteState.answered=false;quoteState.selected=null;$('#quoteRound').textContent=quoteState.round;$('#quoteScore').textContent=quoteState.score;$('#quoteMsg').textContent='';$('#quoteNext').classList.add('hidden');const confirm=$('#quoteConfirm');confirm.classList.remove('hidden');confirm.disabled=true;const q=quoteState.current;$('#quoteGameText').textContent='«'+q.quote+'»';if(quoteState.level==='advanced')showQuoteImage('');else showQuoteImage(q.image);const opts=$('#quoteOptions');opts.innerHTML='';shuffle([q.correct,...q.wrongs]).forEach(answer=>{const b=document.createElement('button');b.textContent=answer;b.onclick=()=>selectQuoteAnswer(answer,b);opts.append(b)})}
 function selectQuoteAnswer(answer,button){if(quoteState.answered)return;quoteState.selected=answer;$$('#quoteOptions button').forEach(b=>b.classList.remove('selected'));button.classList.add('selected');$('#quoteConfirm').disabled=false}
 function confirmQuoteAnswer(){if(quoteState.answered||!quoteState.selected)return;quoteState.answered=true;const correct=quoteState.selected===quoteState.current.correct;$$('#quoteOptions button').forEach(b=>{b.disabled=true;b.classList.remove('selected');if(b.textContent===quoteState.current.correct)b.classList.add('correct');else if(b.textContent===quoteState.selected)b.classList.add('wrong')});if(correct){quoteState.score++;$('#quoteScore').textContent=quoteState.score;$('#quoteMsg').innerHTML='<b>Σωστά! +1 πόντος 🎉</b>'}else $('#quoteMsg').innerHTML='<b>Λάθος.</b><br>Η σωστή απάντηση είναι: '+quoteState.current.correct;$('#quoteConfirm').classList.add('hidden');$('#quoteNext').classList.remove('hidden')}
 function finishQuoteGame(){showQuotePart('quoteResults');$('#quoteFinalScore').textContent=quoteState.score+' / '+quoteState.round}
-$('#quotePlayBtn').onclick=startQuoteGame;$('#quoteConfirm').onclick=confirmQuoteAnswer;$('#quoteNext').onclick=nextQuoteQuestion;$('#quoteEnd').onclick=finishQuoteGame;$('#quoteAgain').onclick=startQuoteGame;
+$('#quoteBeginnerBtn').onclick=()=>startQuoteGame('beginner');$('#quoteAdvancedBtn').onclick=()=>startQuoteGame('advanced');$('#quoteConfirm').onclick=confirmQuoteAnswer;$('#quoteNext').onclick=nextQuoteQuestion;$('#quoteEnd').onclick=finishQuoteGame;$('#quoteAgain').onclick=()=>startQuoteGame(quoteState.level||'beginner');
 
 async function initApp(){
   await loadFolderLibrary();
   folderLibraryStatus();
   update();resetT();resetC();drawWheel();
 }
-if(navigator.serviceWorker&&typeof navigator.serviceWorker.register==="function")addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=29").then(r=>r.update()).catch(()=>{}));
+if(navigator.serviceWorker&&typeof navigator.serviceWorker.register==="function")addEventListener("load",()=>navigator.serviceWorker.register("sw.js?v=stable3fix").then(r=>r.update()).catch(()=>{}));
 initApp();
 
 // V22: κεντρικές διορθώσεις παιχνιδιών

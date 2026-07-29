@@ -285,3 +285,6 @@ body.home-view .brand-box,body.home-view #back,body.home-view .header-spacer{dis
 #sports .image-box.logo{min-height:320px}
 .quote-game-image{max-height:440px;min-height:260px;background-color:#111827;background-repeat:no-repeat;background-position:center}
 @media(max-width:520px){#sports .image-box.logo{min-height:270px}.quote-game-image{min-height:240px;max-height:360px}}
+
+.quote-level-title{text-align:center;font-weight:900;color:#e9d5ff;margin:4px 0 0}.quote-level-badge{padding:7px 12px;border-radius:999px;background:#7c3aed;color:#fff;font-weight:900;font-size:.82rem}.quote-hub-actions #quoteAdvancedBtn{border-color:#a855f7;color:#fff;background:rgba(88,28,135,.75)}
+#sports #qbLogo{display:block!important;width:100%!important;height:100%!important;}
