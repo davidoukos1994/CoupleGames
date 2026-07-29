@@ -3,7 +3,7 @@
   "short_name": "RetroGames",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f5f2ff",
+  "background_color": "#f3efff",
   "theme_color": "#5b21b6",
   "description": "RetroGames By D.Lemonis",
   "icons": [

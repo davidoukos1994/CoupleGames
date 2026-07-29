@@ -1,16 +1,19 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const D={players:["Αλέξανδρος","Παίκτης 2"],tic:{p1:0,p2:0},con:{p1:0,p2:0},flags:0,playersScore:0,teamsScore:0,wheel:["Φιλί","Μασάζ 10 λεπτά","Διαλέγει ταινία","Κερνάει καφέ","Διαλέγει τραγούδι","Κάνει μια χάρη"],coin:[],customPlayers:[],customTeams:[],quizQuestions:{footballers:[],history:[],audience:[]}};
+const D={players:["Παίκτης 1","Παίκτης 2"],tic:{p1:0,p2:0},con:{p1:0,p2:0},flags:0,playersScore:0,teamsScore:0,wheel:["Φιλί","Μασάζ 10 λεπτά","Διαλέγει ταινία","Κερνάει καφέ","Διαλέγει τραγούδι","Κάνει μια χάρη"],coin:[],customPlayers:[],customTeams:[],quizQuestions:{footballers:[],history:[],audience:[]}};
 let d=JSON.parse(localStorage.getItem("retroGamesDLemonis")||"null")||structuredClone(D);
 d.quizQuestions=d.quizQuestions||{footballers:[],history:[],audience:[]};
 for(const k of ['footballers','history','audience'])d.quizQuestions[k]=Array.isArray(d.quizQuestions[k])?d.quizQuestions[k]:[];
 d.customPlayers=Array.isArray(d.customPlayers)?d.customPlayers:[];d.customTeams=Array.isArray(d.customTeams)?d.customTeams:[];
+d.quoteQuestions=Array.isArray(d.quoteQuestions)?d.quoteQuestions:[];
+// Τα ονόματα ξεκινούν καθαρά σε κάθε νέο άνοιγμα της εφαρμογής.
+d.players=["Παίκτης 1","Παίκτης 2"];
 const save=()=>{localStorage.setItem("retroGamesDLemonis",JSON.stringify(d));update()};
 function toast(t){let e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
-const meta={home:["RetroGames By D.Lemonis",""],tic:["Τρίλιζα","Τρία σύμβολα στη σειρά"],connect:["Σκορ 4","Τέσσερα πιόνια στη σειρά"],hang:["Κρεμάλα","Μάντεψε τη λέξη"],coin:["Κορώνα–Γράμματα","Ρίξε το νόμισμα"],wheel:["Τροχός Τύχης","Challenges που αλλάζεις εσύ"],flags:["Σημαίες & Χώρες","Μάντεψε τη χώρα"],sports:["QuizBall","Ποδοσφαιρικά παιχνίδια και ερωτήσεις"],stats:["Στατιστικά","Τα σκορ σας"],settings:["Ρυθμίσεις","Ονόματα παικτών"]};
-function go(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$('#title').textContent=meta[id][0];$('#subtitle').textContent=meta[id][1]||'';$('#subtitle').classList.toggle('hidden',!meta[id][1]);$('#back').classList.toggle('hidden',id==='home');$('#settingsBtn').classList.toggle('hidden',id==='settings');scrollTo(0,0);if(id==='wheel')drawWheel();if(id==='flags')newFlag();if(id==='sports')showQuizBallHub()}
-$$('[data-screen]').forEach(b=>b.onclick=()=>go(b.dataset.screen));$("#back").onclick=()=>go("home");$("#settingsBtn").onclick=()=>go("settings");
+const meta={home:["RetroGames By D.Lemonis",""],tic:["Τρίλιζα","Τρία σύμβολα στη σειρά"],connect:["Σκορ 4","Τέσσερα πιόνια στη σειρά"],hang:["Κρεμάλα","Μάντεψε τη λέξη"],coin:["Κορώνα–Γράμματα","Ρίξε το νόμισμα"],wheel:["Τροχός Τύχης","Challenges που αλλάζεις εσύ"],flags:["Σημαίες & Χώρες","Μάντεψε τη χώρα"],sports:["QuizBall","Ποδοσφαιρικά παιχνίδια και ερωτήσεις"],quotes:["Βρες τη σειρά/ταινία","Από ποια σειρά ή ταινία είναι η ατάκα;"],stats:["Στατιστικά","Τα σκορ σας"],settings:["Ρυθμίσεις","Ονόματα παικτών"]};
+function go(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active');$('#title').textContent=meta[id][0];$('#subtitle').textContent=meta[id][1]||'';$('#subtitle').classList.toggle('hidden',!meta[id][1]);$('#back').classList.toggle('hidden',id==='home');const sb=$('#settingsBtn');if(sb)sb.classList.toggle('hidden',id==='settings');scrollTo(0,0);if(id==='wheel')drawWheel();if(id==='flags')newFlag();if(id==='sports')showQuizBallHub();if(id==='quotes')showQuoteHub()}
+$$('[data-screen]').forEach(b=>b.onclick=()=>go(b.dataset.screen));$("#back").onclick=()=>go("home");const settingsHeader=$("#settingsBtn");if(settingsHeader)settingsHeader.onclick=()=>go("settings");
 function setText(sel,value){let el=$(sel);if(el)el.textContent=value}
-function update(){let[a,b]=d.players;setText("#p1Home",a);setText("#p2Home",b);setText("#ticN1",a);setText("#ticN2",b);setText("#conN1",a);setText("#conN2",b);setText("#ticS1",d.tic.p1);setText("#ticS2",d.tic.p2);setText("#conS1",d.con.p1);setText("#conS2",d.con.p2);if($("#p1Input"))$("#p1Input").value=a;if($("#p2Input"))$("#p2Input").value=b;setText("#flagScore",d.flags);setText("#stTic",d.tic.p1+"-"+d.tic.p2);setText("#stCon",d.con.p1+"-"+d.con.p2);setText("#stFlag",d.flags);setText("#stPlayers",d.playersScore);renderWheel();renderCoin();renderCustom();renderQuestionList()}
+function update(){let[a,b]=d.players;setText("#p1Home",a);setText("#p2Home",b);setText("#ticN1",a);setText("#ticN2",b);setText("#conN1",a);setText("#conN2",b);setText("#ticS1",d.tic.p1);setText("#ticS2",d.tic.p2);setText("#conS1",d.con.p1);setText("#conS2",d.con.p2);if($("#p1Input"))$("#p1Input").value=a;if($("#p2Input"))$("#p2Input").value=b;setText("#flagScore",d.flags);setText("#stTic",d.tic.p1+"-"+d.tic.p2);setText("#stCon",d.con.p1+"-"+d.con.p2);setText("#stFlag",d.flags);setText("#stPlayers",d.playersScore);renderWheel();renderCoin();renderCustom();renderQuestionList();renderQuoteList();updateQuoteCount()}
 $("#saveSettings").onclick=()=>{d.players=[$("#p1Input").value.trim()||"Παίκτης 1",$("#p2Input").value.trim()||"Παίκτης 2"];save();toast("Αποθηκεύτηκαν")};
 
 let tb=Array(9).fill(""),tp="X",to=false;
@@ -138,6 +141,25 @@ $('#qb5050').onclick=()=>{const p=currentQBPlayer(),cat=qb.currentCat;if(qb.used
 $('#qbNext').onclick=()=>{qb.turn++;renderCategoryPick()};$('#qbQuit').onclick=()=>{if(confirm('Να τελειώσει το παιχνίδι;'))finishQB()};
 function finishQB(){showQB('results');const order=qb.names.map((name,i)=>({name,score:qb.scores[i]})).sort((a,b)=>b.score-a.score);$('#qbFinal').innerHTML=order.map((x,i)=>`<div class="result-row"><span>${['🥇','🥈','🥉'][i]||'⚽'} ${x.name}</span><b>${x.score} πόντοι</b></div>`).join('')}
 $('#qbAgain').onclick=()=>showQuizBallHub();
+
+// ===== Βρες τη σειρά/ταινία από την ατάκα =====
+let quoteDraftImage='';
+let quoteState={bag:[],current:null,score:0,round:0,answered:false};
+function showQuotePart(id){['quoteHub','quoteManager','quoteGame','quoteResults'].forEach(x=>$('#'+x).classList.add('hidden'));$('#'+id).classList.remove('hidden')}
+function showQuoteHub(){showQuotePart('quoteHub');updateQuoteCount()}
+function updateQuoteCount(){const e=$('#quoteCount');if(e)e.textContent=(d.quoteQuestions?.length||0)+' αποθηκευμένες ερωτήσεις'}
+function renderQuoteList(){const box=$('#quoteQuestionList');if(!box)return;const qs=d.quoteQuestions||[];box.innerHTML=qs.length?'':'Δεν υπάρχουν ακόμη ερωτήσεις.';qs.forEach((q,i)=>{const row=document.createElement('div');row.className='custom-row quote-list-row';row.innerHTML=`<span><b>${q.correct}</b><small>${q.quote}</small></span><button type="button">🗑️</button>`;row.querySelector('button').onclick=()=>{if(confirm('Να διαγραφεί η ερώτηση;')){d.quoteQuestions.splice(i,1);save()}};box.append(row)})}
+$('#quoteManageBtn').onclick=()=>showQuotePart('quoteManager');
+$('#quoteManagerBack').onclick=showQuoteHub;
+$('#quoteImage').onchange=e=>{const f=e.target.files?.[0];if(!f){quoteDraftImage='';$('#quotePreview').classList.add('hidden');return}const r=new FileReader();r.onload=()=>{quoteDraftImage=r.result;$('#quotePreview img').src=quoteDraftImage;$('#quotePreview').classList.remove('hidden')};r.readAsDataURL(f)};
+$('#quoteSave').onclick=()=>{const quote=$('#quoteText').value.trim(),correct=$('#quoteCorrect').value.trim(),wrongs=[$('#quoteWrong1').value,$('#quoteWrong2').value,$('#quoteWrong3').value].map(x=>x.trim());if(!quote||!correct||wrongs.some(x=>!x))return toast('Συμπλήρωσε την ατάκα και τις 4 επιλογές');const all=[correct,...wrongs].map(normalizeAnswer);if(new Set(all).size<4)return toast('Οι 4 επιλογές πρέπει να είναι διαφορετικές');d.quoteQuestions.push({quote,correct,wrongs,image:quoteDraftImage});['quoteText','quoteCorrect','quoteWrong1','quoteWrong2','quoteWrong3'].forEach(id=>$('#'+id).value='');$('#quoteImage').value='';quoteDraftImage='';$('#quotePreview').classList.add('hidden');save();toast('Η ερώτηση αποθηκεύτηκε')};
+function refillQuoteBag(){quoteState.bag=shuffle((d.quoteQuestions||[]).map((_,i)=>i))}
+function startQuoteGame(){if(!(d.quoteQuestions||[]).length)return toast('Πρόσθεσε πρώτα τουλάχιστον μία ερώτηση');quoteState={bag:[],current:null,score:0,round:0,answered:false};refillQuoteBag();showQuotePart('quoteGame');nextQuoteQuestion()}
+function nextQuoteQuestion(){if(!quoteState.bag.length)return finishQuoteGame();const idx=quoteState.bag.pop();quoteState.current=d.quoteQuestions[idx];quoteState.round++;quoteState.answered=false;$('#quoteRound').textContent=quoteState.round;$('#quoteScore').textContent=quoteState.score;$('#quoteMsg').textContent='';$('#quoteNext').classList.add('hidden');const q=quoteState.current;$('#quoteGameText').textContent='«'+q.quote+'»';const imgBox=$('#quoteGameImage');if(q.image){imgBox.querySelector('img').src=q.image;imgBox.classList.remove('hidden')}else imgBox.classList.add('hidden');const opts=$('#quoteOptions');opts.innerHTML='';shuffle([q.correct,...q.wrongs]).forEach(answer=>{const b=document.createElement('button');b.textContent=answer;b.onclick=()=>answerQuote(answer,b);opts.append(b)})}
+function answerQuote(answer,button){if(quoteState.answered)return;quoteState.answered=true;const correct=answer===quoteState.current.correct;$$('#quoteOptions button').forEach(b=>{b.disabled=true;if(b.textContent===quoteState.current.correct)b.classList.add('correct')});if(!correct)button.classList.add('wrong');if(correct){quoteState.score++;$('#quoteScore').textContent=quoteState.score;$('#quoteMsg').innerHTML='<b>Σωστά! +1 πόντος 🎉</b>'}else $('#quoteMsg').innerHTML='<b>Λάθος.</b><br>Η σωστή απάντηση είναι: '+quoteState.current.correct;$('#quoteNext').classList.remove('hidden')}
+function finishQuoteGame(){showQuotePart('quoteResults');$('#quoteFinalScore').textContent=quoteState.score+' / '+quoteState.round}
+$('#quotePlayBtn').onclick=startQuoteGame;$('#quoteNext').onclick=nextQuoteQuestion;$('#quoteEnd').onclick=finishQuoteGame;$('#quoteAgain').onclick=startQuoteGame;
+
 async function initApp(){
   await loadFolderLibrary();
   folderLibraryStatus();

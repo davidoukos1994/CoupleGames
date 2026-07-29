@@ -13,7 +13,7 @@
 <header class="topbar">
 <button id="back" class="header-box back-box hidden" aria-label="Πίσω">←</button>
 <div class="brand-box"><h1 id="title">RetroGames By D.Lemonis</h1><p id="subtitle" class="hidden"></p></div>
-<button id="settingsBtn" class="header-box settings-box" aria-label="Ρυθμίσεις"><span>⚙️</span><small>Ρυθμίσεις</small></button>
+<div class="header-spacer" aria-hidden="true"></div>
 </header>
 
 <main>
@@ -37,6 +37,13 @@
 
 <h2>QuizBall</h2>
 <button class="quizball-hero" data-screen="sports"><span class="quizball-icon">⚽</span><span><b>QuizBall</b><small>PlayerID, Logo Quiz, Footballers, Ιστορία και Ερωτήσεις κοινού</small></span><span class="quizball-arrow">›</span></button>
+
+<h2>Σειρές & Ταινίες</h2>
+<button class="quote-game-hero" data-screen="quotes"><span class="quote-game-icon">🎬</span><span><b>Βρες τη σειρά/ταινία από την ατάκα</b><small>Φωτογραφία, ατάκα και 4 επιλογές</small></span><span class="quizball-arrow">›</span></button>
+
+<div class="home-settings-wrap">
+  <button class="home-settings-btn" data-screen="settings"><span>⚙️</span><span><b>Ρυθμίσεις</b><small>Ονόματα παικτών και επιλογές</small></span><span>›</span></button>
+</div>
 </section>
 
 <section id="tic" class="screen">
@@ -118,6 +125,50 @@
   </div>
 </div>
 <div id="quizResults" class="hidden"><div class="card quiz-results qb-dark-card"><div class="result-ball">🏆</div><h2>ΤΕΛΙΚΑ ΑΠΟΤΕΛΕΣΜΑΤΑ</h2><div id="qbFinal"></div><button id="qbAgain" class="primary full">ΝΕΟ ΠΑΙΧΝΙΔΙ</button></div></div>
+</section>
+
+<section id="quotes" class="screen">
+<div id="quoteHub">
+  <div class="card quote-cover"><div class="quote-cover-icon">🎬</div><h2>Βρες τη σειρά/ταινία<br>από την ατάκα</h2><p>Διάβασε την ατάκα και διάλεξε τη σωστή απάντηση.</p></div>
+  <div class="quote-hub-actions">
+    <button id="quotePlayBtn" class="primary full">▶ ΕΝΑΡΞΗ ΠΑΙΧΝΙΔΙΟΥ</button>
+    <button id="quoteManageBtn" class="secondary full">＋ ΠΡΟΣΘΗΚΗ / ΕΠΕΞΕΡΓΑΣΙΑ ΕΡΩΤΗΣΕΩΝ</button>
+  </div>
+  <p id="quoteCount" class="helper centered"></p>
+</div>
+
+<div id="quoteManager" class="hidden">
+  <div class="card form-card">
+    <h2>Νέα ερώτηση</h2>
+    <label>Φωτογραφία σειράς ή ταινίας<input id="quoteImage" type="file" accept="image/*"></label>
+    <div id="quotePreview" class="quote-preview hidden"><img alt="Προεπισκόπηση"></div>
+    <label>Ατάκα<textarea id="quoteText" rows="3" placeholder="Γράψε την ατάκα..."></textarea></label>
+    <label>Σωστή σειρά ή ταινία<input id="quoteCorrect" type="text" placeholder="π.χ. Στο Παρά Πέντε"></label>
+    <label>Λάθος επιλογή 1<input id="quoteWrong1" type="text"></label>
+    <label>Λάθος επιλογή 2<input id="quoteWrong2" type="text"></label>
+    <label>Λάθος επιλογή 3<input id="quoteWrong3" type="text"></label>
+    <button id="quoteSave" class="primary full">ΑΠΟΘΗΚΕΥΣΗ ΕΡΩΤΗΣΗΣ</button>
+  </div>
+  <div class="card list-card"><h3>Αποθηκευμένες ερωτήσεις</h3><div id="quoteQuestionList"></div></div>
+  <button id="quoteManagerBack" class="secondary full">ΠΙΣΩ</button>
+</div>
+
+<div id="quoteGame" class="hidden">
+  <div class="card quote-score"><span>Γύρος <b id="quoteRound">1</b></span><span>Σκορ <b id="quoteScore">0</b></span></div>
+  <div class="card quiz-card quote-card">
+    <div id="quoteGameImage" class="quote-game-image hidden"><img alt="Εικόνα ερώτησης"></div>
+    <blockquote id="quoteGameText"></blockquote>
+    <h3>Από ποια σειρά ή ταινία είναι;</h3>
+    <div id="quoteOptions" class="options"></div>
+    <p id="quoteMsg" class="msg"></p>
+    <button id="quoteNext" class="primary full hidden">ΕΠΟΜΕΝΗ ΕΡΩΤΗΣΗ</button>
+  </div>
+  <button id="quoteEnd" class="secondary full">ΤΕΛΟΣ ΠΑΙΧΝΙΔΙΟΥ</button>
+</div>
+
+<div id="quoteResults" class="hidden">
+  <div class="card quote-results"><div>🏆</div><h2>Τέλος παιχνιδιού</h2><p>Τελικό σκορ</p><strong id="quoteFinalScore">0</strong><button id="quoteAgain" class="primary full">ΝΕΟ ΠΑΙΧΝΙΔΙ</button></div>
+</div>
 </section>
 
 <section id="stats" class="screen">
