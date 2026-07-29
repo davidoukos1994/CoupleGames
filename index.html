@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=19">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
 <div class="app">
@@ -17,8 +17,12 @@
 </header>
 
 <main>
+<div id="gamePlayersBar" class="game-players-bar hidden" aria-label="Ονόματα παικτών">
+  <input id="quickP1" type="text" value="Παίκτης 1" aria-label="Όνομα Παίκτη 1" maxlength="24">
+  <span>VS</span>
+  <input id="quickP2" type="text" value="Παίκτης 2" aria-label="Όνομα Παίκτη 2" maxlength="24">
+</div>
 <section id="home" class="screen active">
-<div class="card players"><b id="p1Home">Αλέξανδρος</b><span>VS</span><b id="p2Home">Παίκτης 2</b></div>
 
 <h2>Κλασικά</h2>
 <div class="grid">
@@ -43,6 +47,10 @@
 
 <div class="home-settings-wrap">
   <button class="home-settings-btn" data-screen="settings"><span>⚙️</span><span><b>Ρυθμίσεις</b><small>Ονόματα παικτών και επιλογές</small></span><span>›</span></button>
+</div>
+<div class="home-brand-banner" aria-label="RetroGames By D.Lemonis">
+  <strong>RetroGames By D.Lemonis</strong>
+  <small>Collection of Party Games</small>
 </div>
 </section>
 
@@ -189,6 +197,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=19"></script>
+<script src="app.js?v=20"></script>
 </body>
 </html>

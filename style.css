@@ -220,3 +220,16 @@ body:before{content:""!important;display:none!important}
 #home h2{color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7)}
 .home-settings-wrap{border-top-color:rgba(255,255,255,.28)!important}
 @media(max-width:620px){body{background-position:50% top!important;background-size:auto 1200px!important;background-repeat:repeat-y!important}}
+
+
+/* V20: καθαρή αρχική, γρήγορη αλλαγή ονομάτων και μεγάλο branding στο τέλος */
+body.home-view .topbar{display:none}
+.game-players-bar{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;margin:0 0 18px;padding:14px 16px;border-radius:22px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(1,8,25,.2)}
+.game-players-bar span{font-weight:800;color:#81778f}
+.game-players-bar input{min-width:0;width:100%;border:0;background:transparent;padding:8px 4px;font:inherit;font-weight:900;color:#211a31;outline:none}
+.game-players-bar input:first-child{text-align:left}.game-players-bar input:last-child{text-align:right}
+.game-players-bar input:focus{background:rgba(91,33,182,.08);border-radius:12px;padding-left:10px;padding-right:10px}
+.home-brand-banner{margin-top:18px;width:100%;box-sizing:border-box;padding:20px 18px;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:linear-gradient(135deg,rgba(8,24,69,.9),rgba(23,63,146,.82));color:#fff;text-align:center;box-shadow:0 15px 36px rgba(0,8,30,.34);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.home-brand-banner strong{display:block;font-size:clamp(1.3rem,5vw,2rem);line-height:1.15;white-space:nowrap}
+.home-brand-banner small{display:block;margin-top:7px;opacity:.82;letter-spacing:.04em}
+@media(max-width:420px){.game-players-bar{gap:8px;padding:12px}.game-players-bar input{font-size:.95rem}.home-brand-banner strong{font-size:1.25rem}}
