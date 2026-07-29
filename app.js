@@ -67,14 +67,29 @@ $("#spinWheel").onclick=()=>{if(spin||d.wheel.length<2)return;spin=true;const pl
 $("#addWheel").onclick=()=>{let v=$("#wheelInput").value.trim();if(!v)return;if(d.wheel.length>=12)return toast("Ο τροχός χωράει έως 12 επιλογές");d.wheel.push(v);$("#wheelInput").value="";save();drawWheel()};
 function renderWheel(){let e=$("#wheelItems");if(!e)return;e.innerHTML="";d.wheel.forEach((v,i)=>{let r=document.createElement("div"),s=document.createElement("span"),ed=document.createElement("button"),del=document.createElement("button");s.textContent=(i+1)+". "+v;ed.textContent="✏️";del.textContent="🗑️";ed.onclick=()=>{let nv=prompt("Αλλαγή",v);if(nv){d.wheel[i]=nv;save();drawWheel()}};del.onclick=()=>{if(d.wheel.length<=2)return toast("Χρειάζονται 2 επιλογές");d.wheel.splice(i,1);save();drawWheel()};r.append(s,ed,del);e.append(r)})}
 
-const defaultFlags=[
-["🇬🇷","Ελλάδα"],["🇨🇾","Κύπρος"],["🇮🇹","Ιταλία"],["🇪🇸","Ισπανία"],["🇫🇷","Γαλλία"],["🇩🇪","Γερμανία"],["🇵🇹","Πορτογαλία"],["🇬🇧","Ηνωμένο Βασίλειο"],["🇮🇪","Ιρλανδία"],["🇮🇸","Ισλανδία"],["🇳🇴","Νορβηγία"],["🇸🇪","Σουηδία"],["🇫🇮","Φινλανδία"],["🇩🇰","Δανία"],["🇳🇱","Ολλανδία"],["🇧🇪","Βέλγιο"],["🇱🇺","Λουξεμβούργο"],["🇨🇭","Ελβετία"],["🇦🇹","Αυστρία"],["🇵🇱","Πολωνία"],["🇨🇿","Τσεχία"],["🇸🇰","Σλοβακία"],["🇭🇺","Ουγγαρία"],["🇷🇴","Ρουμανία"],["🇧🇬","Βουλγαρία"],["🇭🇷","Κροατία"],["🇷🇸","Σερβία"],["🇸🇮","Σλοβενία"],["🇧🇦","Βοσνία και Ερζεγοβίνη"],["🇲🇪","Μαυροβούνιο"],["🇦🇱","Αλβανία"],["🇲🇰","Βόρεια Μακεδονία"],["🇲🇹","Μάλτα"],["🇪🇪","Εσθονία"],["🇱🇻","Λετονία"],["🇱🇹","Λιθουανία"],["🇺🇦","Ουκρανία"],["🇲🇩","Μολδαβία"],["🇬🇪","Γεωργία"],["🇦🇲","Αρμενία"],["🇦🇿","Αζερμπαϊτζάν"],["🇹🇷","Τουρκία"],
-["🇺🇸","ΗΠΑ"],["🇨🇦","Καναδάς"],["🇲🇽","Μεξικό"],["🇧🇷","Βραζιλία"],["🇦🇷","Αργεντινή"],["🇺🇾","Ουρουγουάη"],["🇵🇾","Παραγουάη"],["🇨🇱","Χιλή"],["🇵🇪","Περού"],["🇧🇴","Βολιβία"],["🇨🇴","Κολομβία"],["🇻🇪","Βενεζουέλα"],["🇪🇨","Ισημερινός"],["🇨🇷","Κόστα Ρίκα"],["🇵🇦","Παναμάς"],["🇨🇺","Κούβα"],["🇯🇲","Τζαμάικα"],["🇩🇴","Δομινικανή Δημοκρατία"],
-["🇯🇵","Ιαπωνία"],["🇨🇳","Κίνα"],["🇰🇷","Νότια Κορέα"],["🇰🇵","Βόρεια Κορέα"],["🇮🇳","Ινδία"],["🇵🇰","Πακιστάν"],["🇧🇩","Μπανγκλαντές"],["🇱🇰","Σρι Λάνκα"],["🇳🇵","Νεπάλ"],["🇹🇭","Ταϊλάνδη"],["🇻🇳","Βιετνάμ"],["🇮🇩","Ινδονησία"],["🇲🇾","Μαλαισία"],["🇸🇬","Σιγκαπούρη"],["🇵🇭","Φιλιππίνες"],["🇲🇳","Μογγολία"],["🇰🇿","Καζακστάν"],["🇺🇿","Ουζμπεκιστάν"],["🇮🇱","Ισραήλ"],["🇯🇴","Ιορδανία"],["🇱🇧","Λίβανος"],["🇸🇦","Σαουδική Αραβία"],["🇦🇪","Ηνωμένα Αραβικά Εμιράτα"],["🇶🇦","Κατάρ"],["🇮🇶","Ιράκ"],["🇮🇷","Ιράν"],
-["🇪🇬","Αίγυπτος"],["🇲🇦","Μαρόκο"],["🇩🇿","Αλγερία"],["🇹🇳","Τυνησία"],["🇱🇾","Λιβύη"],["🇿🇦","Νότια Αφρική"],["🇳🇬","Νιγηρία"],["🇬🇭","Γκάνα"],["🇸🇳","Σενεγάλη"],["🇨🇲","Καμερούν"],["🇨🇮","Ακτή Ελεφαντοστού"],["🇰🇪","Κένυα"],["🇪🇹","Αιθιοπία"],["🇹🇿","Τανζανία"],["🇺🇬","Ουγκάντα"],["🇲🇬","Μαδαγασκάρη"],
-["🇦🇺","Αυστραλία"],["🇳🇿","Νέα Ζηλανδία"],["🇫🇯","Φίτζι"]
-];
-d.customFlagList=Array.isArray(d.customFlagList)&&d.customFlagList.length>=4?d.customFlagList.map(x=>[String(x[0]||"🏳️"),String(x[1]||"").trim()]).filter(x=>x[1]):defaultFlags.map(x=>[...x]);
+const defaultFlags=[["sprite:albania","Αλβανία"],["sprite:andorra","Ανδόρα"],["sprite:austria","Αυστρία"],["sprite:belarus","Λευκορωσία"],["sprite:belgium","Βέλγιο"],["sprite:bosnia","Βοσνία και Ερζεγοβίνη"],["sprite:bulgaria","Βουλγαρία"],["sprite:croatia","Κροατία"],["sprite:czechia","Τσεχία"],["sprite:denmark","Δανία"],["sprite:england","Αγγλία"],["sprite:estonia","Εσθονία"],["sprite:finland","Φινλανδία"],["sprite:france","Γαλλία"],["sprite:germany","Γερμανία"],["sprite:greece","Ελλάδα"],["sprite:hungary","Ουγγαρία"],["sprite:iceland","Ισλανδία"],["sprite:ireland","Ιρλανδία"],["sprite:italy","Ιταλία"],["sprite:kosovo","Κόσοβο"],["sprite:latvia","Λετονία"],["sprite:liechtenstein","Λιχτενστάιν"],["sprite:lithuania","Λιθουανία"],["sprite:luxembourg","Λουξεμβούργο"],["sprite:north-macedonia","Βόρεια Μακεδονία"],["sprite:malta","Μάλτα"],["sprite:moldova","Μολδαβία"],["sprite:monaco","Μονακό"],["sprite:montenegro","Μαυροβούνιο"],["sprite:netherlands","Ολλανδία"],["sprite:northern-ireland","Βόρεια Ιρλανδία"],["sprite:norway","Νορβηγία"],["sprite:poland","Πολωνία"],["sprite:portugal","Πορτογαλία"],["sprite:romania","Ρουμανία"],["sprite:russia","Ρωσία"],["sprite:san-marino","Άγιος Μαρίνος"],["sprite:scotland","Σκωτία"],["sprite:serbia","Σερβία"],["sprite:slovakia","Σλοβακία"],["sprite:slovenia","Σλοβενία"],["sprite:spain","Ισπανία"],["sprite:sweden","Σουηδία"],["sprite:switzerland","Ελβετία"],["sprite:turkey","Τουρκία"],["sprite:ukraine","Ουκρανία"],["sprite:united-kingdom","Ηνωμένο Βασίλειο"],["sprite:vatican-city","Βατικανό"],["sprite:wales","Ουαλία"],["sprite:european-union","Ευρωπαϊκή Ένωση"]];
+const FLAG_SPRITE={url:"assets/flags-sprite.webp",cellW:320,cellH:200,cols:8,rows:7,map:{"albania":{"x":0,"y":0},"andorra":{"x":1,"y":0},"austria":{"x":2,"y":0},"belarus":{"x":3,"y":0},"belgium":{"x":4,"y":0},"bosnia":{"x":5,"y":0},"bulgaria":{"x":6,"y":0},"croatia":{"x":7,"y":0},"czechia":{"x":0,"y":1},"denmark":{"x":1,"y":1},"england":{"x":2,"y":1},"estonia":{"x":3,"y":1},"european-union":{"x":4,"y":1},"finland":{"x":5,"y":1},"france":{"x":6,"y":1},"germany":{"x":7,"y":1},"greece":{"x":0,"y":2},"hungary":{"x":1,"y":2},"iceland":{"x":2,"y":2},"ireland":{"x":3,"y":2},"italy":{"x":4,"y":2},"kosovo":{"x":5,"y":2},"latvia":{"x":6,"y":2},"liechtenstein":{"x":7,"y":2},"lithuania":{"x":0,"y":3},"luxembourg":{"x":1,"y":3},"malta":{"x":2,"y":3},"moldova":{"x":3,"y":3},"monaco":{"x":4,"y":3},"montenegro":{"x":5,"y":3},"netherlands":{"x":6,"y":3},"north-macedonia":{"x":7,"y":3},"northern-ireland":{"x":0,"y":4},"norway":{"x":1,"y":4},"poland":{"x":2,"y":4},"portugal":{"x":3,"y":4},"romania":{"x":4,"y":4},"russia":{"x":5,"y":4},"san-marino":{"x":6,"y":4},"scotland":{"x":7,"y":4},"serbia":{"x":0,"y":5},"slovakia":{"x":1,"y":5},"slovenia":{"x":2,"y":5},"spain":{"x":3,"y":5},"sweden":{"x":4,"y":5},"switzerland":{"x":5,"y":5},"turkey":{"x":6,"y":5},"ukraine":{"x":7,"y":5},"united-kingdom":{"x":0,"y":6},"vatican-city":{"x":1,"y":6},"wales":{"x":2,"y":6}}};
+const FLAG_PIXEL="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+function setFlagVisual(img,source,alt=""){
+  img.alt=alt;
+  if(source&&source.startsWith("sprite:")){
+    const key=source.slice(7),pos=FLAG_SPRITE.map[key];
+    if(pos){
+      img.src=FLAG_PIXEL;
+      img.style.backgroundImage=`url(${FLAG_SPRITE.url})`;
+      img.style.backgroundRepeat="no-repeat";
+      img.style.backgroundSize=`${FLAG_SPRITE.cols*100}% ${FLAG_SPRITE.rows*100}%`;
+      img.style.backgroundPosition=`${FLAG_SPRITE.cols===1?0:(pos.x/(FLAG_SPRITE.cols-1))*100}% ${FLAG_SPRITE.rows===1?0:(pos.y/(FLAG_SPRITE.rows-1))*100}%`;
+      img.style.objectFit="contain";
+      return;
+    }
+  }
+  img.style.backgroundImage="";img.style.backgroundRepeat="";img.style.backgroundSize="";img.style.backgroundPosition="";img.src=source;
+}
+// V24 Sprite: όλες οι ευρωπαϊκές σημαίες βρίσκονται σε ένα αρχείο και εμφανίζονται ξεχωριστά.
+
+if(d.flagDataVersion!==2401){d.customFlagList=defaultFlags.map(x=>[...x]);d.flagDataVersion=2401;localStorage.setItem("retroGamesDLemonis",JSON.stringify(d));}
+d.customFlagList=Array.isArray(d.customFlagList)&&d.customFlagList.length>=4?d.customFlagList.map(x=>[String(x[0]||""),String(x[1]||"").trim()]).filter(x=>x[0]&&x[1]):defaultFlags.map(x=>[...x]);
 function activeFlags(){return d.customFlagList.length>=4?d.customFlagList:defaultFlags}
 let flagDeck=[];
 let currentFlag=null;
@@ -85,7 +100,7 @@ function newFlag(){
   if(!flagDeck.length)refillFlagDeck();
   let q=flagDeck.pop();
   if(currentFlag&&q[1]===currentFlag[1]&&flagDeck.length){flagDeck.unshift(q);q=flagDeck.pop()}
-  currentFlag=q;$("#flagEmoji").textContent=q[0];$("#flagMsg").textContent="";
+  currentFlag=q;const flagImg=$("#flagImage");setFlagVisual(flagImg,q[0],"Σημαία "+q[1]);$("#flagMsg").textContent="";
   let wrong=shuffle(list.filter(x=>x[1]!==q[1])).slice(0,3);
   let o=shuffle([q,...wrong]).map(x=>x[1]);
   options($("#flagOptions"),o,q[1],a=>{if(a===q[1]){d.flags++;save();$("#flagMsg").textContent="Σωστά"}else $("#flagMsg").textContent="Η σωστή απάντηση είναι "+q[1]})
@@ -95,13 +110,12 @@ function renderFlagEditor(){
   const box=$("#flagEditorList");if(!box)return;box.innerHTML="";
   d.customFlagList.forEach((item,i)=>{
     const row=document.createElement("div");row.className="flag-editor-row";
-    const emoji=document.createElement("input");emoji.value=item[0];emoji.maxLength=8;emoji.setAttribute("aria-label","Σημαία");
+    const preview=document.createElement("img");preview.className="flag-editor-preview";setFlagVisual(preview,item[0],item[1]);
     const country=document.createElement("input");country.value=item[1];country.setAttribute("aria-label","Χώρα");
     const del=document.createElement("button");del.textContent="🗑️";del.title="Διαγραφή";
-    emoji.onchange=()=>{d.customFlagList[i][0]=emoji.value.trim()||"🏳️";flagDeck=[];save()};
     country.onchange=()=>{const v=country.value.trim();if(v){d.customFlagList[i][1]=v;flagDeck=[];save()}else country.value=d.customFlagList[i][1]};
     del.onclick=()=>{if(d.customFlagList.length<=4)return toast("Χρειάζονται τουλάχιστον 4 χώρες");d.customFlagList.splice(i,1);flagDeck=[];save();renderFlagEditor()};
-    row.append(emoji,country,del);box.append(row);
+    row.append(preview,country,del);box.append(row);
   });
 }
 
@@ -233,5 +247,5 @@ initApp();
 const settingsWheel=$("#settingsWheel");if(settingsWheel)settingsWheel.onclick=()=>go("wheel");
 const settingsQuotes=$("#settingsQuotes");if(settingsQuotes)settingsQuotes.onclick=()=>{go("quotes");showQuoteManager()};
 const settingsQuizball=$("#settingsQuizball");if(settingsQuizball)settingsQuizball.onclick=()=>go("sports");
-const addFlagItem=$("#addFlagItem");if(addFlagItem)addFlagItem.onclick=()=>{const emoji=$("#newFlagEmoji").value.trim()||"🏳️",country=$("#newFlagCountry").value.trim();if(!country)return toast("Γράψε όνομα χώρας");d.customFlagList.push([emoji,country]);$("#newFlagEmoji").value="";$("#newFlagCountry").value="";flagDeck=[];save();renderFlagEditor()};
+const addFlagItem=$("#addFlagItem");if(addFlagItem)addFlagItem.onclick=()=>{const emoji=$("#newFlagEmoji").value.trim(),country=$("#newFlagCountry").value.trim();if(!emoji||!country)return toast("Βάλε διαδρομή εικόνας και όνομα χώρας");d.customFlagList.push([emoji,country]);$("#newFlagEmoji").value="";$("#newFlagCountry").value="";flagDeck=[];save();renderFlagEditor()};
 const resetFlags=$("#resetFlags");if(resetFlags)resetFlags.onclick=()=>{if(!confirm("Να επανέλθει η αρχική λίστα χωρών;"))return;d.customFlagList=defaultFlags.map(x=>[...x]);flagDeck=[];save();renderFlagEditor();toast("Η λίστα επανήλθε")};

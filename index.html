@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=23">
+<link rel="stylesheet" href="style.css?v=24-sprite">
 </head>
 <body class="home-view">
 <div class="app">
@@ -95,7 +95,7 @@
 </section>
 
 <section id="flags" class="screen">
-<div class="card quiz-card"><div id="flagEmoji" class="flag">🇬🇷</div><h2>Ποια χώρα είναι;</h2>
+<div class="card quiz-card"><div class="flag-image-wrap"><img id="flagImage" class="flag-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Σημαία χώρας"></div><h2>Ποια χώρα είναι;</h2>
 <div id="flagOptions" class="options"></div><p id="flagMsg" class="msg"></p>
 <div class="row"><b>Σκορ: <span id="flagScore">0</span></b><button id="nextFlag" class="primary">Επόμενη</button></div></div>
 </section>
@@ -200,7 +200,7 @@
 
 <div class="card form-card"><h2>Find the Flags</h2>
 <p class="helper">Μπορείς να διορθώσεις το όνομα χώρας, να αλλάξεις τη σημαία ή να προσθέσεις νέα χώρα.</p>
-<div class="flag-editor-add"><input id="newFlagEmoji" type="text" maxlength="8" placeholder="🇬🇷"><input id="newFlagCountry" type="text" placeholder="Όνομα χώρας"><button id="addFlagItem" class="primary">＋</button></div>
+<div class="flag-editor-add"><input id="newFlagEmoji" placeholder="assets/flags/όνομα.webp" type="text" maxlength="8" placeholder="🇬🇷"><input id="newFlagCountry" type="text" placeholder="Όνομα χώρας"><button id="addFlagItem" class="primary">＋</button></div>
 <div id="flagEditorList" class="flag-editor-list"></div>
 <button id="resetFlags" class="secondary full">Επαναφορά αρχικής λίστας</button>
 </div>
@@ -208,6 +208,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=23"></script>
+<script src="app.js?v=24-sprite"></script>
 </body>
 </html>
