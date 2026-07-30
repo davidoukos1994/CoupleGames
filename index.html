@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#5b21b6">
 <title>RetroGames By D.Lemonis</title>
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css?v=stable9">
+<link rel="stylesheet" href="style.css?v=music11">
 </head>
 <body class="home-view">
 <div class="app">
@@ -38,6 +38,9 @@
 
 <h2>Σειρές & Ταινίες</h2>
 <button class="quote-game-hero" data-screen="quotes"><span class="quote-game-icon">🎬</span><span><b>TV Quote Challenge</b><small>Μάντεψε την ελληνική σειρά από τη διάσημη ατάκα</small></span><span class="quizball-arrow">›</span></button>
+
+<h2>Μουσική</h2>
+<button class="music-game-hero" data-screen="music"><span class="music-game-icon">🎵</span><span><b>Music Challenge</b><small>Άκου το τραγούδι και βρες τη λέξη που λείπει</small></span><span class="quizball-arrow">›</span></button>
 
 <div class="home-settings-wrap">
   <button class="home-settings-btn" data-screen="settings"><span>⚙️</span><span><b>Ρυθμίσεις</b><small>Ονόματα παικτών και επιλογές</small></span><span>›</span></button>
@@ -236,6 +239,67 @@
 
 
 
+<section id="music" class="screen music-screen">
+<div id="musicHub">
+  <div class="card music-cover"><div class="music-cover-icon">🎵</div><h2>Music Challenge</h2><p>Άκου ένα απόσπασμα από το YouTube και συμπλήρωσε τη λέξη ή τη φράση που λείπει.</p></div>
+  <div class="card form-card music-setup">
+    <h2>Νέο παιχνίδι</h2>
+    <label>Αριθμός παικτών<select id="musicPlayerCount"><option value="2">2 παίκτες</option><option value="3">3 παίκτες</option><option value="4">4 παίκτες</option><option value="5">5 παίκτες</option><option value="6">6 παίκτες</option></select></label>
+    <div id="musicPlayerNames" class="music-player-names"></div>
+    <label>Επίπεδο<select id="musicLevel"><option value="beginner">Αρχάριος · 4 επιλογές</option><option value="advanced">Προχωρημένος · πληκτρολόγηση</option></select></label>
+    <label>Αριθμός γύρων<select id="musicRounds"><option value="5">5 γύροι</option><option value="10" selected>10 γύροι</option><option value="15">15 γύροι</option><option value="all">Όλα τα τραγούδια</option></select></label>
+    <button id="musicStart" class="primary full">ΕΝΑΡΞΗ ΠΑΙΧΝΙΔΙΟΥ</button>
+    <button id="musicManage" class="secondary full">＋ ΠΡΟΣΘΗΚΗ / ΔΙΑΧΕΙΡΙΣΗ ΤΡΑΓΟΥΔΙΩΝ</button>
+    <p id="musicCount" class="helper centered"></p>
+  </div>
+</div>
+
+<div id="musicManager" class="hidden">
+  <div class="card form-card">
+    <h2 id="musicEditorTitle">Προσθήκη τραγουδιού</h2>
+    <label>YouTube link<input id="musicUrl" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=..."></label>
+    <div class="actions"><button id="musicFetch" class="secondary">Έλεγχος συνδέσμου</button><button id="musicPreview" class="secondary">▶ Προεπισκόπηση</button></div>
+    <div id="musicMetaPreview" class="music-meta-preview hidden"><img id="musicThumb" alt="Μικρογραφία"><div><b id="musicDetectedTitle"></b><small id="musicDetectedArtist"></small></div></div>
+    <label>Καλλιτέχνης<input id="musicArtist" type="text" placeholder="Συμπληρώνεται αυτόματα ή γράψε το"></label>
+    <label>Τίτλος τραγουδιού<input id="musicTitle" type="text" placeholder="Συμπληρώνεται αυτόματα ή γράψε το"></label>
+    <div class="music-time-grid"><label>Έναρξη αποσπάσματος<input id="musicStartTime" type="text" inputmode="numeric" placeholder="00:45"></label><label>Λήξη αποσπάσματος<input id="musicEndTime" type="text" inputmode="numeric" placeholder="00:55"></label></div>
+    <label>Ολόκληρος στίχος<textarea id="musicLyric" rows="3" placeholder="Γράψε το μέρος του στίχου..."></textarea></label>
+    <p class="helper">Πάτησε πάνω στη λέξη ή στις λέξεις που θέλεις να κρυφτούν.</p>
+    <div id="musicWordPicker" class="music-word-picker"></div>
+    <label>Σωστή απάντηση<input id="musicAnswer" type="text" placeholder="Συμπληρώνεται από τις επιλεγμένες λέξεις"></label>
+    <label>Εμφάνιση σε<select id="musicDifficulty"><option value="both">Αρχάριο και Προχωρημένο</option><option value="beginner">Μόνο Αρχάριο</option><option value="advanced">Μόνο Προχωρημένο</option></select></label>
+    <div id="musicEditorPlayer" class="music-embed hidden"></div>
+    <button id="musicSave" class="primary full">ΑΠΟΘΗΚΕΥΣΗ ΤΡΑΓΟΥΔΙΟΥ</button>
+    <button id="musicCancelEdit" class="secondary full hidden">ΑΚΥΡΩΣΗ ΕΠΕΞΕΡΓΑΣΙΑΣ</button>
+  </div>
+  <div class="card form-card">
+    <h3>Μαζική εισαγωγή YouTube links</h3>
+    <p class="helper">Βάλε ένα link σε κάθε γραμμή. Θα δημιουργηθούν πρόχειρες εγγραφές και μετά μπορείς να συμπληρώσεις στίχο, χρόνο και κρυμμένη λέξη.</p>
+    <textarea id="musicBulkLinks" rows="6" placeholder="https://youtu.be/...&#10;https://www.youtube.com/watch?v=..."></textarea>
+    <button id="musicBulkAdd" class="secondary full">ΜΑΖΙΚΗ ΠΡΟΣΘΗΚΗ</button>
+  </div>
+  <div class="card list-card"><h3>Αποθηκευμένα τραγούδια</h3><div id="musicSongList"></div></div>
+  <button id="musicManagerBack" class="secondary full">ΠΙΣΩ</button>
+</div>
+
+<div id="musicGame" class="hidden">
+  <div class="card music-game-head"><div><small>ΠΑΙΖΕΙ ΤΩΡΑ</small><b id="musicTurnName"></b><small id="musicProgress"></small></div><div id="musicScoreboard" class="music-scoreboard"></div><button id="musicQuit" class="secondary">ΤΕΛΟΣ</button></div>
+  <div class="card quiz-card music-question-card">
+    <div class="music-question-meta"><span id="musicLevelBadge" class="quiz-chip"></span><span id="musicSongMeta"></span></div>
+    <div id="musicPlayer" class="music-embed"></div>
+    <div class="music-player-actions"><button id="musicPlayClip" class="primary">▶ ΑΝΑΠΑΡΑΓΩΓΗ</button><button id="musicStopClip" class="secondary">⏹ ΣΤΑΜΑΤΗΜΑ</button><button id="musicReplayClip" class="secondary">↻ ΕΠΑΝΑΛΗΨΗ</button></div>
+    <blockquote id="musicMaskedLyric" class="music-lyric"></blockquote>
+    <div id="musicBeginnerOptions" class="options"></div>
+    <div id="musicAdvancedAnswer" class="written-answer hidden"><input id="musicTypedAnswer" type="text" autocomplete="off" placeholder="Γράψε τη λέξη ή τη φράση"><button id="musicSubmitTyped" class="primary">ΕΠΙΒΕΒΑΙΩΣΗ ΑΠΑΝΤΗΣΗΣ</button></div>
+    <button id="musicConfirmChoice" class="primary full hidden" disabled>ΕΠΙΒΕΒΑΙΩΣΗ ΑΠΑΝΤΗΣΗΣ</button>
+    <p id="musicMsg" class="msg"></p><button id="musicNext" class="primary full hidden">ΕΠΟΜΕΝΟΣ ΠΑΙΚΤΗΣ</button>
+  </div>
+</div>
+
+<div id="musicResults" class="hidden"><div class="card quote-results"><div>🏆</div><h2>Τελική βαθμολογία</h2><div id="musicFinalScores"></div><button id="musicAgain" class="primary full">ΝΕΟ ΠΑΙΧΝΙΔΙ</button></div></div>
+</section>
+
+
 <section id="settings" class="screen">
 <div class="card form-card"><h2>Ονόματα παικτών</h2>
 <label>Παίκτης 1<input id="p1Input" type="text"></label>
@@ -246,6 +310,7 @@
 <p class="helper">Άνοιξε γρήγορα το παιχνίδι που θέλεις να διορθώσεις ή να ενημερώσεις.</p>
 <button id="settingsWheel" class="settings-link"><span>🎡</span><span><b>Τροχός Τύχης</b><small>Προσθήκη, αλλαγή και διαγραφή επιλογών</small></span><span>›</span></button>
 <button id="settingsQuotes" class="settings-link"><span>🎬</span><span><b>TV Quote Challenge</b><small>Προσθήκη και επεξεργασία ερωτήσεων</small></span><span>›</span></button>
+<button id="settingsMusic" class="settings-link"><span>🎵</span><span><b>Music Challenge</b><small>Προσθήκη και επεξεργασία τραγουδιών</small></span><span>›</span></button>
 <button id="settingsQuizball" class="settings-link"><span>⚽</span><span><b>QuizBall</b><small>Άνοιγμα κατηγοριών και ερωτήσεων</small></span><span>›</span></button>
 </div>
 
@@ -259,6 +324,6 @@
 </main>
 </div>
 <div id="toast"></div>
-<script src="app.js?v=stable7"></script>
+<script src="app.js?v=music11"></script>
 </body>
 </html>

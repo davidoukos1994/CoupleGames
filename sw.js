@@ -1,5 +1,5 @@
-const C='retro-games-v10';
-const A=["./","index.html","style.css?v=stable9","app.js?v=stable9","manifest.json","icon.svg","assets/library.json","assets/gaming-background.svg","find-the-flags.html","assets/flags-world.webp","assets/flags-world.json","assets/quotes-sprite.webp","assets/teams-sprite.webp","assets/players-sprite.webp"];
+const C='retro-games-v11-music';
+const A=["./","index.html","style.css?v=music11","app.js?v=music11","manifest.json","icon.svg","assets/library.json","assets/gaming-background.svg","find-the-flags.html","assets/flags-world.webp","assets/flags-world.json","assets/quotes-sprite.webp","assets/teams-sprite.webp","assets/players-sprite.webp"];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(A)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim()});
 self.addEventListener('fetch',e=>{
